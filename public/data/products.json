@@ -1,0 +1,1376 @@
+[
+  {
+    "id": 1,
+    "sellerName": "Ayzan",
+    "title": "Premium Long Shrug",
+    "price": "BDT 1099",
+    "image": [
+      "https://i.ibb.co.com/Wv467T64/02-White-Shrug.jpg",
+      "https://i.ibb.co.com/BHRWvXPC/03-Green-Shrug.png",
+      "https://i.ibb.co.com/35YnKqY2/04-Musterd-Shrug.png",
+      "https://i.ibb.co.com/1fkGx6Wj/06-Yellow-Shrug.png",
+      "https://i.ibb.co.com/JwL5GZnp/SAVE-20260917-090030.jpg",
+      "https://i.ibb.co.com/BK7xCwGc/SAVE-20260917-091023.jpg"
+    ],
+    "colors": [
+      {
+        "name": "White",
+        "image": "https://i.ibb.co.com/Wv467T64/02-White-Shrug.jpg"
+      },
+      {
+        "name": "Green",
+        "image": "https://i.ibb.co.com/BHRWvXPC/03-Green-Shrug.png"
+      },
+      {
+        "name": "Musterd",
+        "image": "https://i.ibb.co.com/35YnKqY2/04-Musterd-Shrug.png"
+      },
+      {
+        "name": "Yellow",
+        "image": "https://i.ibb.co.com/1fkGx6Wj/06-Yellow-Shrug.png"
+      },
+      {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/JwL5GZnp/SAVE-20260917-090030.jpg"
+      },
+      {
+        "name": "Tiger Print",
+        "image": "https://i.ibb.co.com/BK7xCwGc/SAVE-20260917-091023.jpg"
+      }
+    ],
+    "sizes": [
+      {
+        "name": "32"
+      },
+      {
+        "name": "34"
+      },
+      {
+        "name": "36"
+      },
+      {
+        "name": "38"
+      },
+      {
+        "name": "40"
+      },
+      {
+        "name": "42"
+      },
+      {
+        "name": "44"
+      },
+      {
+        "name": "46"
+      },
+      {
+        "name": "48"
+      },
+      {
+        "name": "50"
+      },
+      {
+        "name": "52"
+      },
+      {
+        "name": "54"
+      }
+    ],
+    "description": {
+      "intro": "Premium long shrug made with printed Georgette fabric, directly imported from China.",
+      "details": [
+        "Length: 46 inch",
+        "Sleeve Length: 22 inch",
+        "Custom Size Available"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "sellerName": "Halal Mood",
+    "title": "Nuha Abaya",
+    "price": "BDT 2800",
+    "originalPrice": "BDT 3200",
+    "image": [
+      "https://i.ibb.co.com/qYxmRGkD/IMG-20260909-143528.jpg",
+      "https://i.ibb.co.com/MkND7DGn/IMG-20260914-222617.jpg",
+      ""
+    ],
+    "colors": [
+      {
+        "name": "Olive Green",
+        "image": "https://i.ibb.co.com/qYxmRGkD/IMG-20260909-143528.jpg"
+      },
+      {
+        "name": "Olive Gold",
+        "image": "https://i.ibb.co.com/MkND7DGn/IMG-20260914-222617.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "An elegant borka designed with a graceful silhouette, comfortable fabric and refined finishing.",
+      "details": [
+        "Premium quality fabric",
+        "Elegant and modest design",
+        "Comfortable for everyday wear",
+        "Suitable for both everyday and special occasions"
+      ]
+    },
+    "sizes": [
+      {
+        "name": "S"
+      },
+      {
+        "name": "M"
+      },
+      {
+        "name": "L"
+      },
+      {
+        "name": "XL"
+      },
+      {
+        "name": "XXL"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "sellerName": "Artistic Humu",
+    "title": "Basanti Tie-Dye Cotton Saree",
+    "price": "BDT 2200",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/CqssPJ6/IMG-20260908-WA0001.jpg",
+      "",
+      ""
+    ],
+    "colors": [
+      {
+        "name": "Yellow",
+        "image": "https://i.ibb.co.com/CqssPJ6/IMG-20260908-WA0001.jpg"
+      },
+      {
+        "name": "",
+        "image": ""
+      },
+      {
+        "name": "",
+        "image": ""
+      },
+      {
+        "name": "",
+        "image": ""
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "A beautifully crafted saree with an elegant design and refined finishing, perfect for creating a graceful look.",
+      "details": []
+    },
+    "sizes": [
+      {
+        "name": "Free Size"
+      },
+      {
+        "name": ""
+      },
+      {
+        "name": ""
+      },
+      {
+        "name": ""
+      },
+      {
+        "name": ""
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "sellerName": "Su Zan 1622",
+    "title": "Jamdani Saree",
+    "price": " BDT 1650",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/jZQv964j/IMG-20260906-WA0011.jpg",
+      "https://i.ibb.co.com/67XtPmXM/IMG-20260906-WA0022.jpg",
+      "https://i.ibb.co.com/39pdwHQD/IMG-20260906-WA0036.jpg",
+      "https://i.ibb.co.com/B5HQhyqz/IMG-20260906-WA0025.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Royal Blue",
+        "image": "https://i.ibb.co.com/jZQv964j/IMG-20260906-WA0011.jpg"
+      },
+      {
+        "name": "Light Dusty Pink",
+        "image": "https://i.ibb.co.com/67XtPmXM/IMG-20260906-WA0022.jpg"
+      },
+      {
+        "name": "Sky Blue",
+        "image": "https://i.ibb.co.com/39pdwHQD/IMG-20260906-WA0036.jpg"
+      },
+      {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/B5HQhyqz/IMG-20260906-WA0025.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Experience elegance with this authentic 40/60 count Jamdani saree, perfect for any occassion. Available now with an attached running blouse piece! .",
+      "details": []
+    },
+    "sizes": [
+      {
+        "name": "Free Size"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "sellerName": "AYZAN",
+    "title": "Kurti + Pant Set",
+    "price": "BDT 1499",
+    "purchaseOptions": [
+      {
+        "name": "Kurti",
+        "price": 899
+      },
+      {
+        "name": "Pant",
+        "price": 699
+      },
+      {
+        "name": "Full Set",
+        "price": 1499
+      }
+    ],
+    "image": [
+      "https://i.ibb.co.com/PswgyCbv/4-Black-Kurti.png",
+      "https://i.ibb.co.com/d097C59c/3-Marron-Kurti.png"
+    ],
+    "colors": [
+      {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/PswgyCbv/4-Black-Kurti.png"
+      },
+      {
+        "name": "Maroon",
+        "image": "https://i.ibb.co.com/d097C59c/3-Marron-Kurti.png"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Soft, textured Jacquard fabric with a subtle elegant finish.",
+      "details": [
+        "Kurti: Free Size | Up to 44\" | Adjustable Back Tie | Length 33\" | Sleeve 22\"",
+        "Pant: Imported Jafran material with a smooth drape and comfortable feel",
+        "Pant: Waist 44\"–46\" | Length 40\"",
+        "Customized Fit Available — Made according to your measurements",
+        "Kurti: BDT 899/-",
+        "Pant: BDT 699/-",
+        "Full Set Price: BDT 1,499/-",
+        "Delivery: Within 2–3 Working Days across Bangladesh",
+        "Free Home Delivery on orders of 2 or more products"
+      ]
+    },
+    "sizes": [
+      {
+        "name": "Free Size",
+        "kurti": {
+          "fit": "Up to 44\"",
+          "backTie": "Adjustable",
+          "length": "33\"",
+          "sleeveLength": "22\""
+        },
+        "pant": {
+          "waist": "44\"–46\"",
+          "length": "40\""
+        },
+        "customizedFit": true
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "sellerName": "Halal Mood",
+    "title": "Nazwah Abaya (Premium Cherry)",
+    "price": "BDT 2160",
+    "originalPrice": "BDT 2400",
+    "image": [
+      "https://i.ibb.co.com/67tmKTt1/IMG-20260909-143450.jpg",
+      "https://i.ibb.co.com/7m1ZNZS/IMG-20260914-222547.jpg",
+      "https://i.ibb.co.com/Kj8dmC5k/IMG-20260914-222534.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Sage Green",
+        "image": "https://i.ibb.co.com/67tmKTt1/IMG-20260909-143450.jpg"
+      },
+      {
+        "name": "Grey Blue",
+        "image": "https://i.ibb.co.com/7m1ZNZS/IMG-20260914-222547.jpg"
+      },
+      {
+        "name": "Dark Plum",
+        "image": "https://i.ibb.co.com/Kj8dmC5k/IMG-20260914-222534.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "A graceful borka combining modest style with comfortable wear and a clean, elegant finish.",
+      "details": [
+        "Premium Cherry fabric",
+        "Graceful and modest design",
+        "Soft and comfortable feel",
+        "Elegant finishing",
+        "Suitable for everyday and special occasions"
+      ]
+    },
+    "sizes": [
+      {
+        "name": "S"
+      },
+      {
+        "name": "M"
+      },
+      {
+        "name": "L"
+      },
+      {
+        "name": "XL"
+      },
+      {
+        "name": "XXL"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "sellerName": "Artistic Humu",
+    "title": "Macrame Placemats",
+    "price": "BDT 2500",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/qFdnscSD/IMG-20260917-WA0047.jpg",
+      "https://i.ibb.co.com/whsHLj1L/IMG-20260917-WA0048.jpg",
+      "https://i.ibb.co.com/4RLGf4wh/IMG-20260917-WA0049.jpg"
+    ],
+    "colors": [
+      {
+        "name": "",
+        "image": "https://i.ibb.co.com/qFdnscSD/IMG-20260917-WA0047.jpg"
+      },
+      {
+        "name": "",
+        "image": "https://i.ibb.co.com/whsHLj1L/IMG-20260917-WA0048.jpg"
+      },
+      {
+        "name": "",
+        "image": "https://i.ibb.co.com/4RLGf4wh/IMG-20260917-WA0049.jpg"
+      },
+      {
+        "name": "",
+        "image": ""
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "A stylish saree designed with a graceful appearance, comfortable fabric and beautiful finishing.",
+      "details": []
+    },
+    "sizes": [
+      {
+        "name": "24 inches"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "sellerName": "Su Zan 1622",
+    "title": "Classic Two Piece Set",
+    "price": "BDT 1250",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/b59cbnNv/IMG-20260907-WA0103.jpg",
+      "https://i.ibb.co.com/QFhBpjXM/IMG-20260907-WA0134.jpg",
+      "https://i.ibb.co.com/xtRmHyCg/IMG-20260907-WA0115.jpg",
+      "https://i.ibb.co.com/qL7Sc5hy/IMG-20260907-WA0135.jpg",
+      "https://i.ibb.co.com/5HCmYK0/IMG-20260907-WA0137.jpg",
+      "https://i.ibb.co.com/mCZzd0B2/IMG-20260907-WA0125.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Teal Blue",
+        "image": "https://i.ibb.co.com/b59cbnNv/IMG-20260907-WA0103.jpg"
+      },
+      {
+        "name": "Light Blue",
+        "image": "https://i.ibb.co.com/QFhBpjXM/IMG-20260907-WA0134.jpg"
+      },
+      {
+        "name": "Soft Pink",
+        "image": "https://i.ibb.co.com/xtRmHyCg/IMG-20260907-WA0115.jpg"
+      },
+      {
+        "name": "Lavendar",
+        "image": "https://i.ibb.co.com/qL7Sc5hy/IMG-20260907-WA0135.jpg"
+      },
+      {
+        "name": "Magenta",
+        "image": "https://i.ibb.co.com/5HCmYK0/IMG-20260907-WA0137.jpg"
+      },
+      {
+        "name": "Maroon",
+        "image": "https://i.ibb.co.com/mCZzd0B2/IMG-20260907-WA0125.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "A stylish two-piece outfit designed with a coordinated look, comfortable fabric, digital print with lace work and a polished finish.",
+      "details": []
+    },
+    "sizes": [
+      {
+        "name": "S"
+      },
+      {
+        "name": "M"
+      },
+      {
+        "name": "L"
+      },
+      {
+        "name": "XL"
+      },
+      {
+        "name": "XXL"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "sellerName": "Trendy Touh",
+    "title": "Summer Breeze Block Print Set",
+    "price": "BDT 1100",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/pBsWwpJP/IMG-20260904-WA0019.jpg",
+      "https://i.ibb.co.com/Rk0JMLmj/IMG-20260904-WA0020.jpg",
+      "https://i.ibb.co.com/MmGW1Lj/IMG-20260904-WA0021.jpg",
+      "https://i.ibb.co.com/bgd09bsn/IMG-20260904-WA0022.jpg",
+      "https://i.ibb.co.com/HfkDX0QF/IMG-20260904-WA0016.jpg",
+      "https://i.ibb.co.com/wFCpFrhQ/IMG-20260904-WA0017.jpg",
+      "https://i.ibb.co.com/Q79mq7b3/IMG-20260904-WA0018.jpg",
+      "https://i.ibb.co.com/27dz7pww/IMG-20260904-WA0012.jpg",
+      "https://i.ibb.co.com/DD33c0YP/IMG-20260904-WA0013.jpg",
+      "https://i.ibb.co.com/TNCkC2g/IMG-20260904-WA0014.jpg",
+      "https://i.ibb.co.com/k2j60sL3/IMG-20260904-WA0011.jpg",
+      "https://i.ibb.co.com/d4JKJwC4/IMG-20260904-WA0015.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Musterd Yellow",
+        "image": "https://i.ibb.co.com/pBsWwpJP/IMG-20260904-WA0019.jpg"
+      },
+      {
+        "name": "Magenta",
+        "image": "https://i.ibb.co.com/Rk0JMLmj/IMG-20260904-WA0020.jpg"
+      },
+      {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/MmGW1Lj/IMG-20260904-WA0021.jpg"
+      },
+      {
+        "name": "Purple",
+        "image": "https://i.ibb.co.com/bgd09bsn/IMG-20260904-WA0022.jpg"
+      },
+      {
+        "name": "Steel Blue",
+        "image": "https://i.ibb.co.com/HfkDX0QF/IMG-20260904-WA0016.jpg"
+      },
+      {
+        "name": "Red",
+        "image": "https://i.ibb.co.com/wFCpFrhQ/IMG-20260904-WA0017.jpg"
+      },
+      {
+        "name": "Pink",
+        "image": "https://i.ibb.co.com/Q79mq7b3/IMG-20260904-WA0018.jpg"
+      },
+      {
+        "name": "Blue",
+        "image": "https://i.ibb.co.com/27dz7pww/IMG-20260904-WA0012.jpg"
+      },
+      {
+        "name": "Lavendar",
+        "image": "https://i.ibb.co.com/DD33c0YP/IMG-20260904-WA0013.jpg"
+      },
+      {
+        "name": "Magenta Pink",
+        "image": "https://i.ibb.co.com/DD33c0YP/IMG-20260904-WA0014.jpg"
+      },
+      {
+        "name": "Royal Navy Blue",
+        "image": "https://i.ibb.co.com/k2j60sL3/IMG-20260904-WA0011.jpg"
+      },
+      {
+        "name": "Sea Green",
+        "image": "https://i.ibb.co.com/d4JKJwC4/IMG-20260904-WA0015.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Beat the heat with our Summer Breeze Block Print Collection! Crafted from 100% color-guaranteed premium voile cotton, this unstitched 3-piece set offers ultimate comfort, fine hand-block detailing, and vibrant elegance for your daily style.",
+      "details": [
+        "All-over printed Voile (Boil) cotton",
+        "100% Color Guarantee",
+        "Free size (Up to 66 inches)",
+        "Separate fabric provided",
+        "5 cubits (5 Hath / ~2.5 yards) with piping and tassel work",
+        "2.5 yards"
+      ]
+    },
+    "sizes": []
+  },
+  {
+    "id": 10,
+    "sellerName": "Halal Mood",
+    "title": "Zainab Abaya(Premium Cherry)",
+    "price": "BDT 2800",
+    "originalPrice": "BDT 3200",
+    "image": [
+      "https://i.ibb.co.com/5hkXvvZB/IMG-20260909-143405.jpg",
+      "https://i.ibb.co.com/WpBzkwpB/IMG-20260914-222507.jpg",
+      "https://i.ibb.co.com/ccd49hyM/IMG-20260914-222447.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Royal Navy Blue",
+        "image": "https://i.ibb.co.com/5hkXvvZB/IMG-20260909-143405.jpg"
+      },
+      {
+        "name": "Brown",
+        "image": "https://i.ibb.co.com/WpBzkwpB/IMG-20260914-222507.jpg"
+      },
+      {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/ccd49hyM/IMG-20260914-222447.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "A beautifully designed modest borka made for a comfortable and sophisticated everyday appearance.",
+      "details": [
+        "Premium Cherry fabric",
+        "Elegant and modest design",
+        "Comfortable for everyday wear",
+        "Soft and graceful fall",
+        "Suitable for both everyday and special occasions"
+      ]
+    },
+    "sizes": [
+      {
+        "name": "S"
+      },
+      {
+        "name": "M"
+      },
+      {
+        "name": "L"
+      },
+      {
+        "name": "XL"
+      },
+      {
+        "name": "XXL"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "sellerName": "Artistic Humu",
+    "title": "Macrame Table Placemats",
+    "price": "BDT 1500",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/ZzT4twTc/IMG-20260917-WA0030.jpg",
+      "",
+      ""
+    ],
+    "colors": [
+      {
+        "name": "White",
+        "image": "https://i.ibb.co.com/ZzT4twTc/IMG-20260917-WA0030.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "A stylish accessory selected to add an elegant finishing touch to your outfit.",
+      "details": []
+    },
+    "sizes": [
+      {
+        "name": "21 inche"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "sellerName": "Su Zan 1622",
+    "title": "Cord Style Outfit",
+    "price": "BDT 950",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/QFnxNKNb/IMG-20260907-WA0015.jpg",
+      "https://i.ibb.co.com/vnHqVk4/IMG-20260907-WA0006.jpg",
+      "https://i.ibb.co.com/TMkQnywK/IMG-20260907-WA0001.jpg",
+      "https://i.ibb.co.com/20s2yK03/IMG-20260907-WA0022.jpg",
+      "https://i.ibb.co.com/N64Lt41J/IMG-20260907-WA0016.jpg",
+      "https://i.ibb.co.com/cc2g9knG/IMG-20260907-WA0004.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Pink",
+        "image": "https://i.ibb.co.com/QFnxNKNb/IMG-20260907-WA0015.jpg"
+      },
+      {
+        "name": "Yellow",
+        "image": "https://i.ibb.co.com/vnHqVk4/IMG-20260907-WA0006.jpg"
+      },
+      {
+        "name": "Old Rose",
+        "image": "https://i.ibb.co.com/TMkQnywK/IMG-20260907-WA0001.jpg"
+      },
+      {
+        "name": "Dusty Blue",
+        "image": "https://i.ibb.co.com/20s2yK03/IMG-20260907-WA0022.jpg"
+      },
+      {
+        "name": "Pista Green",
+        "image": "https://i.ibb.co.com/N64Lt41J/IMG-20260907-WA0016.jpg"
+      },
+      {
+        "name": "Soft Pink",
+        "image": "https://i.ibb.co.com/cc2g9knG/IMG-20260907-WA0004.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "A distinctive cord-style outfit featuring a modern design and beautiful color options for a stylish and comfortable look with intricate karchupi work on soft, high quality premium micro jafran fabric.",
+      "details": []
+    },
+    "sizes": [
+      {
+        "name": "S"
+      },
+      {
+        "name": "M"
+      },
+      {
+        "name": "L"
+      },
+      {
+        "name": "XL"
+      },
+      {
+        "name": "XXL"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "sellerName": "Halal Mood",
+    "title": "Amanee Abaya",
+    "price": "BDT 2140",
+    "originalPrice": "BDT 2600",
+    "image": [
+      "https://i.ibb.co.com/4w0DhqfJ/IMG-20260909-143334.jpg",
+      "https://i.ibb.co.com/FLM6pyvf/IMG-20260914-222423.jpg",
+      "https://i.ibb.co.com/bRG5x5X8/IMG-20260914-222322.jpg",
+      "https://i.ibb.co.com/xqrJ30zC/IMG-20260914-222252.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Olive Green",
+        "image": "https://i.ibb.co.com/4w0DhqfJ/IMG-20260909-143334.jpg"
+      },
+      {
+        "name": "Dusty Mauve",
+        "image": "https://i.ibb.co.com/FLM6pyvf/IMG-20260914-222423.jpg"
+      },
+      {
+        "name": "Sea Green",
+        "image": "https://i.ibb.co.com/bRG5x5X8/IMG-20260914-222322.jpg"
+      },
+      {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/xqrJ30zC/IMG-20260914-222252.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "A stylish modest borka featuring an elegant design and comfortable finish for everyday wear.",
+      "details": [
+        "Premium quality fabric",
+        "Elegant and modest design",
+        "Comfortable for everyday use",
+        "Neat and refined finishing",
+        "Suitable for everyday and special occasions"
+      ]
+    },
+    "sizes": [
+      {
+        "name": "S"
+      },
+      {
+        "name": "M"
+      },
+      {
+        "name": "L"
+      },
+      {
+        "name": "XL"
+      },
+      {
+        "name": "XXL"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "sellerName": "Artistic Humu",
+    "title": "Macrame Wall Hanging",
+    "price": "BDT 700",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/qMj47Vry/IMG-20260917-WA0033.jpg",
+      "https://i.ibb.co.com/JwxGBtG0/IMG-20260917-WA0031.jpg",
+      "https://i.ibb.co.com/mCnxsZwN/IMG-20260917-WA0034.jpg",
+      "https://i.ibb.co.com/5Wv2jmFR/IMG-20260917-WA0032.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Green",
+        "image": "https://i.ibb.co.com/qMj47Vry/IMG-20260917-WA0033.jpg"
+      },
+      {
+        "name": "White",
+        "image": "https://i.ibb.co.com/mCnxsZwN/IMG-20260917-WA0034.jpg"
+      },
+      {
+        "name": "Golden",
+        "image": "https://i.ibb.co.com/JwxGBtG0/IMG-20260917-WA0031.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "A versatile fashion accessory designed to complement your everyday and occasion looks.",
+      "details": []
+    },
+    "sizes": [
+      {
+        "name": "10 inche"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "sellerName": "Halal Mood",
+    "title": "Sehenaj Abaya",
+    "price": "BDT 1980",
+    "originalPrice": "BDT 2200",
+    "image": [
+      "https://i.ibb.co.com/4w56xB7W/IMG-20260909-143257.jpg",
+      "https://i.ibb.co.com/qFBzc5wW/IMG-20260914-222229.jpg",
+      "https://i.ibb.co.com/mrRmzQLy/IMG-20260914-222207.jpg",
+      "https://i.ibb.co.com/HpDwHYNw/IMG-20260914-221959.jpg",
+      "https://i.ibb.co.com/KpYsKgjb/IMG-20260914-221941.jpg",
+      "https://i.ibb.co.com/8g1yhFr1/IMG-20260914-221848.jpg",
+      "https://i.ibb.co.com/whzLHR4H/IMG-20260914-221826.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Plum",
+        "image": "https://i.ibb.co.com/4w56xB7W/IMG-20260909-143257.jpg"
+      },
+      {
+        "name": "Blue",
+        "image": "https://i.ibb.co.com/qFBzc5wW/IMG-20260914-222229.jpg"
+      },
+      {
+        "name": "Maroon",
+        "image": "https://i.ibb.co.com/mrRmzQLy/IMG-20260914-222207.jpg"
+      },
+      {
+        "name": "Olive Green",
+        "image": "https://i.ibb.co.com/HpDwHYNw/IMG-20260914-221959.jpg"
+      },
+      {
+        "name": "Beige",
+        "image": "https://i.ibb.co.com/KpYsKgjb/IMG-20260914-221941.jpg"
+      },
+      {
+        "name": "Green",
+        "image": "https://i.ibb.co.com/whzLHR4H/IMG-20260914-221826.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Premium Cherry Abaya. A perfect blend of modesty and elegance.Crafted with Premium Cherry fabric, this abaya offers a soft, smooth, and luxurious feel with a graceful flow.",
+      "details": [
+        "Premium Cherry fabric",
+        "Special front button work",
+        "Elegant loose & flowy fitting",
+        "Extra wide flare for a gorgeous look",
+        "Comfortable for daily wear & occasions",
+        "simple yet classy design",
+        "Designed for sisters who love comfort, elegance, and modest fashion together."
+      ]
+    },
+    "sizes": [
+      {
+        "name": "S"
+      },
+      {
+        "name": "M"
+      },
+      {
+        "name": "L"
+      },
+      {
+        "name": "XL"
+      },
+      {
+        "name": "XXL"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "sellerName": "Artistic Humu",
+    "title": "Gel candle",
+    "price": "BDT 800",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/chKtxMcc/IMG-20260917-WA0037.jpg",
+      "https://i.ibb.co.com/whN4g8G0/IMG-20260917-WA0036.jpg",
+      ""
+    ],
+    "colors": [],
+    "category": "",
+    "description": {
+      "intro": "Beautiful Aquarium- style Gel Candle- Decorative Water Wax Candle.Bring the soothing beauty of the ocean right into your home with our handcrafted Gel Candle. Designed inside a classic glass bowl, this candle features a vibrant underwater scene complete with colorful pebbles, sea plants, and natural shells—topped with a crystal-clear gel layer that radiates a warm, comforting glow.",
+      "details": [
+        "Beautiful underwater theme that serves as an eye-catching home decor piece even when not lit.",
+        "Gel wax burns up to twice as long as traditional paraffin wax, providing hours of ambient light.",
+        "Made with non-toxic, eco-friendly gel wax for a smooth and clean burn.",
+        "Once the wax is gone, clean the bowl easily and reuse it as a mini vase or keepsake holder."
+      ]
+    },
+    "sizes": []
+  },
+  {
+    "id": 17,
+    "sellerName": "Halal Mood",
+    "title": "Ruhi Abaya",
+    "price": "BDT 2655",
+    "originalPrice": "BDT 2950",
+    "image": [
+      "https://i.ibb.co.com/4whCLpgv/IMG-20260909-143224.jpg",
+      "https://i.ibb.co.com/bMr42fx7/IMG-20260914-221630.jpg",
+      "https://i.ibb.co.com/VY0fq66N/IMG-20260915-090059.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Beige",
+        "image": "https://i.ibb.co.com/4whCLpgv/IMG-20260909-143224.jpg"
+      },
+      {
+        "name": "Dark Grey",
+        "image": "https://i.ibb.co.com/bMr42fx7/IMG-20260914-221630.jpg"
+      },
+      {
+        "name": "Maroon",
+        "image": "https://i.ibb.co.com/VY0fq66N/IMG-20260915-090059.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Premium Popcorn Fabric Abaya.Experience elegance with our beautifully crafted premium Popcorn fabric abaya- designed for sisters who love modesty with a classy touch.",
+      "details": [
+        "Made with premium quality popcorn fabric",
+        "Soft, comfortable & flowy fitting",
+        "Available in 7-10 gorgeous colours",
+        "Perfect for daily wear,outings,and special occasions- where comfort meets elegance."
+      ]
+    },
+    "sizes": [
+      {
+        "name": "S"
+      },
+      {
+        "name": "M"
+      },
+      {
+        "name": "L"
+      },
+      {
+        "name": "XL"
+      },
+      {
+        "name": "XXL"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "sellerName": "Artistic Humu",
+    "title": "Clay Pot",
+    "price": "BDT 250",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/pBQCrVh4/IMG-20260908-WA0002.jpg",
+      "",
+      ""
+    ],
+    "colors": [
+      {
+        "name": "",
+        "image": "https://i.ibb.co.com/pBQCrVh4/IMG-20260908-WA0002.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Artistry in Every Glow.Discover the perfect blend of tradition and creativity. Our latest collection features handcrafted pieces designed to bring warmth and character to your space",
+      "details": [
+        "Weight: 250gm",
+        "The Ocean Shell: A serene blue pour nestled in a natural coconut shell, adorned with real seashells",
+        "The Rainbow Layer: A vibrant, multi-colored pillar that celebrates every hue of the spectrum",
+        "The Earthen Prodip: Classic clay meets modern blue wax for a touch of rustic elegance",
+        "Eco-friendly, hand-poured, and made with love."
+      ]
+    },
+    "sizes": []
+  },
+  {
+    "id": 19,
+    "sellerName": "Halal Mood",
+    "title": "Yara Abaya",
+    "price": "BDT 2430",
+    "originalPrice": "BDT 2700",
+    "image": [
+      "https://i.ibb.co.com/1NWpyvv/IMG-20260909-143151.jpg",
+      "https://i.ibb.co.com/Xksyp529/IMG-20260914-221532.jpg",
+      "https://i.ibb.co.com/HDyf5pbR/IMG-20260914-221501.jpg",
+      "https://i.ibb.co.com/B2g5Qbdv/IMG-20260914-221437.jpg",
+      "https://i.ibb.co.com/0pRRYGYK/IMG-20260914-221413.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Dark Teal",
+        "image": "https://i.ibb.co.com/1NWpyvv/IMG-20260909-143151.jpg"
+      },
+      {
+        "name": "Dusty Rose",
+        "image": "https://i.ibb.co.com/Xksyp529/IMG-20260914-221532.jpg"
+      },
+      {
+        "name": "Plum",
+        "image": "https://i.ibb.co.com/HDyf5pbR/IMG-20260914-221501.jpg"
+      },
+      {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/0pRRYGYK/IMG-20260914-221413.jpg"
+      },
+      {
+        "name": "Beige",
+        "image": "https://i.ibb.co.com/B2g5Qbdv/IMG-20260914-221437.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Premium Zoom Fabric Abaya.Experience elegance with our beautifully crafted premium Zoom fabric abaya- designed for sisters who love modesty with a classy touch.",
+      "details": [
+        "Made with premium quality Zoom fabric",
+        "Stylish front pleated design",
+        "Shoulder zipper with buton lock",
+        "Soft, comfortable & flowy fitting",
+        "Available in 7-10 gorgeous colours",
+        "Perfect for daily wear,outings,and special occasions- where comfort meets elegance."
+      ]
+    },
+    "sizes": [
+      {
+        "name": "S"
+      },
+      {
+        "name": "M"
+      },
+      {
+        "name": "L"
+      },
+      {
+        "name": "XL"
+      },
+      {
+        "name": "XXL"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "sellerName": "Artistic Humu",
+    "title": "Coconut Shell Candle With Shells",
+    "price": "BDT 750",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/twY8HCR8/IMG-20260908-WA0003.jpg",
+      "",
+      ""
+    ],
+    "colors": [
+      {
+        "name": "",
+        "image": "https://i.ibb.co.com/twY8HCR8/IMG-20260908-WA0003.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Artistry in Every Glow.Discover the perfect blend of tradition and creativity. Our latest collection features handcrafted pieces designed to bring warmth and character to your space.",
+      "details": [
+        "Weight: 250gm",
+        "The Ocean Shell: A serene blue pour nestled in a natural coconut shell, adorned with real seashells",
+        "The Rainbow Layer: A vibrant, multi-colored pillar that celebrates every hue of the spectrum",
+        "The Earthen Prodip: Classic clay meets modern blue wax for a touch of rustic elegance",
+        "Eco-friendly, hand-poured, and made with love."
+      ]
+    },
+    "sizes": []
+  },
+  {
+    "id": 21,
+    "sellerName": "Halal Mood",
+    "title": "Nabiha Hijab",
+    "price": "BDT 1500",
+    "originalPrice": "BDT 1650",
+    "image": [
+      "https://i.ibb.co.com/B2374Fg4/IMG-20260909-143036.jpg",
+      "https://i.ibb.co.com/fGG6YN8M/IMG-20260915-095932.jpg",
+      ""
+    ],
+    "colors": [
+      {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/B2374Fg4/IMG-20260909-143036.jpg"
+      },
+      {
+        "name": "Beige",
+        "image": "https://i.ibb.co.com/fGG6YN8M/IMG-20260915-095932.jpg"
+      },
+      {
+        "name": "Maroon",
+        "image": ""
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "This is a instant Ready Hijab.",
+      "details": []
+    },
+    "sizes": []
+  },
+  {
+    "id": 22,
+    "sellerName": "Su Zan 1622",
+    "title": "Soft Jafran MIcro Fabric Co-ord",
+    "price": " BDT 1650",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/v40xCbDg/IMG-20260907-WA0055.jpg",
+      "https://i.ibb.co.com/1tJRw54W/IMG-20260907-WA0052.jpg",
+      "https://i.ibb.co.com/V0x85T74/IMG-20260907-WA0059.jpg",
+      "https://i.ibb.co.com/TBS3pJD8/IMG-20260907-WA0034.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Purple",
+        "image": "https://i.ibb.co.com/v40xCbDg/IMG-20260907-WA0055.jpg"
+      },
+      {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/1tJRw54W/IMG-20260907-WA0052.jpg"
+      },
+      {
+        "name": "Pink",
+        "image": "https://i.ibb.co.com/V0x85T74/IMG-20260907-WA0059.jpg"
+      },
+      {
+        "name": "Yellow",
+        "image": "https://i.ibb.co.com/TBS3pJD8/IMG-20260907-WA0034.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Experience elegance with this pickock digital print jafran premium micro fabric cord set  .",
+      "details": []
+    },
+    "sizes": [
+      {
+        "name": "S"
+      },
+      {
+        "name": "M"
+      },
+      {
+        "name": "L"
+      },
+      {
+        "name": "XL"
+      },
+      {
+        "name": "XXL"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "sellerName": "Su Zan 1622",
+    "title": "Soft Jafran MIcro Fabric Co-ord",
+    "price": " BDT 950",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/NgR3f9MC/IMG-20260907-WA0094.jpg",
+      "https://i.ibb.co.com/HDb1pmSb/IMG-20260907-WA0083.jpg",
+      "https://i.ibb.co.com/4qgYzJK/IMG-20260907-WA0097.jpg",
+      "https://i.ibb.co.com/p6Mm5tff/IMG-20260907-WA0101.jpg",
+      "https://i.ibb.co.com/7JcBQgPP/IMG-20260907-WA0075.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Yellow",
+        "image": "https://i.ibb.co.com/NgR3f9MC/IMG-20260907-WA0094.jpg"
+      },
+      {
+        "name": "Soft Pink",
+        "image": "https://i.ibb.co.com/HDb1pmSb/IMG-20260907-WA0083.jpg"
+      },
+      {
+        "name": "Dark Emerald Green",
+        "image": "https://i.ibb.co.com/4qgYzJK/IMG-20260907-WA0097.jpg"
+      },
+      {
+        "name": "Pink",
+        "image": "https://i.ibb.co.com/p6Mm5tff/IMG-20260907-WA0101.jpg"
+      },
+      {
+        "name": "Sky Blue",
+        "image": "https://i.ibb.co.com/p6Mm5tff/IMG-20260907-WA0075.jpg"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Experience elegance with this pickock digital print jafran premium micro fabric cord set.",
+      "details": []
+    },
+    "sizes": [
+      {
+        "name": "S"
+      },
+      {
+        "name": "M"
+      },
+      {
+        "name": "L"
+      },
+      {
+        "name": "XL"
+      },
+      {
+        "name": "XXL"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "sellerName": "AYZAN",
+    "title": "Shirt+ Pant Set",
+    "price": "BDT 1499",
+    "purchaseOptions": [
+      {
+        "name": "Kurti",
+        "price": 899
+      },
+      {
+        "name": "Pant",
+        "price": 699
+      },
+      {
+        "name": "Full Set",
+        "price": 1499
+      }
+    ],
+    "image": [
+      "https://i.ibb.co.com/pvhjmNG2/7-Green-Shirt.png",
+      "https://i.ibb.co.com/p6wgYygf/1-Biscut-Color.png",
+      "https://i.ibb.co.com/0VMZsjd4/6-Liver-Color.png",
+      "https://i.ibb.co.com/4nqq4DBx/5-Blue-Color.png",
+      "https://i.ibb.co.com/MDpC4G2M/2-Black-Color.png"
+    ],
+    "colors": [
+      {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/MDpC4G2M/2-Black-Color.png"
+      },
+      {
+        "name": "Green",
+        "image": "https://i.ibb.co.com/pvhjmNG2/7-Green-Shirt.png"
+      },
+      {
+        "name": "Blue",
+        "image": "https://i.ibb.co.com/4nqq4DBx/5-Blue-Color.png"
+      },
+      {
+        "name": "Beige",
+        "image": "https://i.ibb.co.com/p6wgYygf/1-Biscut-Color.png"
+      },
+      {
+        "name": "Maroon",
+        "image": "https://i.ibb.co.com/0VMZsjd4/6-Liver-Color.png"
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Soft, textured Jacquard fabric with a subtle elegant finish.",
+      "details": [
+        "Kurti: Free Size | Up to 44\" | Adjustable Back Tie | Length 33\" | Sleeve 22\"",
+        "Pant: Imported Jafran material with a smooth drape and comfortable feel",
+        "Pant: Waist 44\"–46\" | Length 40\"",
+        "Customized Fit Available — Made according to your measurements",
+        "Kurti: BDT 899/-",
+        "Pant: BDT 699/-",
+        "Full Set Price: BDT 1,499/-",
+        "Delivery: Within 2–3 Working Days across Bangladesh",
+        "Free Home Delivery on orders of 2 or more products"
+      ]
+    },
+    "sizes": [
+      {
+        "name": "Free Size",
+        "kurti": {
+          "fit": "Up to 44\"",
+          "backTie": "Adjustable",
+          "length": "33\"",
+          "sleeveLength": "22\""
+        },
+        "pant": {
+          "waist": "44\"–46\"",
+          "length": "40\""
+        },
+        "customizedFit": true
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "sellerName": "Artistic Humu",
+    "title": "Hand-Stitched Denim Bangles",
+    "price": "BDT 380",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/8LkQ0NMg/IMG-20260917-WA0016.jpg",
+      "https://i.ibb.co.com/C5XCmT2y/IMG-20260917-WA0020.jpg",
+      "https://i.ibb.co.com/VcScVYWG/IMG-20260917-WA0018.jpg"
+    ],
+    "colors": [
+      {
+        "name": "",
+        "image": "https://i.ibb.co.com/8LkQ0NMg/IMG-20260917-WA0016.jpg"
+      },
+      {
+        "name": "",
+        "image": "https://i.ibb.co.com/C5XCmT2y/IMG-20260917-WA0020.jpg"
+      },
+      {
+        "name": "",
+        "image": "https://i.ibb.co.com/VcScVYWG/IMG-20260917-WA0018.jpg"
+      },
+      {
+        "name": "",
+        "image": ""
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Where Rugged Denim Meets Fine Artistry.Meet our Hand-Stitched Denim Bangles—the perfect fusion of contemporary street style and traditional embroidery. Each bangle features intricate, time-intensive thread work, including stunning, hand-detailed floral centers and classic sashiko-inspired patterns.",
+      "details": [
+        "100% handmade and sustainably crafted.",
+        "Lightweight, durable, and comfortable for all-day wear.",
+        "Perfect for stacking or wearing as a single statement piece to elevate casual wear or add an edgy, artistic touch to ethnic outfits.",
+        "Ditch the mass-produced. Wear something as unique as your own story."
+      ]
+    },
+    "sizes": [
+      {
+        "name": "26"
+      },
+      {
+        "name": "28"
+      },
+      {
+        "name": "30"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "sellerName": "Artistic Humu",
+    "title": "Hand-Stitched Denim Bangles",
+    "price": "BDT 320",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/3yRmGyKQ/IMG-20260917-WA0028.jpg",
+      "https://i.ibb.co.com/4ZdCVwd0/IMG-20260917-WA0027.jpg",
+      "https://i.ibb.co.com/67s91XD8/IMG-20260917-WA0026.jpg"
+    ],
+    "colors": [
+      {
+        "name": "",
+        "image": "https://i.ibb.co.com/3yRmGyKQ/IMG-20260917-WA0028.jpg"
+      },
+      {
+        "name": "",
+        "image": "https://i.ibb.co.com/3yRmGyKQ/IMG-20260917-WA0027.jpg"
+      },
+      {
+        "name": "",
+        "image": "https://i.ibb.co.com/3yRmGyKQ/IMG-20260917-WA0026.jpg"
+      },
+      {
+        "name": "",
+        "image": ""
+      }
+    ],
+    "category": "",
+    "description": {
+      "intro": "Where Rugged Denim Meets Fine Artistry.Meet our Hand-Stitched Denim Bangles—the perfect fusion of contemporary street style and traditional embroidery. Each bangle features intricate, time-intensive thread work, including stunning, hand-detailed floral centers and classic sashiko-inspired patterns.",
+      "details": [
+        "100% handmade and sustainably crafted.",
+        "Lightweight, durable, and comfortable for all-day wear.",
+        "Perfect for stacking or wearing as a single statement piece to elevate casual wear or add an edgy, artistic touch to ethnic outfits.",
+        "Ditch the mass-produced. Wear something as unique as your own story."
+      ]
+    },
+    "sizes": [
+      {
+        "name": "26"
+      },
+      {
+        "name": "28"
+      },
+      {
+        "name": "30"
+      }
+    ]
+  }
+]

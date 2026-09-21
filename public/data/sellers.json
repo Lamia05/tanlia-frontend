@@ -1,0 +1,74 @@
+
+[
+  {
+    "id": 1,
+    "name": "AYZAN",
+    "tagline": "CONTEMPORARY MODEST WEAR",
+    "description": "Discover elegant and contemporary modest wear from AYZAN.",
+    "productsCount": 3,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/0pmSYZwZ/IMG-20260920-150314.jpg",
+    "instagramUrl": "",
+    "delivery": {
+      "insideDhaka": 80,
+      "outsideDhaka": 120
+    }
+  },
+  {
+    "id": 2,
+    "name": "Su Zan 1622",
+    "tagline": "ELEGANT ETHNIC & CONTEMPORARY WEAR",
+    "description": "Explore stylish sarees, two-piece sets and contemporary outfits from Su Zan 1622.",
+    "productsCount": 4,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/jZQv964j/IMG-20260906-WA0011.jpg",
+    "instagramUrl": "",
+    "delivery": {
+      "insideDhaka": 80,
+      "outsideDhaka": 120
+    }
+  },
+  {
+    "id": 3,
+    "name": "Halal Mood",
+    "tagline": "ELEGANT MODEST FASHION",
+    "description": "Discover graceful abayas and modest fashion designed for comfort and elegance.",
+    "productsCount": 7,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/BKqyBS4H/IMG-20260920-150226.jpg",
+    "instagramUrl": "",
+    "delivery": {
+      "insideDhaka": 80,
+      "outsideDhaka": 120
+    }
+  },
+  {
+    "id": 4,
+    "name": "Trendy Touh",
+    "tagline": "EFFORTLESS EVERYDAY STYLE",
+    "description": "Explore vibrant and comfortable everyday fashion from Trendy Touh.",
+    "productsCount": 1,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/dy0QQP1/IMG-20260920-150241.jpg",
+    "instagramUrl": "",
+    "delivery": {
+      "insideDhaka": 80,
+      "outsideDhaka": 120
+    }
+  },
+  {
+    "id": 5,
+    "name": "Artistic Humu",
+    "tagline": "HANDCRAFTED ART & ACCESSORIES",
+    "description": "Discover handcrafted accessories, home décor and artistic pieces from Artistic Humu.",
+    "productsCount": 8,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/CqssPJ6/IMG-20260908-WA0001.jpg",
+    "instagramUrl": "",
+    "delivery": {
+      "insideDhaka": 80,
+      "outsideDhaka": 120
+    }
+  }
+]
+ 

@@ -1,0 +1,144 @@
+
+[
+  {
+    "id": 27,
+    "sellerName": "Trendy Touch",
+    "title": "Digital Printed Three-Piece",
+    "price": "BDT 900",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/gpjw5Xh/IMG-20260906-WA0000-1.jpg",
+      "https://i.ibb.co.com/93mB1svc/IMG-20260906-WA0004-1.jpg"
+    ],
+    "category": "",
+    "tag": "",
+    "description": {
+      "intro": "Enhance your style with this premium digital printed three-piece dress, adorned with delicate lace work for an elegant and attractive look.This complete set—featuring a kameez, pant, and georgette dupatta—is perfect for parties, invitations, or any special occasion.",
+      "details": [
+        "Product: Digital Printed Three-Piece Set",
+        "Design: Premium digital print with lace accenting",
+        "Fabric: China Microstitch",
+        "Kameez: Smooth fabric with elegant lace details",
+        "Pant: Smooth fabric featuring printed designs",
+        "Dupatta: Georgette (90 inches)",
+        "Kameez Length: 42\"–44\"",
+        "Pant Length: 39\""
+      ]
+    },
+    "colors": [],
+    "sizes": [
+      {
+        "name": "L",
+        "measurement": "Chest 36\"–38\""
+      },
+      {
+        "name": "XL",
+        "measurement": "Chest 40\"–42\""
+      },
+      {
+        "name": "XXL",
+        "measurement": "Chest 44\"–46\""
+      }
+    ],
+    "purchaseOptions": {},
+    "pricing": {},
+    "seller": {
+      "name": "Trendy Touch"
+    },
+    "media": {
+      "cover": "https://i.ibb.co.com/gpjw5Xh/IMG-20260906-WA0000-1.jpg",
+      "images": [
+        "https://i.ibb.co.com/93mB1svc/IMG-20260906-WA0004-1.jpg"
+      ]
+    }
+  },
+  {
+    "id": 28,
+    "sellerName": "Trendy Touch",
+    "title": "Lawn Suit",
+    "price": "BDT 900",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/ppHDgTh/IMG-20260906-WA0005-1.jpg",
+      "https://i.ibb.co.com/93mB1svc/IMG-20260906-WA0004-1.jpg"
+    ],
+    "category": "",
+    "tag": "",
+    "description": {
+      "intro": "",
+      "details": []
+    },
+    "colors": [
+      "Musterd Yellow"
+    ],
+    "sizes": [
+      {
+        "name": "L",
+        "measurement": "Chest 36\"–38\""
+      },
+      {
+        "name": "XL",
+        "measurement": "Chest 40\"–42\""
+      },
+      {
+        "name": "XXL",
+        "measurement": "Chest 44\"–46\""
+      }
+    ],
+    "purchaseOptions": {},
+    "pricing": {},
+    "seller": {
+      "name": "Trendy Touch"
+    },
+    "media": {
+      "cover": "https://i.ibb.co.com/ppHDgTh/IMG-20260906-WA0005-1.jpg",
+      "images": [
+        "https://i.ibb.co.com/93mB1svc/IMG-20260906-WA0004-1.jpg"
+      ]
+    }
+  },
+  {
+    "id": 29,
+    "sellerName": "Trendy Touch",
+    "title": "Digital Printed Three-Piece",
+    "price": "BDT 900",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/Pvyv6Jsb/IMG-20260906-WA0003.jpg",
+      "https://i.ibb.co.com/VYmdS3K1/IMG-20260906-WA0006-1.jpg"
+    ],
+    "category": "",
+    "tag": "",
+    "description": {
+      "intro": "",
+      "details": []
+    },
+    "colors": [],
+    "sizes": [
+      {
+        "name": "L",
+        "measurement": "Chest 36\"–38\""
+      },
+      {
+        "name": "XL",
+        "measurement": "Chest 40\"–42\""
+      },
+      {
+        "name": "XXL",
+        "measurement": "Chest 44\"–46\""
+      }
+    ],
+    "purchaseOptions": {},
+    "pricing": {},
+    "seller": {
+      "name": "Trendy Touch"
+    },
+    "media": {
+      "cover": "https://i.ibb.co.com/Pvyv6Jsb/IMG-20260906-WA0003.jpg",
+      "images": [
+        "https://i.ibb.co.com/VYmdS3K1/IMG-20260906-WA0006-1.jpg",
+        "https://i.ibb.co.com/zhCsTCrb/IMG-20260906-WA0002-1.jpg"
+      ]
+    }
+  }
+]
