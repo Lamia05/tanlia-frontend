@@ -18,102 +18,279 @@ const AllProducts = () => {
   const [selectedSize, setSelectedSize] = useState("");
 
   const [wishlist, setWishlist] = useState([]);
-  const [showCartNotification, setShowCartNotification] = useState(false);
+  const [showCartNotification, setShowCartNotification] =
+    useState(false);
 
-useEffect(() => {
-  fetch("https://tanlia-backend.onrender.com/api/products")
-    .then((res) => res.json())
-    .then((data) => {
-      setProducts(Array.isArray(data) ? data : []);
-      setLoading(false);
-    })
-    .catch((error) => {
-      console.error("Failed to load products:", error);
-      setLoading(false);
-    });
-}, []);
+  useEffect(() => {
+    fetch("https://tanlia-backend.onrender.com/api/products")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to load products");
+        }
+
+        return res.json();
+      })
+      .then((data) => {
+        setProducts(Array.isArray(data) ? data : []);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to load products:", error);
+        setProducts([]);
+        setLoading(false);
+      });
+  }, []);
+
   useEffect(() => {
     const savedWishlist = JSON.parse(
       localStorage.getItem("tanliaWishlist") || "[]"
     );
-    setWishlist(savedWishlist);
+
+    setWishlist(
+      Array.isArray(savedWishlist) ? savedWishlist : []
+    );
   }, []);
 
   const getProductTitle = (product) => {
     return (
-      product.title ||
-      product.name ||
-      product.productName ||
-      product.product?.title ||
+      product?.title ||
+      product?.name ||
+      product?.productName ||
+      product?.product?.title ||
       "Product"
     );
   };
 
   const getSellerName = (product) => {
     return (
-      product.sellerName ||
-      product.seller ||
-      product.product?.sellerName ||
-      product.product?.seller ||
+      product?.sellerName ||
+      product?.seller ||
+      product?.product?.sellerName ||
+      product?.product?.seller ||
       ""
     );
   };
 
+  /* =========================
+     SAFE IMAGE HANDLING
+  ========================= */
+
+  const cleanImages = (images) => {
+    if (!Array.isArray(images)) return [];
+
+    return [
+      ...new Set(
+        images
+          .filter(
+            (image) =>
+              typeof image === "string" &&
+              image.trim() !== ""
+          )
+          .map((image) => image.trim())
+      ),
+    ];
+  };
+
   const getProductImages = (product) => {
-    if (Array.isArray(product.images) && product.images.length > 0) {
-      return product.images;
-    }
+    if (!product) return [];
 
-    if (Array.isArray(product.image) && product.image.length > 0) {
-      return product.image;
-    }
+    if (Array.isArray(product.image)) {
+      const images = cleanImages(product.image);
 
-    if (product.image) {
-      return [product.image];
-    }
-
-    if (product.media?.cover) {
-      return [product.media.cover];
+      if (images.length > 0) {
+        return images;
+      }
     }
 
     if (
-      Array.isArray(product.media?.images) &&
-      product.media.images.length > 0
+      typeof product.image === "string" &&
+      product.image.trim() !== ""
     ) {
-      return product.media.images;
+      return [product.image.trim()];
     }
 
-    if (Array.isArray(product.colors) && product.colors.length > 0) {
+    if (Array.isArray(product.images)) {
+      const images = cleanImages(product.images);
+
+      if (images.length > 0) {
+        return images;
+      }
+    }
+
+    if (product.media) {
+      const mediaImages = [];
+
+      if (
+        typeof product.media.cover === "string" &&
+        product.media.cover.trim() !== ""
+      ) {
+        mediaImages.push(product.media.cover.trim());
+      }
+
+      if (Array.isArray(product.media.images)) {
+        mediaImages.push(...product.media.images);
+      }
+
+      const cleanedMediaImages =
+        cleanImages(mediaImages);
+
+      if (cleanedMediaImages.length > 0) {
+        return cleanedMediaImages;
+      }
+    }
+
+    if (Array.isArray(product.colors)) {
       const colorImages = product.colors
-        .map((color) => color?.image)
+        .map((color) => {
+          if (
+            color &&
+            typeof color === "object" &&
+            typeof color.image === "string"
+          ) {
+            return color.image.trim();
+          }
+
+          return "";
+        })
         .filter(Boolean);
 
-      if (colorImages.length > 0) {
-        return colorImages;
+      const cleanedColorImages =
+        cleanImages(colorImages);
+
+      if (cleanedColorImages.length > 0) {
+        return cleanedColorImages;
       }
     }
 
     return [];
   };
 
+  /* =========================
+     SAFE TEXT HELPERS
+  ========================= */
+
+  const getSafeText = (value) => {
+    if (value === null || value === undefined) {
+      return "";
+    }
+
+    if (
+      typeof value === "string" ||
+      typeof value === "number"
+    ) {
+      return String(value);
+    }
+
+    if (Array.isArray(value)) {
+      return value
+        .map((item) => getSafeText(item))
+        .filter(Boolean)
+        .join(" ");
+    }
+
+    if (typeof value === "object") {
+      if (
+        typeof value.intro === "string" &&
+        Array.isArray(value.details)
+      ) {
+        return [
+          value.intro,
+          ...value.details.map((detail) =>
+            getSafeText(detail)
+          ),
+        ]
+          .filter(Boolean)
+          .join(" ");
+      }
+
+      if (typeof value.intro === "string") {
+        return value.intro;
+      }
+
+      if (typeof value.details === "string") {
+        return value.details;
+      }
+
+      return "";
+    }
+
+    return "";
+  };
+
+  const renderDescription = (description) => {
+    if (!description) return null;
+
+    if (typeof description === "string") {
+      return <p>{description}</p>;
+    }
+
+    if (Array.isArray(description)) {
+      const safeItems = description
+        .map((item) => getSafeText(item))
+        .filter(Boolean);
+
+      if (safeItems.length === 0) return null;
+
+      return (
+        <ul className="space-y-1">
+          {safeItems.map((item, index) => (
+            <li key={index}>• {item}</li>
+          ))}
+        </ul>
+      );
+    }
+
+    if (typeof description === "object") {
+      const intro = getSafeText(description.intro);
+
+      const details = Array.isArray(
+        description.details
+      )
+        ? description.details
+            .map((detail) => getSafeText(detail))
+            .filter(Boolean)
+        : [];
+
+      return (
+        <>
+          {intro && <p>{intro}</p>}
+
+          {details.length > 0 && (
+            <ul className="mt-3 space-y-1">
+              {details.map((detail, index) => (
+                <li key={index}>• {detail}</li>
+              ))}
+            </ul>
+          )}
+        </>
+      );
+    }
+
+    return null;
+  };
+
+  /* =========================
+     PRICE
+  ========================= */
+
   const getPrice = (product) => {
-    if (product.pricing?.fullSet) {
+    if (product?.pricing?.fullSet) {
       return product.pricing.fullSet;
     }
 
-    if (product.pricing?.price) {
+    if (product?.pricing?.price) {
       return product.pricing.price;
     }
 
-    if (product.pricing?.kameez) {
+    if (product?.pricing?.kameez) {
       return product.pricing.kameez;
     }
 
-    if (product.pricing?.pant) {
+    if (product?.pricing?.pant) {
       return product.pricing.pant;
     }
 
-    return product.price || "0";
+    return product?.price || "0";
   };
 
   const getNumericPrice = (price) => {
@@ -128,11 +305,15 @@ useEffect(() => {
     return Number(numeric) || 0;
   };
 
+  /* =========================
+     CATEGORY
+  ========================= */
+
   const getCategories = (product) => {
     const category =
-      product.category ||
-      product.product?.category ||
-      product.type ||
+      product?.category ||
+      product?.product?.category ||
+      product?.type ||
       "";
 
     return String(category)
@@ -141,25 +322,33 @@ useEffect(() => {
       .filter(Boolean);
   };
 
+  /* =========================
+     COLORS
+  ========================= */
+
   const getColors = (product) => {
-    if (Array.isArray(product.colors)) {
-      return product.colors;
+    if (Array.isArray(product?.colors)) {
+      return product.colors.filter(Boolean);
     }
 
-    if (Array.isArray(product.variants?.colors)) {
-      return product.variants.colors;
+    if (Array.isArray(product?.variants?.colors)) {
+      return product.variants.colors.filter(Boolean);
     }
 
     return [];
   };
 
+  /* =========================
+     SIZES
+  ========================= */
+
   const getSizes = (product) => {
-    if (Array.isArray(product.sizes)) {
-      return product.sizes;
+    if (Array.isArray(product?.sizes)) {
+      return product.sizes.filter(Boolean);
     }
 
-    if (Array.isArray(product.variants?.sizes)) {
-      return product.variants.sizes;
+    if (Array.isArray(product?.variants?.sizes)) {
+      return product.variants.sizes.filter(Boolean);
     }
 
     return [];
@@ -167,13 +356,19 @@ useEffect(() => {
 
   const categories = [
     "All",
-    ...new Set(products.flatMap((product) => getCategories(product))),
+    ...new Set(
+      products.flatMap((product) =>
+        getCategories(product)
+      )
+    ),
   ];
 
   const sellers = [
     "All",
     ...new Set(
-      products.map((product) => getSellerName(product)).filter(Boolean)
+      products
+        .map((product) => getSellerName(product))
+        .filter(Boolean)
     ),
   ];
 
@@ -181,7 +376,9 @@ useEffect(() => {
     .filter((product) => {
       const categoryMatch =
         selectedCategory === "All" ||
-        getCategories(product).includes(selectedCategory);
+        getCategories(product).includes(
+          selectedCategory
+        );
 
       const sellerMatch =
         selectedSeller === "All" ||
@@ -202,7 +399,9 @@ useEffect(() => {
       }
 
       if (sortBy === "name") {
-        return getProductTitle(a).localeCompare(getProductTitle(b));
+        return getProductTitle(a).localeCompare(
+          getProductTitle(b)
+        );
       }
 
       return 0;
@@ -211,6 +410,7 @@ useEffect(() => {
   /* =========================
      ADD TO CART
   ========================= */
+
   const handleAddToCart = (
     product,
     color = "",
@@ -224,11 +424,18 @@ useEffect(() => {
 
       const images = getProductImages(product);
 
+      const selectedCartImage =
+        typeof image === "string" && image.trim()
+          ? image.trim()
+          : images.length > 0
+          ? images[0]
+          : "";
+
       const cartItem = {
         id: String(product.id),
         title: getProductTitle(product),
         price: String(getPrice(product) || "0"),
-        image: image || images[0] || "",
+        image: selectedCartImage,
         seller: getSellerName(product),
         color: color || "",
         size: size || "",
@@ -242,7 +449,9 @@ useEffect(() => {
         JSON.stringify(existingCart)
       );
 
-      window.dispatchEvent(new Event("cartUpdated"));
+      window.dispatchEvent(
+        new Event("cartUpdated")
+      );
 
       setShowCartNotification(true);
 
@@ -257,12 +466,15 @@ useEffect(() => {
   /* =========================
      QUICK VIEW
   ========================= */
+
   const openQuickView = (product) => {
     setQuickViewProduct(product);
 
     const images = getProductImages(product);
 
-    setSelectedImage(images[0] || "");
+    setSelectedImage(
+      images.length > 0 ? images[0] : ""
+    );
 
     const colors = getColors(product);
     const sizes = getSizes(product);
@@ -294,6 +506,7 @@ useEffect(() => {
   /* =========================
      WISHLIST
   ========================= */
+
   const handleWishlist = (product) => {
     const productId = String(product.id);
 
@@ -304,7 +517,10 @@ useEffect(() => {
         (id) => id !== productId
       );
     } else {
-      updatedWishlist = [...wishlist, productId];
+      updatedWishlist = [
+        ...wishlist,
+        productId,
+      ];
     }
 
     setWishlist(updatedWishlist);
@@ -314,12 +530,15 @@ useEffect(() => {
       JSON.stringify(updatedWishlist)
     );
 
-    window.dispatchEvent(new Event("wishlistUpdated"));
+    window.dispatchEvent(
+      new Event("wishlistUpdated")
+    );
   };
 
   /* =========================
      ESCAPE QUICK VIEW
   ========================= */
+
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
@@ -327,17 +546,25 @@ useEffect(() => {
       }
     };
 
-    window.addEventListener("keydown", handleEscape);
+    window.addEventListener(
+      "keydown",
+      handleEscape
+    );
 
     return () => {
-      window.removeEventListener("keydown", handleEscape);
+      window.removeEventListener(
+        "keydown",
+        handleEscape
+      );
     };
   }, []);
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7]">
-        <p className="text-sm">Loading products...</p>
+        <p className="text-sm">
+          Loading products...
+        </p>
       </div>
     );
   }
@@ -345,21 +572,22 @@ useEffect(() => {
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
 
-      {/* =========================
-          CART NOTIFICATION
-      ========================= */}
+      {/* CART NOTIFICATION */}
+
       {showCartNotification && (
         <div className="fixed top-24 right-6 z-[100] bg-black text-white px-5 py-3 text-sm shadow-lg">
           Product added to cart
         </div>
       )}
 
-      {/* =========================
-          HEADER
-      ========================= */}
+      {/* HEADER */}
+
       <section className="px-5 md:px-10 lg:px-16 pt-12 pb-8">
+
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+
           <div>
+
             <p className="text-xs tracking-[0.25em] uppercase mb-3">
               Tanlia Studio
             </p>
@@ -371,25 +599,31 @@ useEffect(() => {
             <p className="text-sm text-gray-600 mt-3">
               Discover our curated collection from independent sellers.
             </p>
+
           </div>
 
           <p className="text-sm text-gray-500">
             {filteredProducts.length} Products
           </p>
+
         </div>
+
       </section>
 
-      {/* =========================
-          FILTERS
-      ========================= */}
+      {/* FILTERS */}
+
       <section className="px-5 md:px-10 lg:px-16 pb-8">
+
         <div className="border-y border-gray-200 py-5 flex flex-col lg:flex-row gap-5 lg:items-center lg:justify-between">
 
           <div className="flex flex-wrap gap-2">
+
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() =>
+                  setSelectedCategory(category)
+                }
                 className={`px-4 py-2 text-xs border transition ${
                   selectedCategory === category
                     ? "bg-black text-white border-black"
@@ -399,38 +633,62 @@ useEffect(() => {
                 {category}
               </button>
             ))}
+
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">
+
             <select
               value={selectedSeller}
-              onChange={(e) => setSelectedSeller(e.target.value)}
+              onChange={(e) =>
+                setSelectedSeller(e.target.value)
+              }
               className="border border-gray-300 bg-white px-4 py-2 text-xs outline-none"
             >
               {sellers.map((seller) => (
-                <option key={seller} value={seller}>
-                  {seller === "All" ? "All Sellers" : seller}
+                <option
+                  key={seller}
+                  value={seller}
+                >
+                  {seller === "All"
+                    ? "All Sellers"
+                    : seller}
                 </option>
               ))}
             </select>
 
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
+              onChange={(e) =>
+                setSortBy(e.target.value)
+              }
               className="border border-gray-300 bg-white px-4 py-2 text-xs outline-none"
             >
-              <option value="default">Sort By</option>
-              <option value="low">Price: Low to High</option>
-              <option value="high">Price: High to Low</option>
-              <option value="name">Name</option>
+              <option value="default">
+                Sort By
+              </option>
+
+              <option value="low">
+                Price: Low to High
+              </option>
+
+              <option value="high">
+                Price: High to Low
+              </option>
+
+              <option value="name">
+                Name
+              </option>
             </select>
+
           </div>
+
         </div>
+
       </section>
 
-      {/* =========================
-          PRODUCTS
-      ========================= */}
+      {/* PRODUCTS */}
+
       <section className="px-5 md:px-10 lg:px-16 pb-16">
 
         {filteredProducts.length === 0 ? (
@@ -443,15 +701,29 @@ useEffect(() => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 md:gap-x-6 gap-y-10">
 
             {filteredProducts.map((product) => {
-              const images = getProductImages(product);
-              const image = images[0] || "";
-              const productId = String(product.id);
-              const isWishlisted = wishlist.includes(productId);
+
+              const images =
+                getProductImages(product);
+
+              const image =
+                images.length > 0
+                  ? images[0]
+                  : "";
+
+              const productId =
+                String(product.id);
+
+              const isWishlisted =
+                wishlist.includes(productId);
 
               return (
-                <div key={product.id} className="group">
+                <div
+                  key={product.id}
+                  className="group"
+                >
 
                   {/* PRODUCT IMAGE */}
+
                   <div className="relative overflow-hidden bg-gray-100 aspect-[3/4]">
 
                     {image ? (
@@ -459,6 +731,10 @@ useEffect(() => {
                         src={image}
                         alt={getProductTitle(product)}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        onError={(event) => {
+                          event.currentTarget.style.display =
+                            "none";
+                        }}
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">
@@ -467,8 +743,11 @@ useEffect(() => {
                     )}
 
                     {/* WISHLIST */}
+
                     <button
-                      onClick={() => handleWishlist(product)}
+                      onClick={() =>
+                        handleWishlist(product)
+                      }
                       className="absolute top-3 right-3 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-sm"
                     >
                       <Heart
@@ -482,23 +761,26 @@ useEffect(() => {
                       />
                     </button>
 
-                    {/* =========================
-                        HOVER ACTIONS
-                    ========================= */}
+                    {/* HOVER ACTIONS */}
+
                     <div className="absolute left-3 right-3 bottom-3 flex gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
 
-                      {/* ADD TO CART - LONG BOX */}
                       <button
-                        onClick={() => handleAddToCart(product)}
+                        onClick={() =>
+                          handleAddToCart(product)
+                        }
                         className="flex-1 min-w-0 bg-white text-black py-3 px-3 text-xs flex items-center justify-center gap-2 hover:bg-black hover:text-white transition"
                       >
                         <ShoppingBag size={15} />
-                        <span>Add to Cart</span>
+                        <span>
+                          Add to Cart
+                        </span>
                       </button>
 
-                      {/* QUICK VIEW - ICON ONLY */}
                       <button
-                        onClick={() => openQuickView(product)}
+                        onClick={() =>
+                          openQuickView(product)
+                        }
                         aria-label="Quick View"
                         title="Quick View"
                         className="w-12 shrink-0 bg-white text-black py-3 flex items-center justify-center hover:bg-black hover:text-white transition"
@@ -507,9 +789,11 @@ useEffect(() => {
                       </button>
 
                     </div>
+
                   </div>
 
                   {/* PRODUCT INFO */}
+
                   <div className="pt-4">
 
                     <p className="text-[11px] uppercase tracking-wider text-gray-500 mb-1">
@@ -525,28 +809,33 @@ useEffect(() => {
                     </p>
 
                   </div>
+
                 </div>
               );
             })}
 
           </div>
         )}
+
       </section>
 
-      {/* =========================
-          QUICK VIEW MODAL
-      ========================= */}
+      {/* QUICK VIEW MODAL */}
+
       {quickViewProduct && (
         <div
           className="fixed inset-0 z-[90] bg-black/50 flex items-center justify-center p-4"
           onClick={closeQuickView}
         >
+
           <div
             className="relative bg-[#FDFBF7] w-full max-w-4xl max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           >
 
             {/* CLOSE */}
+
             <button
               onClick={closeQuickView}
               className="absolute top-4 right-4 z-10 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-sm"
@@ -557,72 +846,108 @@ useEffect(() => {
             <div className="grid md:grid-cols-2">
 
               {/* IMAGES */}
+
               <div className="p-5 md:p-8">
 
                 <div className="aspect-[3/4] bg-gray-100 overflow-hidden">
+
                   {selectedImage ? (
                     <img
                       src={selectedImage}
-                      alt={getProductTitle(quickViewProduct)}
+                      alt={getProductTitle(
+                        quickViewProduct
+                      )}
                       className="w-full h-full object-cover"
+                      onError={(event) => {
+                        event.currentTarget.style.display =
+                          "none";
+                      }}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">
                       No Image
                     </div>
                   )}
+
                 </div>
 
-                {getProductImages(quickViewProduct).length > 1 && (
+                {getProductImages(
+                  quickViewProduct
+                ).length > 1 && (
                   <div className="flex gap-2 mt-3 overflow-x-auto">
 
-                    {getProductImages(quickViewProduct).map(
-                      (img, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setSelectedImage(img)}
-                          className={`w-16 h-20 shrink-0 overflow-hidden border ${
-                            selectedImage === img
-                              ? "border-black"
-                              : "border-gray-200"
-                          }`}
-                        >
-                          <img
-                            src={img}
-                            alt=""
-                            className="w-full h-full object-cover"
-                          />
-                        </button>
-                      )
-                    )}
+                    {getProductImages(
+                      quickViewProduct
+                    ).map((img, index) => (
+
+                      <button
+                        key={`${img}-${index}`}
+                        onClick={() =>
+                          setSelectedImage(img)
+                        }
+                        className={`w-16 h-20 shrink-0 overflow-hidden border ${
+                          selectedImage === img
+                            ? "border-black"
+                            : "border-gray-200"
+                        }`}
+                      >
+
+                        <img
+                          src={img}
+                          alt=""
+                          className="w-full h-full object-cover"
+                          onError={(event) => {
+                            event.currentTarget.style.display =
+                              "none";
+                          }}
+                        />
+
+                      </button>
+
+                    ))}
 
                   </div>
                 )}
+
               </div>
 
               {/* DETAILS */}
+
               <div className="p-5 md:p-8 flex flex-col justify-center">
 
                 <p className="text-[11px] uppercase tracking-wider text-gray-500 mb-2">
-                  {getSellerName(quickViewProduct)}
+                  {getSellerName(
+                    quickViewProduct
+                  )}
                 </p>
 
                 <h2 className="text-2xl md:text-3xl font-light">
-                  {getProductTitle(quickViewProduct)}
+                  {getProductTitle(
+                    quickViewProduct
+                  )}
                 </h2>
 
                 <p className="text-base mt-4">
-                  {getPrice(quickViewProduct)}
+                  {getPrice(
+                    quickViewProduct
+                  )}
                 </p>
 
+                {/* DESCRIPTION */}
+
                 {quickViewProduct.description && (
-                  <p className="text-sm text-gray-600 leading-6 mt-5">
-                    {quickViewProduct.description}
-                  </p>
+                  <div className="text-sm text-gray-600 leading-6 mt-5">
+                    {renderDescription(
+                      quickViewProduct.description
+                    )}
+                  </div>
                 )}
 
                 {/* COLORS */}
-                {getColors(quickViewProduct).length > 0 && (
+
+                {getColors(
+                  quickViewProduct
+                ).length > 0 && (
                   <div className="mt-6">
 
                     <p className="text-xs uppercase tracking-wider mb-3">
@@ -631,46 +956,72 @@ useEffect(() => {
 
                     <div className="flex flex-wrap gap-2">
 
-                      {getColors(quickViewProduct).map(
-                        (color, index) => {
+                      {getColors(
+                        quickViewProduct
+                      ).map(
+                        (
+                          color,
+                          index
+                        ) => {
+
                           const colorName =
-                            typeof color === "string"
-                              ? color
-                              : color?.name || "";
+                            typeof color ===
+                            "string"
+                              ? color.trim()
+                              : color?.name ||
+                                "";
 
                           const colorImage =
-                            typeof color === "object"
-                              ? color?.image || ""
+                            typeof color ===
+                              "object" &&
+                            typeof color?.image ===
+                              "string"
+                              ? color.image.trim()
                               : "";
+
+                          if (!colorName) {
+                            return null;
+                          }
 
                           return (
                             <button
-                              key={index}
+                              key={`${colorName}-${index}`}
                               onClick={() => {
-                                setSelectedColor(colorName);
+                                setSelectedColor(
+                                  colorName
+                                );
 
-                                if (colorImage) {
-                                  setSelectedImage(colorImage);
+                                if (
+                                  colorImage
+                                ) {
+                                  setSelectedImage(
+                                    colorImage
+                                  );
                                 }
                               }}
                               className={`px-4 py-2 border text-xs ${
-                                selectedColor === colorName
+                                selectedColor ===
+                                colorName
                                   ? "bg-black text-white border-black"
                                   : "bg-white border-gray-300"
                               }`}
                             >
-                              {colorName || "Color"}
+                              {colorName}
                             </button>
                           );
                         }
                       )}
 
                     </div>
+
                   </div>
                 )}
 
                 {/* SIZES */}
-                {getSizes(quickViewProduct).length > 0 && (
+
+                {getSizes(
+                  quickViewProduct
+                ).length > 0 && (
                   <div className="mt-6">
 
                     <p className="text-xs uppercase tracking-wider mb-3">
@@ -679,36 +1030,55 @@ useEffect(() => {
 
                     <div className="flex flex-wrap gap-2">
 
-                      {getSizes(quickViewProduct).map(
-                        (size, index) => {
+                      {getSizes(
+                        quickViewProduct
+                      ).map(
+                        (
+                          size,
+                          index
+                        ) => {
+
                           const sizeName =
-                            typeof size === "string"
-                              ? size
-                              : size?.name || "";
+                            typeof size ===
+                            "string"
+                              ? size.trim()
+                              : size?.name ||
+                                size?.size ||
+                                size?.title ||
+                                "";
+
+                          if (!sizeName) {
+                            return null;
+                          }
 
                           return (
                             <button
-                              key={index}
+                              key={`${sizeName}-${index}`}
                               onClick={() =>
-                                setSelectedSize(sizeName)
+                                setSelectedSize(
+                                  sizeName
+                                )
                               }
                               className={`px-4 py-2 border text-xs ${
-                                selectedSize === sizeName
+                                selectedSize ===
+                                sizeName
                                   ? "bg-black text-white border-black"
                                   : "bg-white border-gray-300"
                               }`}
                             >
-                              {sizeName || "Size"}
+                              {sizeName}
                             </button>
                           );
                         }
                       )}
 
                     </div>
+
                   </div>
                 )}
 
                 {/* ACTIONS */}
+
                 <div className="flex flex-col sm:flex-row gap-3 mt-8">
 
                   <button
@@ -729,6 +1099,7 @@ useEffect(() => {
                   <button
                     onClick={() => {
                       closeQuickView();
+
                       navigate(
                         `/products/${quickViewProduct.id}`
                       );
@@ -739,11 +1110,16 @@ useEffect(() => {
                   </button>
 
                 </div>
+
               </div>
+
             </div>
+
           </div>
+
         </div>
       )}
+
     </div>
   );
 };

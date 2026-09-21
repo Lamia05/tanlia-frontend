@@ -27,7 +27,7 @@ const ProductDetails = () => {
   const [showQuickView, setShowQuickView] = useState(false);
   const [showCartNotification, setShowCartNotification] = useState(false);
 
-  // Fetch products from JSON
+  // Fetch products from backend
   useEffect(() => {
     fetch("https://tanlia-backend.onrender.com/api/products")
       .then((res) => {
@@ -53,52 +53,78 @@ const ProductDetails = () => {
     (item) => String(item.id) === String(id)
   );
 
-  // Get images
+  // Get images safely
   const getProductImages = (item) => {
     if (!item) return [];
 
-    if (item.media) {
-      const images = [];
+    const images = [];
 
-      if (item.media.cover) {
-        images.push(item.media.cover);
+    // Old / nested format
+    if (item.media) {
+      if (typeof item.media.cover === "string") {
+        const cover = item.media.cover.trim();
+
+        if (cover) {
+          images.push(cover);
+        }
       }
 
       if (Array.isArray(item.media.images)) {
-        images.push(...item.media.images);
+        item.media.images.forEach((image) => {
+          if (typeof image === "string" && image.trim()) {
+            images.push(image.trim());
+          }
+        });
       }
-
-      return images.filter(Boolean);
     }
 
+    // Current backend format
     if (Array.isArray(item.image)) {
-      return item.image.filter(Boolean);
+      item.image.forEach((image) => {
+        if (typeof image === "string" && image.trim()) {
+          images.push(image.trim());
+        }
+      });
+    } else if (
+      typeof item.image === "string" &&
+      item.image.trim()
+    ) {
+      images.push(item.image.trim());
     }
 
-    if (item.image) {
-      return [item.image];
-    }
-
-    return [];
+    // Remove empty values and duplicates
+    return [...new Set(images.filter(Boolean))];
   };
 
   const images = getProductImages(product);
 
   // Set default image
   useEffect(() => {
-    if (images.length > 0) {
-      setSelectedImage(images[0]);
+    if (!product) return;
+
+    const productImages = getProductImages(product);
+
+    if (productImages.length > 0) {
+      setSelectedImage(productImages[0]);
     } else {
       setSelectedImage("");
     }
-  }, [id, products]);
+
+    setSelectedColor("");
+  }, [id, product]);
 
   // Get colors
   const getColorOptions = (item) => {
     if (!item) return [];
 
     if (Array.isArray(item.colors)) {
-      return item.colors.filter(Boolean);
+      return item.colors.filter((color) => {
+        if (typeof color === "string") {
+          return color.trim() !== "";
+        }
+
+        return color && typeof color === "object";
+      });
     }
 
     if (
@@ -130,7 +156,13 @@ const ProductDetails = () => {
     if (!item) return [];
 
     if (Array.isArray(item.sizes)) {
-      return item.sizes.filter(Boolean);
+      return item.sizes.filter((size) => {
+        if (typeof size === "string") {
+          return size.trim() !== "";
+        }
+
+        return size && typeof size === "object";
+      });
     }
 
     if (
@@ -282,7 +314,7 @@ const ProductDetails = () => {
   // Get color name
   const getColorName = (color) => {
     if (typeof color === "string") {
-      return color;
+      return color.trim();
     }
 
     return color?.name || "";
@@ -290,17 +322,23 @@ const ProductDetails = () => {
 
   // Get color image
   const getColorImage = (color) => {
-    if (typeof color === "string") {
+    if (!color || typeof color === "string") {
       return "";
     }
 
-    return color?.image || "";
+    const image = color?.image;
+
+    if (typeof image === "string" && image.trim()) {
+      return image.trim();
+    }
+
+    return "";
   };
 
   // Get size name
   const getSizeName = (size) => {
     if (typeof size === "string") {
-      return size;
+      return size.trim();
     }
 
     return (
@@ -318,8 +356,15 @@ const ProductDetails = () => {
 
     setSelectedColor(colorName);
 
+    // Use color-specific image when available
     if (colorImage) {
       setSelectedImage(colorImage);
+      return;
+    }
+
+    // If color has no image, keep current valid product image
+    if (!selectedImage && images.length > 0) {
+      setSelectedImage(images[0]);
     }
   };
 
@@ -363,7 +408,6 @@ const ProductDetails = () => {
 
     window.dispatchEvent(new Event("cartUpdated"));
 
-    // Show cart notification
     setShowCartNotification(true);
 
     setTimeout(() => {
@@ -449,6 +493,9 @@ const ProductDetails = () => {
                   src={selectedImage}
                   alt={getProductTitle(product)}
                   className="w-full h-full object-cover"
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                  }}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -480,6 +527,10 @@ const ProductDetails = () => {
                         product
                       )} ${index + 1}`}
                       className="w-full h-full object-cover"
+                      onError={(event) => {
+                        event.currentTarget.style.display =
+                          "none";
+                      }}
                     />
                   </button>
                 ))}
@@ -575,6 +626,8 @@ const ProductDetails = () => {
                     const colorName =
                       getColorName(color);
 
+                    if (!colorName) return null;
+
                     return (
                       <button
                         key={`${colorName}-${index}`}
@@ -613,6 +666,8 @@ const ProductDetails = () => {
 
                     const sizeName =
                       getSizeName(size);
+
+                    if (!sizeName) return null;
 
                     return (
                       <button
@@ -805,7 +860,9 @@ const ProductDetails = () => {
                 getProductImages(item);
 
               const relatedImage =
-                relatedImages[0];
+                relatedImages.length > 0
+                  ? relatedImages[0]
+                  : "";
 
               return (
                 <div
@@ -828,6 +885,10 @@ const ProductDetails = () => {
                         src={relatedImage}
                         alt={getProductTitle(item)}
                         className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                        onError={(event) => {
+                          event.currentTarget.style.display =
+                            "none";
+                        }}
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -868,7 +929,6 @@ const ProductDetails = () => {
                           new Event("cartUpdated")
                         );
 
-                        // Show cart notification
                         setShowCartNotification(true);
 
                         setTimeout(() => {
@@ -945,6 +1005,10 @@ const ProductDetails = () => {
                     src={selectedImage}
                     alt={getProductTitle(product)}
                     className="w-full h-full object-cover"
+                    onError={(event) => {
+                      event.currentTarget.style.display =
+                        "none";
+                    }}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-400">
