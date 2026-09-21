@@ -29,9 +29,16 @@ const FeaturedProducts = () => {
         return res.json();
       })
       .then((data) => {
-        setProducts(Array.isArray(data) ? data : []);
-        setLoading(false);
-      })
+  const normalizedProducts = Array.isArray(data)
+    ? data.map((product) => ({
+        ...product,
+        id: product.id || product._id,
+      }))
+    : [];
+
+  setProducts(normalizedProducts);
+  setLoading(false);
+})
       .catch((err) => {
         console.error("Error fetching products:", err);
         setProducts([]);
