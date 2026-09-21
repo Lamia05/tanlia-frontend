@@ -8,7 +8,7 @@ const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSeller, setSelectedSeller] = useState("All");
   const [sortBy, setSortBy] = useState("default");
 
@@ -354,8 +354,12 @@ const AllProducts = () => {
     return [];
   };
 
+  /* =========================
+     FILTER OPTIONS
+  ========================= */
+
+  // Category "All" removed
   const categories = [
-    "All",
     ...new Set(
       products.flatMap((product) =>
         getCategories(product)
@@ -363,6 +367,7 @@ const AllProducts = () => {
     ),
   ];
 
+  // All Sellers kept
   const sellers = [
     "All",
     ...new Set(
@@ -375,7 +380,7 @@ const AllProducts = () => {
   const filteredProducts = products
     .filter((product) => {
       const categoryMatch =
-        selectedCategory === "All" ||
+        selectedCategory === "" ||
         getCategories(product).includes(
           selectedCategory
         );
