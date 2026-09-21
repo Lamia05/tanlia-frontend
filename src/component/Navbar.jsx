@@ -283,7 +283,7 @@ const Navbar = () => {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 h-20 flex items-center">
 
           {/* =========================
               MOBILE LEFT - MENU
@@ -321,7 +321,7 @@ const Navbar = () => {
               MOBILE CENTER BRAND
           ========================= */}
 
-          <div className="md:hidden w-1/3 flex items-center justify-center">
+          <div className="md:hidden w-1/3 flex items-center justify-center px-2">
             <Link
               to="/"
               onClick={closeMobileMenu}
@@ -396,7 +396,7 @@ const Navbar = () => {
               RIGHT - ICONS
           ========================= */}
 
-          <div className="flex-1 flex items-center justify-end gap-4 text-gray-800">
+          <div className="md:flex-1 flex-1 flex items-center justify-end gap-4 text-gray-800 pl-3">
 
             {/* SEARCH */}
 
