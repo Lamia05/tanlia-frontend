@@ -293,7 +293,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={handleMobileMenu}
-              className="p-1 hover:text-black transition-colors"
+              className="p-1 text-gray-800 hover:text-black transition-colors"
               aria-label="Menu"
             >
               {mobileMenuOpen ? (
@@ -305,7 +305,7 @@ const Navbar = () => {
           </div>
 
           {/* =========================
-              BRAND
+              BRAND - DESKTOP
           ========================= */}
 
           <div className="hidden md:flex flex-1">
@@ -317,13 +317,15 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* MOBILE CENTER BRAND */}
+          {/* =========================
+              MOBILE CENTER BRAND
+          ========================= */}
 
           <div className="md:hidden w-1/3 flex items-center justify-center">
             <Link
               to="/"
               onClick={closeMobileMenu}
-              className="text-xl font-serif tracking-wider text-gray-900 whitespace-nowrap"
+              className="block text-xl font-serif tracking-wider text-gray-900 whitespace-nowrap"
             >
               Tanlia Studio
             </Link>
@@ -401,7 +403,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={handleOpenSearch}
-              className="p-1 hover:text-black transition-colors"
+              className="p-1 text-gray-800 hover:text-black transition-colors"
               aria-label="Search"
             >
               <Search className="w-5 h-5 stroke-[1.5]" />
@@ -412,7 +414,7 @@ const Navbar = () => {
             <Link
               to="/wishlist"
               onClick={closeMobileMenu}
-              className="p-1 relative hover:text-black transition-colors"
+              className="p-1 relative text-gray-800 hover:text-black transition-colors"
               aria-label="Wishlist"
             >
               <Heart className="w-5 h-5 stroke-[1.5]" />
@@ -429,7 +431,7 @@ const Navbar = () => {
             <Link
               to="/cart"
               onClick={closeMobileMenu}
-              className="p-1 relative hover:text-black transition-colors"
+              className="p-1 relative text-gray-800 hover:text-black transition-colors"
               aria-label="Cart"
             >
               <ShoppingBag className="w-5 h-5 stroke-[1.5]" />
