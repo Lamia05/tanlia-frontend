@@ -20,7 +20,7 @@ const FeaturedProducts = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/data/products.json")
+    fetch("https://tanlia-backend.onrender.com/api/products")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch products");

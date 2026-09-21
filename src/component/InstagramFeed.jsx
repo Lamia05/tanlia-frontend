@@ -9,7 +9,7 @@ const InstagramFeed = () => {
   useEffect(() => {
     const loadPosts = async () => {
       try {
-        const response = await fetch("/data/products.json");
+        const response = await fetch("https://tanlia-backend.onrender.com/api/products");
         const products = await response.json();
 
         // One/two nice product images from each seller

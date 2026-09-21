@@ -20,19 +20,18 @@ const AllProducts = () => {
   const [wishlist, setWishlist] = useState([]);
   const [showCartNotification, setShowCartNotification] = useState(false);
 
-  useEffect(() => {
-    fetch("/data/products.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(Array.isArray(data) ? data : []);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Failed to load products:", error);
-        setLoading(false);
-      });
-  }, []);
-
+useEffect(() => {
+  fetch("https://tanlia-backend.onrender.com/api/products")
+    .then((res) => res.json())
+    .then((data) => {
+      setProducts(Array.isArray(data) ? data : []);
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.error("Failed to load products:", error);
+      setLoading(false);
+    });
+}, []);
   useEffect(() => {
     const savedWishlist = JSON.parse(
       localStorage.getItem("tanliaWishlist") || "[]"

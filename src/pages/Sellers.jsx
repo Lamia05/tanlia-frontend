@@ -15,7 +15,7 @@ const Sellers = () => {
   useEffect(() => {
     Promise.all([
       fetch("/data/sellers.json").then((res) => res.json()),
-      fetch("/data/products.json").then((res) => res.json()),
+      fetch("https://tanlia-backend.onrender.com/api/products").then((res) => res.json()),
       fetch("/data/featured.json").then((res) => res.json()),
     ])
       .then(([sellerData, productData, featuredData]) => {
