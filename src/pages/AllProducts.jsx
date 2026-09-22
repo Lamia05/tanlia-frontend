@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Heart, ShoppingBag, Eye, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -46,9 +47,23 @@ const AllProducts = () => {
       localStorage.getItem("tanliaWishlist") || "[]"
     );
 
-    setWishlist(
-      Array.isArray(savedWishlist) ? savedWishlist : []
-    );
+    if (Array.isArray(savedWishlist)) {
+      const savedIds = savedWishlist
+        .map((item) => {
+          if (typeof item === "string") {
+            return item;
+          }
+
+          return item?.id || item?._id
+            ? String(item.id || item._id)
+            : "";
+        })
+        .filter(Boolean);
+
+      setWishlist(savedIds);
+    } else {
+      setWishlist([]);
+    }
   }, []);
 
   const getProductTitle = (product) => {
@@ -358,7 +373,6 @@ const AllProducts = () => {
      FILTER OPTIONS
   ========================= */
 
-  // Category "All" removed
   const categories = [
     ...new Set(
       products.flatMap((product) =>
@@ -367,7 +381,6 @@ const AllProducts = () => {
     ),
   ];
 
-  // All Sellers kept
   const sellers = [
     "All",
     ...new Set(
@@ -437,7 +450,7 @@ const AllProducts = () => {
           : "";
 
       const cartItem = {
-        id: String(product.id),
+        id: String(product.id || product._id),
         title: getProductTitle(product),
         price: String(getPrice(product) || "0"),
         image: selectedCartImage,
@@ -513,22 +526,55 @@ const AllProducts = () => {
   ========================= */
 
   const handleWishlist = (product) => {
-    const productId = String(product.id);
+    const productId = String(
+      product.id || product._id
+    );
+
+    const savedWishlist = JSON.parse(
+      localStorage.getItem("tanliaWishlist") || "[]"
+    );
+
+    const wishlistItems = Array.isArray(savedWishlist)
+      ? savedWishlist
+      : [];
+
+    const alreadyExists = wishlistItems.some(
+      (item) =>
+        String(
+          typeof item === "string"
+            ? item
+            : item?.id || item?._id
+        ) === productId
+    );
 
     let updatedWishlist;
 
-    if (wishlist.includes(productId)) {
-      updatedWishlist = wishlist.filter(
-        (id) => id !== productId
+    if (alreadyExists) {
+      updatedWishlist = wishlistItems.filter(
+        (item) =>
+          String(
+            typeof item === "string"
+              ? item
+              : item?.id || item?._id
+          ) !== productId
       );
     } else {
       updatedWishlist = [
-        ...wishlist,
-        productId,
+        ...wishlistItems,
+        product,
       ];
     }
 
-    setWishlist(updatedWishlist);
+    const updatedIds = updatedWishlist.map(
+      (item) =>
+        String(
+          typeof item === "string"
+            ? item
+            : item?.id || item?._id
+        )
+    );
+
+    setWishlist(updatedIds);
 
     localStorage.setItem(
       "tanliaWishlist",
@@ -716,14 +762,16 @@ const AllProducts = () => {
                   : "";
 
               const productId =
-                String(product.id);
+                String(
+                  product.id || product._id
+                );
 
               const isWishlisted =
                 wishlist.includes(productId);
 
               return (
                 <div
-                  key={product.id}
+                  key={productId}
                   className="group"
                 >
 
@@ -750,10 +798,12 @@ const AllProducts = () => {
                     {/* WISHLIST */}
 
                     <button
+                      type="button"
                       onClick={() =>
                         handleWishlist(product)
                       }
-                      className="absolute top-3 right-3 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-sm"
+                      aria-label="Add to Wishlist"
+                      className="absolute top-3 right-3 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-sm z-20"
                     >
                       <Heart
                         size={16}
@@ -768,9 +818,10 @@ const AllProducts = () => {
 
                     {/* HOVER ACTIONS */}
 
-                    <div className="absolute left-3 right-3 bottom-3 flex gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                    <div className="absolute left-3 right-3 bottom-3 flex gap-2 opacity-100 translate-y-0 md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-300">
 
                       <button
+                        type="button"
                         onClick={() =>
                           handleAddToCart(product)
                         }
@@ -783,6 +834,7 @@ const AllProducts = () => {
                       </button>
 
                       <button
+                        type="button"
                         onClick={() =>
                           openQuickView(product)
                         }
@@ -842,6 +894,7 @@ const AllProducts = () => {
             {/* CLOSE */}
 
             <button
+              type="button"
               onClick={closeQuickView}
               className="absolute top-4 right-4 z-10 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-sm"
             >
@@ -886,6 +939,7 @@ const AllProducts = () => {
                     ).map((img, index) => (
 
                       <button
+                        type="button"
                         key={`${img}-${index}`}
                         onClick={() =>
                           setSelectedImage(img)
@@ -990,6 +1044,7 @@ const AllProducts = () => {
 
                           return (
                             <button
+                              type="button"
                               key={`${colorName}-${index}`}
                               onClick={() => {
                                 setSelectedColor(
@@ -1058,6 +1113,7 @@ const AllProducts = () => {
 
                           return (
                             <button
+                              type="button"
                               key={`${sizeName}-${index}`}
                               onClick={() =>
                                 setSelectedSize(
@@ -1087,6 +1143,7 @@ const AllProducts = () => {
                 <div className="flex flex-col sm:flex-row gap-3 mt-8">
 
                   <button
+                    type="button"
                     onClick={() =>
                       handleAddToCart(
                         quickViewProduct,
@@ -1102,11 +1159,12 @@ const AllProducts = () => {
                   </button>
 
                   <button
+                    type="button"
                     onClick={() => {
                       closeQuickView();
 
                       navigate(
-                        `/products/${quickViewProduct.id}`
+                        `/products/${quickViewProduct.id || quickViewProduct._id}`
                       );
                     }}
                     className="flex-1 border border-black py-3 text-sm hover:bg-black hover:text-white transition"

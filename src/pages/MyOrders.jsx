@@ -14,6 +14,7 @@ const MyOrders = () => {
   const [error, setError] = useState("");
   const [searched, setSearched] = useState(false);
   const [openOrder, setOpenOrder] = useState(null);
+  const [cancellingOrder, setCancellingOrder] = useState(null);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -55,6 +56,64 @@ const MyOrders = () => {
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleCancelOrder = async (orderId) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to cancel this order?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      setCancellingOrder(orderId);
+      setError("");
+
+      const response = await fetch(
+        `https://tanlia-backend.onrender.com/api/orders/cancel/${encodeURIComponent(
+          orderId
+        )}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            phone: phone.trim(),
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Failed to cancel order."
+        );
+      }
+
+      setOrders((currentOrders) =>
+        currentOrders.map((order) =>
+          order.orderId === orderId
+            ? {
+                ...order,
+                status: "Cancelled",
+              }
+            : order
+        )
+      );
+    } catch (error) {
+      console.error("Cancel order error:", error);
+
+      setError(
+        error.message ||
+          "Something went wrong. Please try again."
+      );
+    } finally {
+      setCancellingOrder(null);
     }
   };
 
@@ -146,6 +205,8 @@ const MyOrders = () => {
 
             {orders.map((order) => {
               const isOpen = openOrder === order.orderId;
+              const isCancelling =
+                cancellingOrder === order.orderId;
 
               return (
                 <div
@@ -407,17 +468,36 @@ const MyOrders = () => {
 
                         </div>
 
-                        {/* TRACK */}
+                        {/* ACTIONS */}
 
-                        <div className="mt-6 flex justify-end">
+                        <div className="mt-6 flex flex-col sm:flex-row justify-end gap-3">
+
+                          {order.status === "Pending" && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleCancelOrder(
+                                  order.orderId
+                                )
+                              }
+                              disabled={isCancelling}
+                              className="border border-red-300 text-red-600 px-5 py-3 text-xs uppercase tracking-wider hover:bg-red-50 transition disabled:opacity-60"
+                            >
+                              {isCancelling
+                                ? "Cancelling..."
+                                : "Cancel Order"}
+                            </button>
+                          )}
+
                           <Link
                             to={`/track-order?orderId=${encodeURIComponent(
                               order.orderId
                             )}`}
-                            className="bg-black text-white px-5 py-3 text-xs uppercase tracking-wider hover:bg-[#B85028] transition"
+                            className="bg-black text-white px-5 py-3 text-xs uppercase tracking-wider hover:bg-[#B85028] transition text-center"
                           >
                             Track Order
                           </Link>
+
                         </div>
 
                       </div>

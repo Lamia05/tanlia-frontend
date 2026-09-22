@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import {
   Heart,
@@ -29,16 +30,16 @@ const FeaturedProducts = () => {
         return res.json();
       })
       .then((data) => {
-  const normalizedProducts = Array.isArray(data)
-    ? data.map((product) => ({
-        ...product,
-        id: product.id || product._id,
-      }))
-    : [];
+        const normalizedProducts = Array.isArray(data)
+          ? data.map((product) => ({
+              ...product,
+              id: product.id || product._id,
+            }))
+          : [];
 
-  setProducts(normalizedProducts);
-  setLoading(false);
-})
+        setProducts(normalizedProducts);
+        setLoading(false);
+      })
       .catch((err) => {
         console.error("Error fetching products:", err);
         setProducts([]);
@@ -201,6 +202,36 @@ const FeaturedProducts = () => {
     }
 
     return [];
+  };
+
+  // Add product to wishlist
+  const handleWishlist = (product) => {
+    const wishlist = JSON.parse(
+      localStorage.getItem("tanliaWishlist") || "[]"
+    );
+
+    const productId = product.id || product._id;
+
+    const alreadyExists = wishlist.some(
+      (item) => (item.id || item._id) === productId
+    );
+
+    let updatedWishlist;
+
+    if (alreadyExists) {
+      updatedWishlist = wishlist.filter(
+        (item) => (item.id || item._id) !== productId
+      );
+    } else {
+      updatedWishlist = [...wishlist, product];
+    }
+
+    localStorage.setItem(
+      "tanliaWishlist",
+      JSON.stringify(updatedWishlist)
+    );
+
+    window.dispatchEvent(new Event("wishlistUpdated"));
   };
 
   // Add product to cart
@@ -366,14 +397,16 @@ const FeaturedProducts = () => {
                   <button
                     type="button"
                     aria-label="Add to Wishlist"
-                    className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-gray-800 hover:text-black hover:bg-white transition-colors shadow-sm z-10"
+                    onClick={() => handleWishlist(product)}
+                    className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-gray-800 hover:text-black hover:bg-white transition-colors shadow-sm z-20"
                   >
                     <Heart className="w-4 h-4 stroke-[1.8]" />
                   </button>
 
                   {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
-                    <div className="w-full flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-black/20 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
+
+                    <div className="w-full flex items-center gap-2 transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300">
 
                       {/* Add to Cart */}
                       <button
@@ -400,6 +433,7 @@ const FeaturedProducts = () => {
                       </button>
 
                     </div>
+
                   </div>
 
                 </div>
@@ -700,7 +734,7 @@ const FeaturedProducts = () => {
                       closeQuickView();
                       navigate(`/products/${productId}`);
                     }}
-                    className=" text-gray-900 py-3 rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-gray-100 transition-colors"
+                    className="text-gray-900 py-3 rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-gray-100 transition-colors"
                   >
                     View Details
                   </button>

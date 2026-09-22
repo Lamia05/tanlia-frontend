@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -8,6 +8,7 @@ import {
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const addressRef = useRef(null);
 
   const [cart, setCart] = useState([]);
   const [sellers, setSellers] = useState([]);
@@ -15,6 +16,8 @@ const Checkout = () => {
   const [placedOrder, setPlacedOrder] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showAddressSuggestions, setShowAddressSuggestions] =
+    useState(false);
 
   const [deliveryLocation, setDeliveryLocation] =
     useState("insideDhaka");
@@ -24,6 +27,654 @@ const Checkout = () => {
     phone: "",
     address: "",
   });
+
+  const addressSuggestions = [
+    // Dhaka
+    "Dhaka",
+    "Mirpur",
+    "Pallabi",
+    "Kazipara",
+    "Shewrapara",
+    "Rupnagar",
+    "Kallyanpur",
+    "Darus Salam",
+    "Agargaon",
+    "Mohammadpur",
+    "Adabor",
+    "Shyamoli",
+    "Asad Gate",
+    "Bosila",
+    "Dhanmondi",
+    "Jigatola",
+    "Kalabagan",
+    "Lalmatia",
+    "New Market",
+    "Hazaribagh",
+    "Uttara",
+    "Uttara Sector 1",
+    "Uttara Sector 3",
+    "Uttara Sector 4",
+    "Uttara Sector 7",
+    "Uttara Sector 10",
+    "Uttara Sector 11",
+    "Uttara Sector 12",
+    "Airport",
+    "Dakshinkhan",
+    "Uttarkhan",
+    "Abdullahpur",
+    "Khilkhet",
+    "Nikunja",
+    "Bashundhara",
+    "Bashundhara Residential Area",
+    "Baridhara",
+    "Gulshan",
+    "Gulshan 1",
+    "Gulshan 2",
+    "Banani",
+    "Niketan",
+    "Mohakhali",
+    "Tejgaon",
+    "Farmgate",
+    "Karwan Bazar",
+    "Badda",
+    "Merul Badda",
+    "Aftabnagar",
+    "Rampura",
+    "Hatirjheel",
+    "Khilgaon",
+    "Malibagh",
+    "Moghbazar",
+    "Mouchak",
+    "Shantinagar",
+    "Paltan",
+    "Motijheel",
+    "Kakrail",
+    "Jatrabari",
+    "Sayedabad",
+    "Dania",
+    "Demra",
+    "Basabo",
+    "Wari",
+    "Old Dhaka",
+    "Lalbagh",
+    "Azimpur",
+    "Islampur",
+    "Sadarghat",
+
+    // Savar
+    "Savar",
+    "Savar Bazar",
+    "Hemayetpur",
+    "Aminbazar",
+    "Nabinagar",
+    "Baipayl",
+    "Ashulia",
+    "Zirabo",
+    "Jamgora",
+    "Dhamsona",
+    "Yearpur",
+    "Kathgara",
+    "BEPZA",
+    "DEPZ",
+    "Birulia",
+    "Tetuljhora",
+    "Bank Town",
+
+    // Gazipur
+    "Tongi",
+    "Gazipur",
+    "Joydebpur",
+    "Board Bazar",
+    "Chandana",
+    "Konabari",
+    "Kashimpur",
+    "Pubail",
+    "Kapasia",
+    "Sreepur",
+    "Mawna",
+    "Kaliganj",
+    "Bason",
+    "Salna",
+
+    // Narayanganj
+    "Narayanganj",
+    "Chashara",
+    "Fatullah",
+    "Siddhirganj",
+    "Shibu Market",
+    "Pagla",
+    "Kanchpur",
+    "Rupganj",
+    "Araihazar",
+    "Sonargaon",
+
+    // Chattogram
+    "Chattogram",
+    "Agrabad",
+    "GEC Circle",
+    "Panchlaish",
+    "Nasirabad",
+    "Muradpur",
+    "Oxygen",
+    "Khulshi",
+    "Halishahar",
+    "EPZ Chattogram",
+    "Patenga",
+    "Bakalia",
+    "Chawkbazar Chattogram",
+    "Kotwali Chattogram",
+    "Anderkilla",
+    "Bahaddarhat",
+    "Chandgaon",
+    "Bayezid",
+    "Hathazari",
+    "Sitakunda",
+    "Mirsharai",
+    "Patiya",
+    "Raozan",
+    "Boalkhali",
+    "Anwara",
+    "Fatikchhari",
+
+    // Cox's Bazar
+    "Cox's Bazar",
+    "Kolatoli",
+    "Sugandha Point",
+    "Laboni Point",
+    "Ramu",
+    "Chakaria",
+    "Teknaf",
+    "Ukhia",
+    "Pekua",
+
+    // Sylhet
+    "Sylhet",
+    "Zindabazar",
+    "Amberkhana",
+    "Shibgonj Sylhet",
+    "Uposhohor Sylhet",
+    "Mirabazar",
+    "Subid Bazar",
+    "Lamabazar",
+    "Bandar Bazar",
+    "Tilagor",
+    "South Surma",
+    "Beanibazar",
+    "Golapganj",
+    "Zakiganj",
+    "Jaintapur",
+    "Companiganj Sylhet",
+    "Kanaighat",
+    "Bishwanath",
+    "Balaganj",
+    "Fenchuganj",
+    "Osmani Nagar",
+
+    // Rajshahi
+    "Rajshahi",
+    "Shaheb Bazar",
+    "Boalia",
+    "Kazla Rajshahi",
+    "Motihar",
+    "Talaimari",
+    "Laxmipur Rajshahi",
+    "Railgate Rajshahi",
+    "Rajpara",
+    "Paba",
+    "Godagari",
+    "Tanore",
+    "Puthia",
+    "Durgapur Rajshahi",
+    "Bagha",
+    "Charghat",
+    "Mohanpur",
+    "Bagmara",
+
+    // Khulna
+    "Khulna",
+    "Sonadanga",
+    "Khalishpur",
+    "Boyra",
+    "Daulatpur Khulna",
+    "Nirala",
+    "Moylapota",
+    "Shibbari",
+    "Rupsha",
+    "Dumuria",
+    "Batiaghata",
+    "Paikgachha",
+    "Koyra",
+    "Dighalia",
+    "Terokhada",
+
+    // Barishal
+    "Barishal",
+    "Nathullabad",
+    "Rupatali",
+    "Sadar Road Barishal",
+    "Band Road Barishal",
+    "Kawnia",
+    "Sagardi",
+    "Bakerganj",
+    "Banaripara",
+    "Wazirpur",
+    "Mehendiganj",
+    "Hizla",
+    "Muladi",
+    "Agailjhara",
+
+    // Rangpur
+    "Rangpur",
+    "Jahaj Company More",
+    "Dhap",
+    "Modern More Rangpur",
+    "Mithapukur",
+    "Pirganj Rangpur",
+    "Badarganj",
+    "Kaunia",
+    "Gangachara",
+    "Taraganj",
+    "Pirgachha",
+    "Haragach",
+
+    // Mymensingh
+    "Mymensingh",
+    "Ganginarpar",
+    "Town Hall Mymensingh",
+    "Charpara",
+    "Maskanda",
+    "Shambhuganj",
+    "Kewatkhali",
+    "Trishal",
+    "Muktagachha",
+    "Bhaluka",
+    "Gaffargaon",
+    "Fulbaria Mymensingh",
+    "Ishwarganj",
+    "Nandail",
+    "Haluaghat",
+
+    // Cumilla
+    "Cumilla",
+    "Kandirpar",
+    "Tomchom Bridge",
+    "Race Course Cumilla",
+    "Kotbari",
+    "Daudkandi",
+    "Burichang",
+    "Brahmanpara",
+    "Chandina",
+    "Debidwar",
+    "Homna",
+    "Laksam",
+    "Muradnagar",
+    "Nangalkot",
+    "Chauddagram",
+
+    // Bogura
+    "Bogura",
+    "Satmatha",
+    "Thanthania",
+    "Sherpur Bogura",
+    "Nawab Bari Road",
+    "Matidali",
+    "Shibganj Bogura",
+    "Sonatola",
+    "Gabtali",
+    "Sariakandi",
+    "Adamdighi",
+    "Dupchanchia",
+    "Kahaloo",
+
+    // Jashore
+    "Jashore",
+    "Jessore",
+    "Monihar",
+    "Chanchra",
+    "Palbari",
+    "Rail Road Jashore",
+    "Noapara",
+    "Jhikargachha",
+    "Sharsha",
+    "Manirampur",
+    "Keshabpur",
+    "Bagherpara",
+    "Abhaynagar",
+
+    // Dinajpur
+    "Dinajpur",
+    "Pulhat",
+    "Munshipara Dinajpur",
+    "Birganj",
+    "Parbatipur",
+    "Phulbari Dinajpur",
+    "Birampur",
+    "Nawabganj Dinajpur",
+    "Ghoraghat",
+
+    // Tangail
+    "Tangail",
+    "Akurtakur",
+    "Old Bus Stand Tangail",
+    "Kalihati",
+    "Mirzapur Tangail",
+    "Ghatail",
+    "Madhupur Tangail",
+    "Dhanbari",
+    "Bhuapur",
+    "Delduar",
+
+    // Faridpur
+    "Faridpur",
+    "Goalchamat",
+    "Kanaipur",
+    "Bhanga",
+    "Boalmari",
+    "Nagarkanda",
+    "Madhukhali",
+    "Alfadanga",
+    "Sadarpur Faridpur",
+
+    // Pabna
+    "Pabna",
+    "Shalgaria",
+    "Ataikula",
+    "Ishwardi",
+    "Bera",
+    "Santhia",
+    "Chatmohar",
+    "Sujanagar",
+
+    // Narsingdi
+    "Narsingdi",
+    "Madhabdi",
+    "Palash Narsingdi",
+    "Shibpur Narsingdi",
+    "Raipura Narsingdi",
+    "Belabo",
+
+    // Kishoreganj
+    "Kishoreganj",
+    "Bhairab",
+    "Kuliarchar",
+    "Karimganj Kishoreganj",
+    "Pakundia",
+    "Hossainpur",
+    "Bajitpur",
+
+    // Feni
+    "Feni",
+    "Mohipal",
+    "Trunk Road Feni",
+    "Sonagazi",
+    "Daganbhuiyan",
+    "Parshuram",
+    "Chagalnaiya",
+
+    // Noakhali
+    "Noakhali",
+    "Maijdee",
+    "Sonapur Noakhali",
+    "Begumganj",
+    "Chatkhil",
+    "Senbagh",
+    "Sonaimuri",
+    "Companiganj Noakhali",
+    "Subarnachar",
+
+    // Brahmanbaria
+    "Brahmanbaria",
+    "Ashuganj",
+    "Kasba",
+    "Nabinagar Brahmanbaria",
+    "Sarail",
+    "Nasirnagar",
+    "Bancharampur",
+
+    // Habiganj
+    "Habiganj",
+    "Shaistaganj",
+    "Madhabpur Habiganj",
+    "Chunarughat",
+    "Nabiganj Habiganj",
+    "Bahubal",
+
+    // Moulvibazar
+    "Moulvibazar",
+    "Sreemangal",
+    "Kulaura",
+    "Barlekha",
+    "Rajnagar Moulvibazar",
+    "Kamalganj",
+
+    // Kushtia
+    "Kushtia",
+    "Kumarkhali",
+    "Mirpur Kushtia",
+    "Bheramara",
+    "Daulatpur Kushtia",
+    "Khoksa",
+
+    // Jhenaidah
+    "Jhenaidah",
+    "Kaliganj Jhenaidah",
+    "Shailkupa",
+    "Harinakundu",
+    "Kotchandpur",
+
+    // Satkhira
+    "Satkhira",
+    "Kalaroa",
+    "Tala Satkhira",
+    "Shyamnagar",
+    "Kaliganj Satkhira",
+    "Assasuni",
+
+    // Bagerhat
+    "Bagerhat",
+    "Mongla",
+    "Fakirhat",
+    "Mollahat",
+    "Rampal",
+    "Morrelganj",
+    "Sharankhola",
+
+    // Patuakhali
+    "Patuakhali",
+    "Kuakata",
+    "Kalapara",
+    "Bauphal",
+    "Galachipa",
+    "Mirzaganj",
+    "Dumki",
+
+    // Bhola
+    "Bhola",
+    "Borhanuddin",
+    "Lalmohan",
+    "Char Fasson",
+    "Daulatkhan",
+    "Tazumuddin",
+    "Monpura",
+
+    // Madaripur
+    "Madaripur",
+    "Shibchar",
+    "Rajoir",
+    "Kalkini",
+
+    // Gopalganj
+    "Gopalganj",
+    "Tungipara",
+    "Kashiani",
+    "Kotalipara",
+    "Muksudpur",
+
+    // Shariatpur
+    "Shariatpur",
+    "Zajira",
+    "Naria",
+    "Bhedarganj",
+    "Gosairhat",
+    "Damudya",
+
+    // Chandpur
+    "Chandpur",
+    "Hajiganj",
+    "Shahrasti",
+    "Matlab",
+    "Faridganj",
+    "Kachua Chandpur",
+    "Haimchar",
+
+    // Lakshmipur
+    "Lakshmipur",
+    "Raipur Lakshmipur",
+    "Ramganj",
+    "Ramgati",
+    "Kamalnagar",
+
+    // Manikganj
+    "Manikganj",
+    "Singair",
+    "Saturia",
+    "Shibalaya",
+    "Ghior",
+    "Harirampur",
+    "Daulatpur Manikganj",
+
+    // Munshiganj
+    "Munshiganj",
+    "Muktarpur",
+    "Sreenagar",
+    "Lohajang",
+    "Tongibari",
+    "Sirajdikhan",
+
+    // Jamalpur
+    "Jamalpur",
+    "Melandaha",
+    "Islampur Jamalpur",
+    "Sarishabari",
+    "Madarganj",
+    "Dewanganj",
+    "Baksiganj",
+
+    // Sherpur
+    "Sherpur",
+    "Nalitabari",
+    "Sreebardi",
+    "Nakla",
+    "Jhenaigati",
+
+    // Netrokona
+    "Netrokona",
+    "Madan Netrokona",
+    "Mohanganj",
+    "Durgapur Netrokona",
+    "Kendua",
+    "Purbadhala",
+
+    // Naogaon
+    "Naogaon",
+    "Manda",
+    "Raninagar",
+    "Atrai",
+    "Patnitala",
+    "Dhamoirhat",
+    "Sapahar",
+    "Niamatpur",
+
+    // Natore
+    "Natore",
+    "Baraigram",
+    "Gurudaspur",
+    "Singra Natore",
+    "Bagatipara",
+    "Lalpur Natore",
+
+    // Chapainawabganj
+    "Chapainawabganj",
+    "Shibganj Chapainawabganj",
+    "Gomastapur",
+    "Nachole",
+    "Bholahat",
+
+    // Sirajganj
+    "Sirajganj",
+    "Shahjadpur",
+    "Ullapara",
+    "Belkuchi",
+    "Kazipur Sirajganj",
+    "Raiganj Sirajganj",
+    "Kamarkhanda",
+
+    // Joypurhat
+    "Joypurhat",
+    "Panchbibi",
+    "Akkelpur",
+    "Kalai",
+    "Khetlal",
+
+    // Lalmonirhat
+    "Lalmonirhat",
+    "Patgram",
+    "Hatibandha",
+    "Kaliganj Lalmonirhat",
+    "Aditmari",
+
+    // Nilphamari
+    "Nilphamari",
+    "Saidpur",
+    "Domar",
+    "Dimla",
+    "Jaldhaka",
+    "Kishoreganj Nilphamari",
+
+    // Kurigram
+    "Kurigram",
+    "Nageshwari",
+    "Ulipur",
+    "Bhurungamari",
+    "Chilmari",
+    "Rajarhat",
+    "Rowmari",
+
+    // Gaibandha
+    "Gaibandha",
+    "Palashbari",
+    "Sundarganj",
+    "Gobindaganj",
+    "Fulchhari",
+    "Sadullapur",
+
+    // Panchagarh
+    "Panchagarh",
+    "Tetulia",
+    "Boda",
+    "Debiganj",
+    "Atwari",
+
+    // Thakurgaon
+    "Thakurgaon",
+    "Pirganj Thakurgaon",
+    "Ranisankail",
+    "Baliadangi",
+    "Haripur",
+
+    // Pirojpur
+    "Pirojpur",
+    "Mathbaria",
+    "Bhandaria",
+    "Nazirpur",
+    "Kawkhali Pirojpur",
+
+    // Jhalokathi
+    "Jhalokathi",
+    "Nalchity",
+    "Kathalia",
+    "Rajapur Jhalokathi",
+  ];
 
   useEffect(() => {
     const savedCart = JSON.parse(
@@ -42,6 +693,30 @@ const Checkout = () => {
       .catch((error) => {
         console.error("Error loading sellers:", error);
       });
+  }, []);
+
+  // Close address dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        addressRef.current &&
+        !addressRef.current.contains(event.target)
+      ) {
+        setShowAddressSuggestions(false);
+      }
+    };
+
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside
+    );
+
+    return () => {
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
+    };
   }, []);
 
   const getNumericPrice = (price) => {
@@ -98,6 +773,16 @@ const Checkout = () => {
 
   const total = subtotal + deliveryTotal;
 
+  const filteredSuggestions = formData.address.trim()
+    ? addressSuggestions
+        .filter((area) =>
+          area
+            .toLowerCase()
+            .includes(formData.address.trim().toLowerCase())
+        )
+        .slice(0, 8)
+    : [];
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -107,10 +792,26 @@ const Checkout = () => {
     }));
 
     setErrorMessage("");
+
+    if (name === "address") {
+      setShowAddressSuggestions(true);
+    }
+  };
+
+  const handleAddressSuggestion = (area) => {
+    setFormData((prev) => ({
+      ...prev,
+      address: area,
+    }));
+
+    setShowAddressSuggestions(false);
+    setErrorMessage("");
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setShowAddressSuggestions(false);
 
     if (
       !formData.name ||
@@ -170,16 +871,13 @@ const Checkout = () => {
 
       const savedOrder = data.order || order;
 
-      // Save successful order locally
       localStorage.setItem(
         "tanliaLastOrder",
         JSON.stringify(savedOrder)
       );
 
-      // Save order for success screen
       setPlacedOrder(savedOrder);
 
-      // Clear cart only after successful backend save
       localStorage.removeItem("tanliaCart");
 
       window.dispatchEvent(new Event("cartUpdated"));
@@ -252,8 +950,6 @@ const Checkout = () => {
               order details successfully.
             </p>
 
-            {/* Order ID */}
-
             {placedOrder?.orderId && (
               <div className="border border-gray-200 bg-[#FDFBF7] px-5 py-4 mb-8">
                 <p className="text-xs uppercase tracking-wider text-gray-500">
@@ -265,8 +961,6 @@ const Checkout = () => {
                 </p>
               </div>
             )}
-
-            {/* Buttons */}
 
             <div className="flex flex-col sm:flex-row justify-center gap-3">
 
@@ -313,8 +1007,6 @@ const Checkout = () => {
   return (
     <div className="bg-[#FDFBF7] min-h-screen">
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
-        {/* Header */}
 
         <div className="flex items-center gap-3 mb-10">
           <ShoppingBag size={24} />
@@ -373,7 +1065,10 @@ const Checkout = () => {
                   />
                 </div>
 
-                <div>
+                <div
+                  ref={addressRef}
+                  className="relative"
+                >
                   <label className="block text-sm mb-2">
                     Delivery Address
                   </label>
@@ -382,11 +1077,44 @@ const Checkout = () => {
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
+                    onFocus={() => {
+                      if (formData.address.trim()) {
+                        setShowAddressSuggestions(true);
+                      }
+                    }}
                     placeholder="Enter your complete delivery address"
                     required
                     rows={4}
                     className="w-full border border-gray-300 px-4 py-3 text-sm outline-none resize-none focus:border-black"
                   />
+
+                  {showAddressSuggestions &&
+                    filteredSuggestions.length > 0 && (
+                      <div className="absolute left-0 right-0 top-full z-30 bg-white border border-gray-200 shadow-lg max-h-64 overflow-y-auto">
+
+                        {filteredSuggestions.map(
+                          (area, index) => (
+                            <button
+                              key={`${area}-${index}`}
+                              type="button"
+                              onMouseDown={(event) => {
+                                event.preventDefault();
+                                handleAddressSuggestion(area);
+                              }}
+                              className="w-full text-left px-4 py-3 text-sm hover:bg-[#FDFBF7] border-b border-gray-100 last:border-b-0 transition"
+                            >
+                              {area}
+                            </button>
+                          )
+                        )}
+
+                      </div>
+                    )}
+
+                  <p className="text-xs text-gray-400 mt-2">
+                    Start typing your area to see nearby location
+                    suggestions.
+                  </p>
                 </div>
 
               </div>
@@ -467,8 +1195,6 @@ const Checkout = () => {
                 Order Summary
               </h2>
 
-              {/* Products */}
-
               <div className="space-y-4 mb-6">
 
                 {cart.map((item, index) => {
@@ -528,8 +1254,6 @@ const Checkout = () => {
 
               <div className="border-t border-gray-200 pt-5">
 
-                {/* Subtotal */}
-
                 <div className="flex items-center justify-between text-sm mb-4">
                   <span className="text-gray-600">
                     Subtotal
@@ -539,8 +1263,6 @@ const Checkout = () => {
                     BDT {subtotal.toLocaleString()}
                   </span>
                 </div>
-
-                {/* Delivery */}
 
                 <div className="mb-5">
 
@@ -568,8 +1290,6 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                {/* Total */}
-
                 <div className="border-t border-gray-200 pt-5 flex items-center justify-between">
 
                   <span className="font-medium">
@@ -581,8 +1301,6 @@ const Checkout = () => {
                   </span>
 
                 </div>
-
-                {/* Error */}
 
                 {errorMessage && (
                   <p className="text-sm text-red-600 mt-4">

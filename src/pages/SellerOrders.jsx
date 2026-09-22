@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -8,11 +7,11 @@ import {
   MapPin,
   User,
   Package,
-  Clock,
-  CheckCircle,
   Banknote,
   X,
   Eye,
+  Percent,
+  Wallet,
 } from "lucide-react";
 
 const SellerOrders = () => {
@@ -46,7 +45,7 @@ const SellerOrders = () => {
         setError("");
 
         const response = await fetch(
-           "https://tanlia-backend.onrender.com/api/orders/seller/me",
+          "https://tanlia-backend.onrender.com/api/orders/seller/me",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -116,7 +115,7 @@ const SellerOrders = () => {
       setUpdatingOrder(orderId);
 
       const response = await fetch(
-        `/api/orders/${encodeURIComponent(
+        `https://tanlia-backend.onrender.com/api/orders/${encodeURIComponent(
           orderId
         )}/status`,
         {
@@ -181,26 +180,63 @@ const SellerOrders = () => {
     }
   };
 
-  // Dashboard Summary
+  // ========================================
+  // DASHBOARD SUMMARY
+  // ========================================
+
+  const activeOrders = orders.filter(
+    (order) =>
+      String(order.status || "").toLowerCase() !==
+      "cancelled"
+  );
+
   const totalOrders = orders.length;
 
-  const pendingOrders = orders.filter(
-    (order) =>
-      String(order.status || "").toLowerCase() ===
-      "pending"
-  ).length;
+  const totalSales = activeOrders.reduce(
+    (sum, order) => {
+      let sellerSales = Number(
+        order.subtotal
+      );
 
-  const deliveredOrders = orders.filter(
-    (order) =>
-      String(order.status || "").toLowerCase() ===
-      "delivered"
-  ).length;
+      // If seller subtotal is not available,
+      // calculate sales from seller's products.
+      if (
+        !Number.isFinite(sellerSales) ||
+        sellerSales <= 0
+      ) {
+        sellerSales = (order.items || []).reduce(
+          (itemSum, item) => {
+            const price = Number(
+              String(item.price || "").replace(
+                /[^0-9.-]/g,
+                ""
+              )
+            );
 
-  const totalSales = orders.reduce(
-    (sum, order) =>
-      sum + Number(order.total || 0),
+            const quantity = Number(
+              item.quantity || 1
+            );
+
+            return (
+              itemSum +
+              (Number.isFinite(price)
+                ? price * quantity
+                : 0)
+            );
+          },
+          0
+        );
+      }
+
+      return sum + sellerSales;
+    },
     0
   );
+
+  const commission = totalSales * 0.1;
+
+  const youWillGet =
+    totalSales - commission;
 
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
@@ -242,6 +278,7 @@ const SellerOrders = () => {
         {/* Dashboard Summary */}
         {!loading && !error && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+            {/* Total Orders */}
             <div className="bg-white border border-gray-200 p-5">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -262,46 +299,7 @@ const SellerOrders = () => {
               </div>
             </div>
 
-            <div className="bg-white border border-gray-200 p-5">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">
-                    Pending Orders
-                  </p>
-
-                  <p className="text-2xl font-semibold mt-2">
-                    {pendingOrders}
-                  </p>
-                </div>
-
-                <Clock
-                  size={22}
-                  strokeWidth={1.5}
-                  className="text-gray-500"
-                />
-              </div>
-            </div>
-
-            <div className="bg-white border border-gray-200 p-5">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">
-                    Delivered Orders
-                  </p>
-
-                  <p className="text-2xl font-semibold mt-2">
-                    {deliveredOrders}
-                  </p>
-                </div>
-
-                <CheckCircle
-                  size={22}
-                  strokeWidth={1.5}
-                  className="text-gray-500"
-                />
-              </div>
-            </div>
-
+            {/* Total Sales */}
             <div className="bg-white border border-gray-200 p-5">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -310,11 +308,56 @@ const SellerOrders = () => {
                   </p>
 
                   <p className="text-2xl font-semibold mt-2">
-                    BDT {totalSales.toLocaleString()}
+                    BDT{" "}
+                    {totalSales.toLocaleString()}
                   </p>
                 </div>
 
                 <Banknote
+                  size={22}
+                  strokeWidth={1.5}
+                  className="text-gray-500"
+                />
+              </div>
+            </div>
+
+            {/* Commission */}
+            <div className="bg-white border border-gray-200 p-5">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider">
+                    Commission (10%)
+                  </p>
+
+                  <p className="text-2xl font-semibold mt-2">
+                    BDT{" "}
+                    {commission.toLocaleString()}
+                  </p>
+                </div>
+
+                <Percent
+                  size={22}
+                  strokeWidth={1.5}
+                  className="text-gray-500"
+                />
+              </div>
+            </div>
+
+            {/* You Will Get */}
+            <div className="bg-white border border-gray-200 p-5">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider">
+                    You Will Get
+                  </p>
+
+                  <p className="text-2xl font-semibold mt-2">
+                    BDT{" "}
+                    {youWillGet.toLocaleString()}
+                  </p>
+                </div>
+
+                <Wallet
                   size={22}
                   strokeWidth={1.5}
                   className="text-gray-500"
@@ -383,7 +426,10 @@ const SellerOrders = () => {
                     <select
                       value={order.status || "Pending"}
                       disabled={
-                        updatingOrder === order.orderId
+                        updatingOrder ===
+                        order.orderId ||
+                        String(order.status || "").toLowerCase() ===
+                          "cancelled"
                       }
                       onChange={(e) =>
                         handleStatusChange(
@@ -657,7 +703,11 @@ const SellerOrders = () => {
                     }
                     disabled={
                       updatingOrder ===
-                      selectedOrder.orderId
+                        selectedOrder.orderId ||
+                      String(
+                        selectedOrder.status || ""
+                      ).toLowerCase() ===
+                        "cancelled"
                     }
                     onChange={(e) =>
                       handleStatusChange(
@@ -665,7 +715,7 @@ const SellerOrders = () => {
                         e.target.value
                       )
                     }
-                    className="border border-gray-300 px-3 py-2 text-sm bg-white outline-none"
+                    className="border border-gray-300 px-3 py-2 text-sm bg-white outline-none disabled:opacity-60"
                   >
                     <option value="Pending">
                       Pending
@@ -791,7 +841,8 @@ const SellerOrders = () => {
 
                             {item.size && (
                               <p className="text-xs text-gray-500 mt-1">
-                                Size: {item.size}
+                                Size:{" "}
+                                {item.size}
                               </p>
                             )}
 
