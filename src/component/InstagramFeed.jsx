@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
@@ -9,40 +10,43 @@ const InstagramFeed = () => {
   useEffect(() => {
     const loadPosts = async () => {
       try {
-        const response = await fetch("https://tanlia-backend.onrender.com/api/products");
+        const response = await fetch(
+          "https://tanlia-backend.onrender.com/api/products"
+        );
+
         const products = await response.json();
 
-        // One/two nice product images from each seller
+        // Selected product images for the Instagram-inspired grid
         const selected = [
           products.find(
             (product) =>
               product.sellerName?.toLowerCase() === "ayzan" &&
-              product.id === 1
+              (product.id === 1 || product._id)
           ),
           products.find(
             (product) =>
               product.sellerName?.toLowerCase() === "halal mood" &&
-              product.id === 2
+              (product.id === 2 || product._id)
           ),
           products.find(
             (product) =>
               product.sellerName?.toLowerCase() === "artistic humu" &&
-              product.id === 3
+              (product.id === 3 || product._id)
           ),
           products.find(
             (product) =>
               product.sellerName?.toLowerCase() === "su zan 1622" &&
-              product.id === 4
+              (product.id === 4 || product._id)
           ),
           products.find(
             (product) =>
               product.sellerName?.toLowerCase() === "trendy touh" &&
-              product.id === 9
+              (product.id === 9 || product._id)
           ),
           products.find(
             (product) =>
               product.sellerName?.toLowerCase() === "halal mood" &&
-              product.id === 6
+              (product.id === 6 || product._id)
           ),
         ].filter(Boolean);
 
@@ -56,36 +60,44 @@ const InstagramFeed = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-[#F4F1EA] text-gray-900 border-t border-gray-200">
+    <section className="py-20 sm:py-24 lg:py-28 bg-[#FDFBF7] text-[#1A1A1A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 border-b border-gray-300 pb-7">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-14">
           <div>
-            <span className="uppercase text-[10px] sm:text-xs tracking-[0.3em] font-semibold text-[#B85028] block mb-3">
-              From Our Instagram
+            <span className="block text-[10px] sm:text-xs uppercase tracking-[0.3em] text-[#B85028] mb-3">
+              Follow Along
             </span>
 
-            <h2 className="text-3xl sm:text-5xl font-serif font-light tracking-tight">
-              A Little Inspiration
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal tracking-tight">
+              From Tanlia Studio
             </h2>
           </div>
 
-          <p className="text-xs sm:text-sm text-gray-500 font-light max-w-sm md:text-right leading-relaxed">
-            Everyday looks, new arrivals and beautiful moments from the
-            Tanlia Studio community.
+          <p className="text-xs sm:text-sm text-gray-600 font-light max-w-sm md:text-right leading-relaxed">
+            Discover new pieces, boutique stories and everyday fashion
+            inspiration from our growing community.
           </p>
         </div>
 
         {/* Instagram Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3">
           {posts.map((post, index) => {
-            const sellerName = post.sellerName;
+            const sellerName = post.sellerName || "Tanlia Studio";
+
+            const image =
+              Array.isArray(post.images) && post.images.length > 0
+                ? post.images[0]
+                : post.image;
 
             return (
-              <div
-                key={post.id}
-                className={`group relative overflow-hidden bg-gray-200 ${
+              <a
+                key={post.id || post._id || index}
+                href={tanliaInstagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group relative overflow-hidden bg-[#EDE8E0] block ${
                   index === 1 || index === 4
                     ? "lg:translate-y-8"
                     : ""
@@ -93,58 +105,46 @@ const InstagramFeed = () => {
               >
                 <div className="aspect-[4/5] overflow-hidden">
                   <img
-                    src={
-                      Array.isArray(post.images)
-                        ? post.images[0]
-                        : post.image
-                    }
-                    alt={`${sellerName} - ${post.title}`}
-                    className="w-full h-full object-cover object-center grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                    src={image}
+                    alt={`${sellerName} - ${post.title || "Tanlia Studio"}`}
+                    className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 </div>
-              </div>
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
+                    <ArrowUpRight className="w-4 h-4 text-[#1A1A1A]" />
+                  </div>
+                </div>
+              </a>
             );
           })}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-16 flex justify-center">
+        {/* CTA */}
+        <div className="mt-16 sm:mt-20 flex justify-center">
           <a
             href={tanliaInstagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-4 border border-gray-900 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-gray-900 hover:text-white transition-all duration-300"
+            className="group inline-flex items-center gap-3 border-b border-[#1A1A1A] pb-2 text-xs font-medium uppercase tracking-[0.2em] text-[#1A1A1A] hover:text-[#B85028] hover:border-[#B85028] transition-colors duration-300"
           >
             {/* Instagram Icon */}
             <svg
-              className="w-4 h-4 fill-none stroke-current stroke-[1.8]"
+              className="w-4 h-4 fill-none stroke-current stroke-[1.7]"
               viewBox="0 0 24 24"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <rect
-                x="2"
-                y="2"
-                width="20"
-                height="20"
-                rx="5"
-              />
-
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 1 1 16 11.37z" />
-
-              <line
-                x1="17.5"
-                y1="6.5"
-                x2="17.51"
-                y2="6.5"
-              />
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
             </svg>
 
-            <span>Tanlia Studio</span>
+            <span>Follow Tanlia Studio</span>
 
-            <ArrowUpRight
-              className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-            />
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
           </a>
         </div>
 

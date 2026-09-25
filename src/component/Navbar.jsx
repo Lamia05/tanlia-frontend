@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -15,10 +16,8 @@ const Navbar = () => {
   const [cartCount, setCartCount] = useState(0);
   const [wishlistCount, setWishlistCount] = useState(0);
 
-  // Mobile Menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Search
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState([]);
@@ -126,6 +125,10 @@ const Navbar = () => {
      SEARCH HELPERS
   ========================= */
 
+  const getProductId = (product) => {
+    return product?.id || product?._id;
+  };
+
   const getProductTitle = (product) => {
     return (
       product?.product?.title ||
@@ -153,6 +156,10 @@ const Navbar = () => {
       product.media.images.length > 0
     ) {
       return product.media.images[0];
+    }
+
+    if (Array.isArray(product?.images)) {
+      return product.images[0] || "";
     }
 
     if (Array.isArray(product?.image)) {
@@ -208,10 +215,9 @@ const Navbar = () => {
           const description =
             typeof product?.description === "string"
               ? product.description.toLowerCase()
-              : typeof product?.description?.intro ===
-                  "string"
-                ? product.description.intro.toLowerCase()
-                : "";
+              : typeof product?.description?.intro === "string"
+              ? product.description.intro.toLowerCase()
+              : "";
 
           return (
             title.includes(query) ||
@@ -221,7 +227,7 @@ const Navbar = () => {
         });
 
   /* =========================
-     OPEN SEARCH
+     SEARCH ACTIONS
   ========================= */
 
   const handleOpenSearch = () => {
@@ -229,24 +235,18 @@ const Navbar = () => {
     setMobileMenuOpen(false);
   };
 
-  /* =========================
-     CLOSE SEARCH
-  ========================= */
-
   const handleCloseSearch = () => {
     setSearchOpen(false);
     setSearchQuery("");
   };
 
-  /* =========================
-     SEARCH PRODUCT
-  ========================= */
-
   const handleSearchProduct = (product) => {
-    if (!product?.id) return;
+    const productId = getProductId(product);
+
+    if (!productId) return;
 
     handleCloseSearch();
-    navigate(`/products/${product.id}`);
+    navigate(`/products/${productId}`);
   };
 
   /* =========================
@@ -280,167 +280,133 @@ const Navbar = () => {
     };
   }, []);
 
+  /* =========================
+     NAV LINKS
+  ========================= */
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    { name: "Collections", path: "/collections" },
+    { name: "Sellers", path: "/sellers" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+    { name: "Track Order", path: "/track-order" },
+  ];
+
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 h-20 flex items-center">
+      {/* =========================
+          NAVBAR
+      ========================= */}
 
-          {/* =========================
-              MOBILE LEFT - MENU
-          ========================= */}
+      <header className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#E7E0D8]">
 
-          <div className="md:hidden w-1/3 flex items-center justify-start">
-            <button
-              type="button"
-              onClick={handleMobileMenu}
-              className="p-1 text-gray-800 hover:text-black transition-colors"
-              aria-label="Menu"
-            >
-              {mobileMenuOpen ? (
-                <X className="w-6 h-6 stroke-[1.5]" />
-              ) : (
-                <Menu className="w-6 h-6 stroke-[1.5]" />
-              )}
-            </button>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* =========================
-              BRAND - DESKTOP
-          ========================= */}
+          <div className="h-[72px] sm:h-20 flex items-center">
 
-          <div className="hidden md:flex flex-1">
-            <Link
-              to="/"
-              className="text-2xl sm:text-3xl font-serif tracking-wider text-gray-900"
-            >
-              Tanlia Studio
-            </Link>
-          </div>
+            {/* MOBILE MENU */}
+            <div className="md:hidden flex-1">
+              <button
+                type="button"
+                onClick={handleMobileMenu}
+                className="p-2 -ml-2 text-[#1A1A1A] hover:text-[#B85028] transition-colors"
+                aria-label="Menu"
+              >
+                {mobileMenuOpen ? (
+                  <X className="w-5 h-5 stroke-[1.5]" />
+                ) : (
+                  <Menu className="w-5 h-5 stroke-[1.5]" />
+                )}
+              </button>
+            </div>
 
-          {/* =========================
-              MOBILE CENTER BRAND
-          ========================= */}
+            {/* BRAND */}
+            <div className="flex-1 md:flex-none">
+              <Link
+                to="/"
+                onClick={closeMobileMenu}
+                className="inline-block text-[20px] sm:text-[23px] font-serif tracking-[0.08em] text-[#1A1A1A] whitespace-nowrap hover:text-[#B85028] transition-colors"
+              >
+                Tanlia Studio
+              </Link>
+            </div>
 
-          <div className="md:hidden w-1/3 flex items-center justify-center px-2">
-            <Link
-              to="/"
-              onClick={closeMobileMenu}
-              className="block text-xl font-serif tracking-wider text-gray-900 whitespace-nowrap"
-            >
-              Tanlia Studio
-            </Link>
-          </div>
+            {/* DESKTOP NAV */}
+            <nav className="hidden md:flex flex-1 items-center justify-center gap-5 lg:gap-7 xl:gap-8 ml-8">
 
-          {/* =========================
-              CENTER - DESKTOP NAV
-          ========================= */}
+              {navLinks.map((link) => {
+                const active =
+                  link.name === "Collections"
+                    ? isCollectionsActive
+                    : location.pathname === link.path;
 
-          <nav className="hidden md:flex items-center justify-center gap-7 text-xs uppercase tracking-widest font-medium text-gray-600">
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className={`relative py-2 text-[10px] lg:text-[11px] uppercase tracking-[0.16em] transition-colors ${
+                      active
+                        ? "text-[#1A1A1A]"
+                        : "text-gray-600 hover:text-[#B85028]"
+                    }`}
+                  >
+                    {link.name}
 
-            <Link
-              to="/"
-              className="hover:text-orange-400 transition-colors"
-            >
-              Home
-            </Link>
+                    {active && (
+                      <span className="absolute left-0 right-0 -bottom-0.5 h-px bg-[#B85028]" />
+                    )}
+                  </Link>
+                );
+              })}
 
-            <Link
-              to="/products"
-              className="hover:text-orange-400 transition-colors"
-            >
-              Products
-            </Link>
+            </nav>
 
-            <Link
-              to="/collections"
-              className={`hover:text-orange-400 transition-colors ${
-                isCollectionsActive
-                  ? "text-black border-b border-black pb-1"
-                  : ""
-              }`}
-            >
-              Collections
-            </Link>
+            {/* RIGHT ICONS */}
+            <div className="flex-1 flex items-center justify-end gap-2 sm:gap-3 md:gap-4">
 
-            <Link
-              to="/sellers"
-              className="hover:text-orange-400 transition-colors"
-            >
-              Sellers
-            </Link>
+              {/* SEARCH */}
+              <button
+                type="button"
+                onClick={handleOpenSearch}
+                className="p-2 text-[#1A1A1A] hover:text-[#B85028] transition-colors"
+                aria-label="Search"
+              >
+                <Search className="w-[19px] h-[19px] stroke-[1.5]" />
+              </button>
 
-            <Link
-              to="/about"
-              className="hover:text-orange-400 transition-colors"
-            >
-              About
-            </Link>
+              {/* WISHLIST */}
+              <Link
+                to="/wishlist"
+                onClick={closeMobileMenu}
+                className="relative p-2 text-[#1A1A1A] hover:text-[#B85028] transition-colors"
+                aria-label="Wishlist"
+              >
+                <Heart className="w-[19px] h-[19px] stroke-[1.5]" />
 
-            <Link
-              to="/contact"
-              className="hover:text-orange-400 transition-colors"
-            >
-              Contact
-            </Link>
+                {wishlistCount > 0 && (
+                  <span className="absolute top-0 right-0 min-w-[15px] h-[15px] px-1 bg-[#B85028] text-white text-[8px] rounded-full flex items-center justify-center">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
 
-            <Link
-              to="/track-order"
-              className="hover:text-orange-400 transition-colors"
-            >
-              Track Order
-            </Link>
+              {/* CART */}
+              <Link
+                to="/cart"
+                onClick={closeMobileMenu}
+                className="relative p-2 text-[#1A1A1A] hover:text-[#B85028] transition-colors"
+                aria-label="Cart"
+              >
+                <ShoppingBag className="w-[19px] h-[19px] stroke-[1.5]" />
 
-          </nav>
-
-          {/* =========================
-              RIGHT - ICONS
-          ========================= */}
-
-          <div className="md:flex-1 flex-1 flex items-center justify-end gap-4 text-gray-800 pl-3">
-
-            {/* SEARCH */}
-
-            <button
-              type="button"
-              onClick={handleOpenSearch}
-              className="p-1 text-gray-800 hover:text-black transition-colors"
-              aria-label="Search"
-            >
-              <Search className="w-5 h-5 stroke-[1.5]" />
-            </button>
-
-            {/* WISHLIST */}
-
-            <Link
-              to="/wishlist"
-              onClick={closeMobileMenu}
-              className="p-1 relative text-gray-800 hover:text-black transition-colors"
-              aria-label="Wishlist"
-            >
-              <Heart className="w-5 h-5 stroke-[1.5]" />
-
-              {wishlistCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-[#B85028] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
-                  {wishlistCount}
+                <span className="absolute top-0 right-0 min-w-[15px] h-[15px] px-1 bg-[#B85028] text-white text-[8px] rounded-full flex items-center justify-center">
+                  {cartCount}
                 </span>
-              )}
-            </Link>
+              </Link>
 
-            {/* CART */}
-
-            <Link
-              to="/cart"
-              onClick={closeMobileMenu}
-              className="p-1 relative text-gray-800 hover:text-black transition-colors"
-              aria-label="Cart"
-            >
-              <ShoppingBag className="w-5 h-5 stroke-[1.5]" />
-
-              <span className="absolute -top-1.5 -right-1.5 bg-[#B85028] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
-                {cartCount}
-              </span>
-            </Link>
-
+            </div>
           </div>
         </div>
 
@@ -449,68 +415,38 @@ const Navbar = () => {
         ========================= */}
 
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 bg-white">
-            <nav className="px-5 py-5 flex flex-col">
+          <div className="md:hidden bg-[#FDFBF7] border-t border-[#E7E0D8]">
+            <nav className="px-5 sm:px-6 py-3">
 
-              <Link
-                to="/"
-                onClick={closeMobileMenu}
-                className="py-3 text-sm uppercase tracking-widest text-gray-700 hover:text-orange-400 transition-colors border-b border-gray-100"
-              >
-                Home
-              </Link>
+              {navLinks.map((link, index) => {
+                const active =
+                  link.name === "Collections"
+                    ? isCollectionsActive
+                    : location.pathname === link.path;
 
-              <Link
-                to="/products"
-                onClick={closeMobileMenu}
-                className="py-3 text-sm uppercase tracking-widest text-gray-700 hover:text-orange-400 transition-colors border-b border-gray-100"
-              >
-                Products
-              </Link>
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    onClick={closeMobileMenu}
+                    className={`flex items-center justify-between py-4 text-[11px] uppercase tracking-[0.18em] border-b border-[#EAE4DD] transition-colors ${
+                      active
+                        ? "text-[#B85028]"
+                        : "text-[#444] hover:text-[#B85028]"
+                    } ${
+                      index === navLinks.length - 1
+                        ? "border-b-0"
+                        : ""
+                    }`}
+                  >
+                    <span>{link.name}</span>
 
-              <Link
-                to="/collections"
-                onClick={closeMobileMenu}
-                className={`py-3 text-sm uppercase tracking-widest hover:text-orange-400 transition-colors border-b border-gray-100 ${
-                  isCollectionsActive
-                    ? "text-black font-medium"
-                    : "text-gray-700"
-                }`}
-              >
-                Collections
-              </Link>
-
-              <Link
-                to="/sellers"
-                onClick={closeMobileMenu}
-                className="py-3 text-sm uppercase tracking-widest text-gray-700 hover:text-orange-400 transition-colors border-b border-gray-100"
-              >
-                Sellers
-              </Link>
-
-              <Link
-                to="/about"
-                onClick={closeMobileMenu}
-                className="py-3 text-sm uppercase tracking-widest text-gray-700 hover:text-orange-400 transition-colors border-b border-gray-100"
-              >
-                About
-              </Link>
-
-              <Link
-                to="/contact"
-                onClick={closeMobileMenu}
-                className="py-3 text-sm uppercase tracking-widest text-gray-700 hover:text-orange-400 transition-colors border-b border-gray-100"
-              >
-                Contact
-              </Link>
-
-              <Link
-                to="/track-order"
-                onClick={closeMobileMenu}
-                className="py-3 text-sm uppercase tracking-widest text-gray-700 hover:text-orange-400 transition-colors"
-              >
-                Track Order
-              </Link>
+                    {active && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#B85028]" />
+                    )}
+                  </Link>
+                );
+              })}
 
             </nav>
           </div>
@@ -522,17 +458,17 @@ const Navbar = () => {
       ========================= */}
 
       {searchOpen && (
-        <div className="fixed inset-0 z-[200] bg-black/40">
-          <div className="bg-white w-full shadow-lg">
+        <div className="fixed inset-0 z-[200] bg-black/30 backdrop-blur-[2px]">
 
-            {/* SEARCH HEADER */}
+          <div className="w-full bg-[#FDFBF7] shadow-xl">
 
-            <div className="max-w-5xl mx-auto px-5 sm:px-6 py-6">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 py-5 sm:py-7">
 
-              <div className="flex items-center gap-4 border-b border-gray-200 pb-4">
+              {/* SEARCH INPUT */}
+              <div className="flex items-center gap-3 sm:gap-4 border-b border-[#DCD4CB] pb-4">
 
                 <Search
-                  className="w-5 h-5 text-gray-500 flex-shrink-0"
+                  className="w-5 h-5 text-[#B85028] flex-shrink-0"
                   strokeWidth={1.5}
                 />
 
@@ -543,14 +479,14 @@ const Navbar = () => {
                   onChange={(event) =>
                     setSearchQuery(event.target.value)
                   }
-                  placeholder="Search products..."
-                  className="flex-1 outline-none text-base text-gray-900 placeholder:text-gray-400 bg-transparent"
+                  placeholder="Search products, boutiques..."
+                  className="flex-1 min-w-0 bg-transparent outline-none text-sm sm:text-base text-[#1A1A1A] placeholder:text-gray-400"
                 />
 
                 <button
                   type="button"
                   onClick={handleCloseSearch}
-                  className="p-1 text-gray-500 hover:text-black transition"
+                  className="p-1 text-gray-500 hover:text-[#B85028] transition-colors"
                   aria-label="Close Search"
                 >
                   <X
@@ -562,32 +498,34 @@ const Navbar = () => {
               </div>
 
               {/* SEARCH RESULTS */}
-
               {searchQuery.trim() !== "" && (
                 <div className="mt-5 max-h-[65vh] overflow-y-auto">
 
                   {filteredProducts.length > 0 ? (
-                    <div className="divide-y divide-gray-100">
+                    <div className="divide-y divide-[#EAE4DD]">
 
                       {filteredProducts
                         .slice(0, 8)
-                        .map((product) => {
+                        .map((product, index) => {
                           const image =
                             getProductImage(product);
 
                           return (
                             <button
                               type="button"
-                              key={product.id}
+                              key={
+                                getProductId(product) ||
+                                index
+                              }
                               onClick={() =>
                                 handleSearchProduct(product)
                               }
-                              className="w-full flex items-center gap-4 py-3 text-left hover:bg-gray-50 transition px-2"
+                              className="w-full flex items-center gap-4 py-3 px-1 sm:px-2 text-left hover:bg-[#F5F0E9] transition-colors"
                             >
 
                               {/* IMAGE */}
+                              <div className="w-14 h-[72px] sm:w-16 sm:h-20 flex-shrink-0 bg-[#EEE9E2] overflow-hidden">
 
-                              <div className="w-16 h-20 flex-shrink-0 bg-gray-100 overflow-hidden">
                                 {image ? (
                                   <img
                                     src={image}
@@ -595,21 +533,21 @@ const Navbar = () => {
                                     className="w-full h-full object-cover"
                                   />
                                 ) : (
-                                  <div className="w-full h-full flex items-center justify-center text-[10px] text-gray-400">
+                                  <div className="w-full h-full flex items-center justify-center text-[9px] text-gray-400">
                                     No Image
                                   </div>
                                 )}
+
                               </div>
 
                               {/* INFO */}
-
                               <div className="flex-1 min-w-0">
 
-                                <p className="text-[10px] uppercase tracking-wider text-gray-500">
+                                <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-[#B85028]">
                                   {getSellerName(product)}
                                 </p>
 
-                                <p className="mt-1 text-sm text-gray-900 truncate">
+                                <p className="mt-1 text-sm text-[#1A1A1A] truncate">
                                   {getProductTitle(product)}
                                 </p>
 
@@ -619,20 +557,24 @@ const Navbar = () => {
 
                               </div>
 
+                              <div className="hidden sm:block text-gray-400">
+                                <ArrowUpRight className="w-4 h-4" />
+                              </div>
+
                             </button>
                           );
                         })}
 
                     </div>
                   ) : (
-                    <div className="py-10 text-center">
+                    <div className="py-12 text-center">
 
                       <Search
-                        className="w-8 h-8 mx-auto text-gray-300"
+                        className="w-8 h-8 mx-auto text-[#D8CEC3]"
                         strokeWidth={1.2}
                       />
 
-                      <p className="mt-3 text-sm text-gray-500">
+                      <p className="mt-4 text-sm text-gray-500">
                         No products found for "{searchQuery}"
                       </p>
 
@@ -643,16 +585,15 @@ const Navbar = () => {
               )}
 
               {/* INITIAL SEARCH STATE */}
-
               {searchQuery.trim() === "" && (
-                <div className="py-8 text-center">
+                <div className="py-9 sm:py-12 text-center">
 
-                  <p className="text-xs uppercase tracking-[0.2em] text-gray-400">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-[#B85028]">
                     Search Tanlia Studio
                   </p>
 
-                  <p className="mt-2 text-sm text-gray-500">
-                    Find your favorite products and collections
+                  <p className="mt-2 text-xs sm:text-sm text-gray-500">
+                    Find products, boutiques and collections
                   </p>
 
                 </div>

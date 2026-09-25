@@ -23,30 +23,33 @@ const FeaturedThisWeek = () => {
   }, []);
 
   return (
-    <section className="bg-[#FDFBF7] py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#FDFBF7] py-20 sm:py-24 lg:py-28 px-5 sm:px-8 lg:px-12">
       <div className="max-w-7xl mx-auto">
 
-        {/* Section Heading */}
-        <div className="text-center mb-10">
-          <div className="space-y-1 mb-5">
-            
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-12 lg:mb-14">
 
-            <p className="text-xs tracking-[0.3em]  uppercase text-orange-500">
-              LIMITED TIME
-            </p>
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-px bg-[#B85028]" />
+              <p className="text-[10px] tracking-[0.28em] uppercase text-[#B85028] font-medium">
+                Curated selection
+              </p>
+            </div>
 
-            <p className="text-3xl tracking-[0.3em]  uppercase text-[#111111]">
-              FEATURED THIS WEEK
-            </p>
+            <h2 className="font-serif text-4xl sm:text-5xl text-[#171717] tracking-tight">
+              Featured this week
+            </h2>
           </div>
 
-          <h2 className="text-sm text-gray-600">
-            Promotional highlights from our boutique sellers — special offers available for a limited time
-          </h2>
+          <p className="max-w-sm text-sm leading-6 text-neutral-500 font-light sm:text-right">
+            A thoughtful selection of pieces from our boutique sellers,
+            available for a limited time.
+          </p>
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
           {products.map((product) => {
             const image = Array.isArray(product.image)
               ? product.image[0]
@@ -54,52 +57,61 @@ const FeaturedThisWeek = () => {
 
             return (
               <div key={product.id} className="group">
+
                 {/* Product Image */}
                 <Link to={`/products/${product.id}`}>
-                  <div className="aspect-[4/5] overflow-hidden bg-neutral-900">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-[#EEE9E2]">
                     <img
                       src={image}
                       alt={product.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
                     />
+
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.06] transition-colors duration-500" />
                   </div>
                 </Link>
 
                 {/* Product Info */}
-                <div className="pt-4 text-[#666666]">
-                  {/* Seller Name */}
-                  <p className="text-sm text-neutral-400 mb-1">
+                <div className="pt-5">
+
+                  <p className="text-[10px] tracking-[0.18em] uppercase text-neutral-400 mb-2">
                     {product.sellerName}
                   </p>
 
-                  {/* Product Title */}
-                  <h3 className="text-base sm:text-lg font-medium mb-4 hover:text-orange-400">
+                  <h3 className="text-base sm:text-lg text-[#222] font-medium leading-snug">
                     {product.title}
                   </h3>
 
-                  {/* Price + Shop Now */}
-                  <div className="flex items-center justify-between gap-4">
+                  <div className="mt-4 flex items-center justify-between gap-4">
+
+                    {/* Price */}
                     <div className="flex items-center gap-2">
-                      <span className="text-base font-medium">
-                        {product.price}
+                      <span className="text-sm sm:text-base text-[#222] font-medium">
+                        ৳{product.price}
                       </span>
 
                       {product.originalPrice && (
-                        <span className="text-sm text-neutral-500 line-through">
-                          {product.originalPrice}
+                        <span className="text-xs text-neutral-400 line-through">
+                          ৳{product.originalPrice}
                         </span>
                       )}
                     </div>
 
+                    {/* Shop Now */}
                     <Link
                       to={`/products/${product.id}`}
-                      className="shrink-0 inline-flex items-center gap-2 bg-[#B85028] text-white px-4 py-2 text-sm transition-all duration-300 hover:bg-[#D97852] rounded-full"
+                      className="group/link inline-flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-[0.16em] font-semibold text-[#B85028] border-b border-[#B85028]/40 pb-1 hover:border-[#B85028] transition-all duration-300"
                     >
-                      Shop Now
-                      <ArrowRight size={15} />
+                      Shop now
+                      <ArrowRight
+                        size={14}
+                        className="transition-transform duration-300 group-hover/link:translate-x-1"
+                      />
                     </Link>
                   </div>
                 </div>
+
               </div>
             );
           })}

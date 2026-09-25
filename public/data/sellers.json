@@ -1,4 +1,3 @@
-
 [
   {
     "id": 1,
@@ -10,7 +9,7 @@
     "image": "https://i.ibb.co.com/0pmSYZwZ/IMG-20260920-150314.jpg",
     "instagramUrl": "",
     "delivery": {
-      "insideDhaka": 80,
+      "insideDhaka": 70,
       "outsideDhaka": 120
     }
   },
@@ -24,8 +23,8 @@
     "image": "https://i.ibb.co.com/jZQv964j/IMG-20260906-WA0011.jpg",
     "instagramUrl": "",
     "delivery": {
-      "insideDhaka": 80,
-      "outsideDhaka": 120
+      "insideDhaka": 70,
+      "outsideDhaka": 130
     }
   },
   {
@@ -38,21 +37,21 @@
     "image": "https://i.ibb.co.com/BKqyBS4H/IMG-20260920-150226.jpg",
     "instagramUrl": "",
     "delivery": {
-      "insideDhaka": 80,
-      "outsideDhaka": 120
+      "insideDhaka": 70,
+      "outsideDhaka": 140
     }
   },
   {
     "id": 4,
-    "name": "Trendy Touh",
+    "name": "Trendy Touch",
     "tagline": "EFFORTLESS EVERYDAY STYLE",
-    "description": "Explore vibrant and comfortable everyday fashion from Trendy Touh.",
+    "description": "Explore vibrant and comfortable everyday fashion from Trendy Touch.",
     "productsCount": 1,
     "location": "Dhaka, Bangladesh",
     "image": "https://i.ibb.co.com/dy0QQP1/IMG-20260920-150241.jpg",
     "instagramUrl": "",
     "delivery": {
-      "insideDhaka": 80,
+      "insideDhaka": 70,
       "outsideDhaka": 120
     }
   },
@@ -66,9 +65,38 @@
     "image": "https://i.ibb.co.com/CqssPJ6/IMG-20260908-WA0001.jpg",
     "instagramUrl": "",
     "delivery": {
+      "insideDhaka": 70,
+      "outsideDhaka": 150
+    }
+  },
+  {
+    "id": 6,
+    "name": "Boutique Shop by Adri",
+    "tagline": "ELEGANT EVERYDAY FASHION",
+    "description": "Discover stylish and elegant fashion from Adri.",
+    "productsCount": 6,
+    "location": "Dhaka, Bangladesh",
+    "image": "",
+    "instagramUrl": "",
+    "delivery": {
+      "insideDhaka": 100,
+      "outsideDhaka": 150,
+      "baseWeight": 2,
+      "extraKgCharge": 20
+    }
+  },
+  {
+    "id": 7,
+    "name": "Straver",
+    "tagline": "MODERN FASHION & STYLE",
+    "description": "Explore modern and stylish fashion from Straver.",
+    "productsCount": 2,
+    "location": "Dhaka, Bangladesh",
+    "image": "",
+    "instagramUrl": "",
+    "delivery": {
       "insideDhaka": 80,
-      "outsideDhaka": 120
+      "outsideDhaka": 150
     }
   }
 ]
- 

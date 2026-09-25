@@ -39,43 +39,20 @@
       }
     ],
     "sizes": [
-      {
-        "name": "32"
-      },
-      {
-        "name": "34"
-      },
-      {
-        "name": "36"
-      },
-      {
-        "name": "38"
-      },
-      {
-        "name": "40"
-      },
-      {
-        "name": "42"
-      },
-      {
-        "name": "44"
-      },
-      {
-        "name": "46"
-      },
-      {
-        "name": "48"
-      },
-      {
-        "name": "50"
-      },
-      {
-        "name": "52"
-      },
-      {
-        "name": "54"
-      }
+      { "name": "32" },
+      { "name": "34" },
+      { "name": "36" },
+      { "name": "38" },
+      { "name": "40" },
+      { "name": "42" },
+      { "name": "44" },
+      { "name": "46" },
+      { "name": "48" },
+      { "name": "50" },
+      { "name": "52" },
+      { "name": "54" }
     ],
+    "category": "Women's Fashion",
     "description": {
       "intro": "Premium long shrug made with printed Georgette fabric, directly imported from China.",
       "details": [
@@ -106,7 +83,7 @@
         "image": "https://i.ibb.co.com/MkND7DGn/IMG-20260914-222617.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "An elegant borka designed with a graceful silhouette, comfortable fabric and refined finishing.",
       "details": [
@@ -117,21 +94,11 @@
       ]
     },
     "sizes": [
-      {
-        "name": "S"
-      },
-      {
-        "name": "M"
-      },
-      {
-        "name": "L"
-      },
-      {
-        "name": "XL"
-      },
-      {
-        "name": "XXL"
-      }
+      { "name": "S" },
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
     ]
   },
   {
@@ -163,27 +130,47 @@
         "image": ""
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "A beautifully crafted saree with an elegant design and refined finishing, perfect for creating a graceful look.",
       "details": []
     },
     "sizes": [
+      { "name": "Free Size" },
+      { "name": "" },
+      { "name": "" },
+      { "name": "" },
+      { "name": "" }
+    ]
+  },
+  {
+    "id": 27,
+    "sellerName": "Boutique shop by Adri",
+    "title": "Qalamkar Luxury Lawn",
+    "price": "BDT 8800",
+    "originalPrice": "BDT 12,590",
+    "image": [
+      "https://i.ibb.co.com/ZpBHtfLs/IMG-20260923-WA0053.jpg"
+    ],
+    "colors": [
       {
-        "name": "Free Size"
-      },
-      {
-        "name": ""
-      },
-      {
-        "name": ""
-      },
-      {
-        "name": ""
-      },
-      {
-        "name": ""
+        "name": "Mint Green",
+        "image": "https://i.ibb.co.com/ZpBHtfLs/IMG-20260923-WA0053.jpg"
       }
+    ],
+    
+    "category": "Women's Fashion",
+    "description": {
+      "intro": "This is an elegant, pastel mint green and pink designer three-piece outfit (Salwar Kameez / Pakistani Lawns suit style). It features intricate floral embroidery, cutwork detailing, and delicate lace trims, making it ideal for festive occasions, weddings, or formal gatherings.",
+      "details": [
+        "Top: Mint green kameez with intricate floral embroidery & scalloped cutwork hem.",
+        "Dupatta: Dual-tone pink & green dupatta with embroidered borders.",
+        "Bottom: Flared wide-leg trousers featuring matching lace detail.",
+        "Vibe: Soft, regal, and modern-traditional."
+      ]
+    },
+    "sizes": [
+      { "name": "Free Size" }
     ]
   },
   {
@@ -216,15 +203,13 @@
         "image": "https://i.ibb.co.com/B5HQhyqz/IMG-20260906-WA0025.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "Experience elegance with this authentic 40/60 count Jamdani saree, perfect for any occassion. Available now with an attached running blouse piece! .",
       "details": []
     },
     "sizes": [
-      {
-        "name": "Free Size"
-      }
+      { "name": "Free Size" }
     ]
   },
   {
@@ -260,7 +245,7 @@
         "image": "https://i.ibb.co.com/d097C59c/3-Marron-Kurti.png"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "Soft, textured Jacquard fabric with a subtle elegant finish.",
       "details": [
@@ -317,7 +302,7 @@
         "image": "https://i.ibb.co.com/Kj8dmC5k/IMG-20260914-222534.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "A graceful borka combining modest style with comfortable wear and a clean, elegant finish.",
       "details": [
@@ -329,21 +314,50 @@
       ]
     },
     "sizes": [
+      { "name": "S" },
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
+    ]
+  },
+  {
+    "id": 28,
+    "sellerName": "Boutique shop by Adri",
+    "title": "Unstiched Celestara",
+    "price": "BDT 6800",
+    "originalPrice": "BDT 9710",
+    "image": [
+      "https://i.ibb.co.com/FLpx1B41/IMG-20260923-WA0005-1.jpg",
+      "https://i.ibb.co.com/k6r5dmB2/IMG-20260923-WA0010.jpg"
+    ],
+    "colors": [
       {
-        "name": "S"
+        "name": "Royal Blue",
+        "image": "https://i.ibb.co.com/FLpx1B41/IMG-20260923-WA0005-1.jpg"
       },
       {
-        "name": "M"
+        "name": "Black",
+        "image": "https://i.ibb.co.com/k6r5dmB2/IMG-20260923-WA0010.jpg"
       },
-      {
-        "name": "L"
-      },
-      {
-        "name": "XL"
-      },
-      {
-        "name": "XXL"
+       {
+        "name": "Olive Green",
+        "image": "https://i.ibb.co.com/rK5Dv4s0/IMG-20260923-WA0017.jpg"
       }
+    ],
+    "category": "Women's Fashion",
+    "description": {
+      "intro": "A stunning royal blue sleeveless suit designed with intricate white floral schiffli lace and subtle printed details. Perfect for summer festivities, daytime events, or chic formal gatherings!",
+      "details": [
+        "Design & Fabric: Deep royal blue base with soft floral prints and contrasting white Schiffli/Lace threadwork.",
+        "Neckline & Yoke: Features a round neck highlighted with detailed white lace overlays and central floral motifs.",
+        "Sleeves: Sleeveless cut for a sleek, modern, and breathable summer look.",
+        "Dupatta: Matching blue scarf embellished with broad, intricate white lace along the border.",
+        "Vibe: Classy, fresh, and effortlessly sophisticated."
+      ]
+    },
+    "sizes": [
+      {"name": "Free Size"}
     ]
   },
   {
@@ -375,15 +389,13 @@
         "image": ""
       }
     ],
-    "category": "",
+    "category": "Home & Lifestyle",
     "description": {
       "intro": "A stylish saree designed with a graceful appearance, comfortable fabric and beautiful finishing.",
       "details": []
     },
     "sizes": [
-      {
-        "name": "24 inches"
-      }
+      { "name": "24 inches" }
     ]
   },
   {
@@ -426,32 +438,22 @@
         "image": "https://i.ibb.co.com/mCZzd0B2/IMG-20260907-WA0125.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "A stylish two-piece outfit designed with a coordinated look, comfortable fabric, digital print with lace work and a polished finish.",
       "details": []
     },
     "sizes": [
-      {
-        "name": "S"
-      },
-      {
-        "name": "M"
-      },
-      {
-        "name": "L"
-      },
-      {
-        "name": "XL"
-      },
-      {
-        "name": "XXL"
-      }
+      { "name": "S" },
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
     ]
   },
   {
     "id": 9,
-    "sellerName": "Trendy Touh",
+    "sellerName": "Trendy Touch",
     "title": "Summer Breeze Block Print Set",
     "price": "BDT 1100",
     "originalPrice": "",
@@ -519,7 +521,7 @@
         "image": "https://i.ibb.co.com/d4JKJwC4/IMG-20260904-WA0015.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "Beat the heat with our Summer Breeze Block Print Collection! Crafted from 100% color-guaranteed premium voile cotton, this unstitched 3-piece set offers ultimate comfort, fine hand-block detailing, and vibrant elegance for your daily style.",
       "details": [
@@ -558,7 +560,7 @@
         "image": "https://i.ibb.co.com/ccd49hyM/IMG-20260914-222447.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "A beautifully designed modest borka made for a comfortable and sophisticated everyday appearance.",
       "details": [
@@ -570,21 +572,64 @@
       ]
     },
     "sizes": [
+      { "name": "S" },
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
+    ]
+  },
+  {
+    "id": 29,
+    "sellerName": "Straver",
+    "title": "Oversized half sleeve Shirt",
+    "price": "BDT 699",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/MyjTX9j1/IMG-20260924-WA0004.jpg",
+      "https://i.ibb.co.com/1GGDrddh/IMG-20260924-WA0002.jpg",
+      "https://i.ibb.co.com/Y4VX9M3N/IMG-20260924-WA0001.jpg",
+      "https://i.ibb.co.com/Y4VX9M3N/IMG-20260924-WA0001.jpg",
+      "https://i.ibb.co.com/gMVLPkvH/IMG-20260924-WA0005.jpg"
+    ],
+    "colors": [
       {
-        "name": "S"
+        "name": "Horizon Tint",
+        "image": "https://i.ibb.co.com/MyjTX9j1/IMG-20260924-WA0004.jpg"
       },
       {
-        "name": "M"
+        "name": "Desert Sand",
+        "image": "https://i.ibb.co.com/Y4VX9M3N/IMG-20260924-WA0001.jpg"
       },
       {
-        "name": "L"
+        "name": "Classic Charcoal",
+        "image": "https://i.ibb.co.com/1GGDrddh/IMG-20260924-WA0002.jpg"
       },
       {
-        "name": "XL"
+        "name": "Earthy Brown",
+        "image": "https://i.ibb.co.com/Y4VX9M3N/IMG-20260924-WA0001.jpg"
       },
       {
-        "name": "XXL"
+        "name": "Light Olive",
+        "image": "https://i.ibb.co.com/gMVLPkvH/IMG-20260924-WA0005.jpg"
       }
+    ],
+    "category": "Men's Fashion",
+    "description": {
+      "intro": "Discover the latest dropped-shoulder Half Shirts from STRAVER.Crafted with rich, textured premium fabric and clean vertical stripes designed to elevate your everyday look.",
+      "details": [
+        "Effortless Style, premium texture",
+        "M: Chest 42", "Length 26" ,"Shoulder 8","Sleeve 9.5", "Collar 3.5",
+        "L: Chest 44", "Length 27", "Shoulder 8.5", "Sleeve 10", "Collar 3.5",
+        "XL: Chest 46", "Length 28" , "Shoulder 9", "Sleeve 10.5", "Collar 3.5",
+        "XXL: Chest 48", "Length 29",  "Shoulder 9.5", "Sleeve 11", "Collar 3.5"
+      ]
+    },
+    "sizes": [
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
     ]
   },
   {
@@ -604,15 +649,13 @@
         "image": "https://i.ibb.co.com/ZzT4twTc/IMG-20260917-WA0030.jpg"
       }
     ],
-    "category": "",
+    "category": "Home & Lifestyle",
     "description": {
       "intro": "A stylish accessory selected to add an elegant finishing touch to your outfit.",
       "details": []
     },
     "sizes": [
-      {
-        "name": "21 inche"
-      }
+      { "name": "21 inche" }
     ]
   },
   {
@@ -655,27 +698,17 @@
         "image": "https://i.ibb.co.com/cc2g9knG/IMG-20260907-WA0004.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "A distinctive cord-style outfit featuring a modern design and beautiful color options for a stylish and comfortable look with intricate karchupi work on soft, high quality premium micro jafran fabric.",
       "details": []
     },
     "sizes": [
-      {
-        "name": "S"
-      },
-      {
-        "name": "M"
-      },
-      {
-        "name": "L"
-      },
-      {
-        "name": "XL"
-      },
-      {
-        "name": "XXL"
-      }
+      { "name": "S" },
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
     ]
   },
   {
@@ -708,7 +741,7 @@
         "image": "https://i.ibb.co.com/xqrJ30zC/IMG-20260914-222252.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "A stylish modest borka featuring an elegant design and comfortable finish for everyday wear.",
       "details": [
@@ -720,21 +753,11 @@
       ]
     },
     "sizes": [
-      {
-        "name": "S"
-      },
-      {
-        "name": "M"
-      },
-      {
-        "name": "L"
-      },
-      {
-        "name": "XL"
-      },
-      {
-        "name": "XXL"
-      }
+      { "name": "S" },
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
     ]
   },
   {
@@ -763,15 +786,57 @@
         "image": "https://i.ibb.co.com/JwxGBtG0/IMG-20260917-WA0031.jpg"
       }
     ],
-    "category": "",
+    "category": "Home & Lifestyle",
     "description": {
       "intro": "A versatile fashion accessory designed to complement your everyday and occasion looks.",
       "details": []
     },
     "sizes": [
+      { "name": "10 inche" }
+    ]
+  },
+  {
+    "id": 30,
+    "sellerName": "Straver",
+    "title": "Unisex Premium Straight Ffit Baggy Pant",
+    "price": "BDT 899",
+    "originalPrice": "",
+    "image": [
+      "https://i.ibb.co.com/d9gzS3b/IMG-20260924-WA0008.jpg",
+      "https://i.ibb.co.com/vCwMpcTf/IMG-20260924-WA0007.jpg",
+      "https://i.ibb.co.com/p6xXkxT4/IMG-20260924-WA0009.jpg"
+    ],
+    "colors": [
       {
-        "name": "10 inche"
+        "name": "Grey",
+        "image": "https://i.ibb.co.com/d9gzS3b/IMG-20260924-WA0008.jpg"
+      },
+      {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/vCwMpcTf/IMG-20260924-WA0007.jpg"
+      },
+      {
+        "name": "Off- white",
+        "image": "https://i.ibb.co.com/p6xXkxT4/IMG-20260924-WA0009.jpg"
       }
+    ],
+    "category": "Unisex",
+    "description": {
+      "intro": "Super Comfortable| Unique Design| Trendy Fit| Crafted from premium Terry Cotton Fabric(280-300± GSM) for maximum comfort, durability,and a relaxed streetwear look.",
+      "details": [
+        "Oversized Baggy Fit",
+        "Ultra-Soft & Breathable",
+        "Premium 280-300± GSM Terry Cotton",
+        "Perfect for Everyday & Causal Wear",
+        "Unisex",
+        "Upgrade your Style with the perfect blend of comfort & fashion"
+      ]
+    },
+    "sizes": [
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
     ]
   },
   {
@@ -815,7 +880,7 @@
         "image": "https://i.ibb.co.com/whzLHR4H/IMG-20260914-221826.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "Premium Cherry Abaya. A perfect blend of modesty and elegance.Crafted with Premium Cherry fabric, this abaya offers a soft, smooth, and luxurious feel with a graceful flow.",
       "details": [
@@ -829,21 +894,11 @@
       ]
     },
     "sizes": [
-      {
-        "name": "S"
-      },
-      {
-        "name": "M"
-      },
-      {
-        "name": "L"
-      },
-      {
-        "name": "XL"
-      },
-      {
-        "name": "XXL"
-      }
+      { "name": "S" },
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
     ]
   },
   {
@@ -858,7 +913,7 @@
       ""
     ],
     "colors": [],
-    "category": "",
+    "category": "Home & Lifestyle",
     "description": {
       "intro": "Beautiful Aquarium- style Gel Candle- Decorative Water Wax Candle.Bring the soothing beauty of the ocean right into your home with our handcrafted Gel Candle. Designed inside a classic glass bowl, this candle features a vibrant underwater scene complete with colorful pebbles, sea plants, and natural shells—topped with a crystal-clear gel layer that radiates a warm, comforting glow.",
       "details": [
@@ -870,6 +925,43 @@
     },
     "sizes": []
   },
+  {
+  "id": 34,
+  "sellerName": "Boutique shop by Adri",
+  "title": "Unstiched 3 pcs ",
+  "price": "BDT 4250",
+  "originalPrice": "BDT 6070",
+  "image": [
+    "https://i.ibb.co.com/6cb8ckPw/IMG-20260925-WA0004.jpg",
+    "https://i.ibb.co.com/ZzvBNyLJ/IMG-20260925-WA0006.jpg"
+  ],
+  "colors": [
+    {
+        "name": "Aqua Blue",
+        "image": "https://i.ibb.co.com/6cb8ckPw/IMG-20260925-WA0004.jpg"
+      },
+      {
+        "name": "Olive Green",
+        "image": "https://i.ibb.co.com/ZzvBNyLJ/IMG-20260925-WA0006.jpg"
+      },
+      {
+        "name": "Pink",
+        "image": "https://i.ibb.co.com/xq6QpYCF/IMG-20260925-WA0003.jpg"
+      }
+  ],
+  "category": "Women's Fashion",
+  "description": {
+    "intro": "A refreshing 3-piece printed ethnic suit, designed for a light, elegant, and stylish summer or daytime look.",
+    "details": [
+      " Features a geometric lattice pattern with intricate purple floral motifs along the neckline, front panel, sleeves, and hem.",
+      "Flowy, lightweight purple chiffon/organza dupatta decorated with matching printed patterns and corner tassels.",
+      "Matching plain light mint green wide-leg trousers."
+    ]
+  },
+  "sizes": [
+    {"name":"Free Size"}
+  ]
+},
   {
     "id": 17,
     "sellerName": "Halal Mood",
@@ -895,7 +987,7 @@
         "image": "https://i.ibb.co.com/VY0fq66N/IMG-20260915-090059.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "Premium Popcorn Fabric Abaya.Experience elegance with our beautifully crafted premium Popcorn fabric abaya- designed for sisters who love modesty with a classy touch.",
       "details": [
@@ -906,21 +998,11 @@
       ]
     },
     "sizes": [
-      {
-        "name": "S"
-      },
-      {
-        "name": "M"
-      },
-      {
-        "name": "L"
-      },
-      {
-        "name": "XL"
-      },
-      {
-        "name": "XXL"
-      }
+      { "name": "S" },
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
     ]
   },
   {
@@ -940,7 +1022,7 @@
         "image": "https://i.ibb.co.com/pBQCrVh4/IMG-20260908-WA0002.jpg"
       }
     ],
-    "category": "",
+    "category": "Home & Lifestyle",
     "description": {
       "intro": "Artistry in Every Glow.Discover the perfect blend of tradition and creativity. Our latest collection features handcrafted pieces designed to bring warmth and character to your space",
       "details": [
@@ -952,6 +1034,36 @@
       ]
     },
     "sizes": []
+  },
+  {
+    "id": 31,
+    "sellerName": "Boutique shop by Adri",
+    "title": "Unstiched 3 pcs from Iznik",
+    "price": "BDT 7000",
+    "originalPrice": "BDT 10,000",
+    "image": [
+      "https://i.ibb.co.com/bjzfVLRj/IMG-20260923-WA0047.jpg"
+    ],
+    "colors": [
+      {
+        "name": "Deep Red",
+        "image":"https://i.ibb.co.com/bjzfVLRj/IMG-20260923-WA0047.jpg"
+      }
+     
+    ],
+    "category": "Women's Fashion",
+    "description": {
+      "intro": "An elegant, full-length ethnic outfit designed in a rich shade of deep red/burgundy, blending traditional craftsmanship with contemporary floral aesthetics. Perfect for festive occasions, daytime events, or wedding celebrations.",
+      "details": [
+        "Type: 3-Piece Set (Long Frock Kameez, Dupatta, and Bottoms)",
+        "Design: All-over subtle floral prints on a deep red base.",
+        "Features: Detailed embroidered border at the hem with scalloped edging and full sleeves.",
+        "Dupatta: Lightweight matching dupatta featuring bold floral motifs."
+      ]
+    },
+    "sizes": [
+      {"name":"Free Size"}
+    ]
   },
   {
     "id": 19,
@@ -988,7 +1100,7 @@
         "image": "https://i.ibb.co.com/B2g5Qbdv/IMG-20260914-221437.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "Premium Zoom Fabric Abaya.Experience elegance with our beautifully crafted premium Zoom fabric abaya- designed for sisters who love modesty with a classy touch.",
       "details": [
@@ -1001,21 +1113,11 @@
       ]
     },
     "sizes": [
-      {
-        "name": "S"
-      },
-      {
-        "name": "M"
-      },
-      {
-        "name": "L"
-      },
-      {
-        "name": "XL"
-      },
-      {
-        "name": "XXL"
-      }
+      { "name": "S" },
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
     ]
   },
   {
@@ -1035,7 +1137,7 @@
         "image": "https://i.ibb.co.com/twY8HCR8/IMG-20260908-WA0003.jpg"
       }
     ],
-    "category": "",
+    "category": "Home & Lifestyle",
     "description": {
       "intro": "Artistry in Every Glow.Discover the perfect blend of tradition and creativity. Our latest collection features handcrafted pieces designed to bring warmth and character to your space.",
       "details": [
@@ -1073,7 +1175,7 @@
         "image": ""
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "This is a instant Ready Hijab.",
       "details": []
@@ -1084,7 +1186,7 @@
     "id": 22,
     "sellerName": "Su Zan 1622",
     "title": "Soft Jafran MIcro Fabric Co-ord",
-    "price": " BDT 1650",
+    "price": " BDT 950",
     "originalPrice": "",
     "image": [
       "https://i.ibb.co.com/v40xCbDg/IMG-20260907-WA0055.jpg",
@@ -1110,27 +1212,52 @@
         "image": "https://i.ibb.co.com/TBS3pJD8/IMG-20260907-WA0034.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "Experience elegance with this pickock digital print jafran premium micro fabric cord set  .",
       "details": []
     },
     "sizes": [
+      { "name": "S" },
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
+    ]
+  },
+  {
+    "id": 32,
+    "sellerName": "Boutique shop by Adri",
+    "title": "Unstiched 3 pcs ",
+    "price": "BDT 5800",
+    "originalPrice": "BDT 8290",
+    "image": [
+      "https://i.ibb.co.com/1JZ6w1ch/IMG-20260923-WA0032.jpg"
+    ],
+    "colors": [
       {
-        "name": "S"
+        "name": "Pink",
+        "image": "https://i.ibb.co.com/1JZ6w1ch/IMG-20260923-WA0032.jpg"
       },
       {
-        "name": "M"
-      },
-      {
-        "name": "L"
-      },
-      {
-        "name": "XL"
-      },
-      {
-        "name": "XXL"
+        "name": "",
+        "image": ""
       }
+    ],
+    "category": "Women's Fashion",
+    "description": {
+      "intro": "A stylish and sophisticated off-white and lilac 3-piece designer suit, perfect for party wear, family gatherings, or festive occasions.",
+
+      "details": [
+        "3-Piece Set (Kameez, Dupatta, and Trousers)",
+        "Intricate embroidery on the neckline and front panel, complemented by delicate all-over motifs.",
+        " Wide flared sleeves and hemline adorned with detailed floral lace and embroidery.",
+        "Matching lilac organza/lightweight dupatta with printed borders and Pearl/bead embellishments along the edges.",
+        "Straight trousers with embroidered organza lace detailing at the bottom."
+      ]
+    },
+    "sizes": [
+      {"name":"Free Size"}
     ]
   },
   {
@@ -1168,27 +1295,17 @@
         "image": "https://i.ibb.co.com/p6Mm5tff/IMG-20260907-WA0075.jpg"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "Experience elegance with this pickock digital print jafran premium micro fabric cord set.",
       "details": []
     },
     "sizes": [
-      {
-        "name": "S"
-      },
-      {
-        "name": "M"
-      },
-      {
-        "name": "L"
-      },
-      {
-        "name": "XL"
-      },
-      {
-        "name": "XXL"
-      }
+      { "name": "S" },
+      { "name": "M" },
+      { "name": "L" },
+      { "name": "XL" },
+      { "name": "XXL" }
     ]
   },
   {
@@ -1239,7 +1356,7 @@
         "image": "https://i.ibb.co.com/0VMZsjd4/6-Liver-Color.png"
       }
     ],
-    "category": "",
+    "category": "Women's Fashion",
     "description": {
       "intro": "Soft, textured Jacquard fabric with a subtle elegant finish.",
       "details": [
@@ -1300,7 +1417,7 @@
         "image": ""
       }
     ],
-    "category": "",
+    "category": "Accessories",
     "description": {
       "intro": "Where Rugged Denim Meets Fine Artistry.Meet our Hand-Stitched Denim Bangles—the perfect fusion of contemporary street style and traditional embroidery. Each bangle features intricate, time-intensive thread work, including stunning, hand-detailed floral centers and classic sashiko-inspired patterns.",
       "details": [
@@ -1311,17 +1428,51 @@
       ]
     },
     "sizes": [
-      {
-        "name": "26"
-      },
-      {
-        "name": "28"
-      },
-      {
-        "name": "30"
-      }
+      { "name": "26" },
+      { "name": "28" },
+      { "name": "30" }
     ]
   },
+  {
+  "id": 33,
+  "sellerName": "Boutique shop by Adri",
+  "title": "Unstiched Lawn",
+  "price": "BDT 3800",
+  "originalPrice": "BDT 5430",
+  "image": [
+    "https://i.ibb.co.com/21gCfsDV/IMG-20260923-WA0035.jpg",
+    "https://i.ibb.co.com/Z1g5WscZ/IMG-20260923-WA0040.jpg",
+    "https://i.ibb.co.com/hJQSHxtz/IMG-20260923-WA0041.jpg"
+  ],
+  "colors": [
+     {
+        "name": "Black",
+        "image": "https://i.ibb.co.com/21gCfsDV/IMG-20260923-WA0035.jpg"
+      },
+      {
+        "name": "Classic Charcoal",
+        "image": "https://i.ibb.co.com/Z1g5WscZ/IMG-20260923-WA0040.jpg"
+      },
+      {
+        "name": "Charcoal Black",
+        "image": "https://i.ibb.co.com/hJQSHxtz/IMG-20260923-WA0041.jpg"
+      }
+  ],
+  "category": "Women's Fashion",
+  "description": {
+    "intro": "An elegant charcoal black floral co-ord set designed with intricate pink embroidery, offering a stylish and comfortable look for casual gatherings or smart-casual wear.",
+    "details": [
+      "2-Piece Co-ord Set (Kameez / Kurti and Matching Wide-Leg Trousers)",
+      "Heavy pink thread embroidery around the split crew neckline with a decorative yoke panel.",
+      "All-over subtle floral print on the shirt and trousers.",
+      "Wide sleeves with embroidered borders and matching printed/embroidered borders at the shirt hem and trouser bottoms.",
+      "Matching wide-leg matching printed trousers."
+    ]
+  },
+  "sizes": [
+    {"name":"Free Size"}
+  ]
+},
   {
     "id": 26,
     "sellerName": "Artistic Humu",
@@ -1351,7 +1502,7 @@
         "image": ""
       }
     ],
-    "category": "",
+    "category": "Accessories",
     "description": {
       "intro": "Where Rugged Denim Meets Fine Artistry.Meet our Hand-Stitched Denim Bangles—the perfect fusion of contemporary street style and traditional embroidery. Each bangle features intricate, time-intensive thread work, including stunning, hand-detailed floral centers and classic sashiko-inspired patterns.",
       "details": [
@@ -1362,15 +1513,9 @@
       ]
     },
     "sizes": [
-      {
-        "name": "26"
-      },
-      {
-        "name": "28"
-      },
-      {
-        "name": "30"
-      }
+      { "name": "26" },
+      { "name": "28" },
+      { "name": "30" }
     ]
   }
 ]

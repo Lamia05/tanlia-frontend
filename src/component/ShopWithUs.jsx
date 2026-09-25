@@ -7,59 +7,76 @@ const WhyShopWithUs = () => {
       id: 1,
       icon: BadgeCheck,
       title: "Curated Sellers",
-      description: "Every boutique is hand-selected for quality and craftsmanship"
+      description: "Discover thoughtfully selected boutiques with distinctive collections"
     },
     {
       id: 2,
       icon: Sparkles,
       title: "Quality Products",
-      description: "Premium materials and artisanal attention to detail"
+      description: "Explore carefully chosen pieces from independent sellers"
     },
     {
       id: 3,
       icon: ShieldCheck,
       title: "Secure Shopping",
-      description: "Your transactions are protected with industry-leading security"
+      description: "A smooth and secure shopping experience from browsing to checkout"
     },
     {
       id: 4,
       icon: Truck,
-      title: "Easy Delivery",
-      description: "Complimentary shipping on orders over $150 worldwide"
+      title: "Reliable Delivery",
+      description: "Delivery options and charges are provided by each boutique"
     }
   ];
 
   return (
-    <section className="py-20 bg-[#FDFBF7] text-gray-900 border-t border-gray-200/60">
+    <section className="py-20 sm:py-24 lg:py-28 bg-[#F5F0E9] text-[#1A1A1A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Title */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-serif font-normal tracking-tight text-[#1A1A1A]">
-            Why Shop With Us
+
+        {/* Header */}
+        <div className="text-center max-w-xl mx-auto mb-14 sm:mb-16">
+          <span className="block text-[10px] sm:text-xs uppercase tracking-[0.28em] text-[#B85028] mb-3">
+            The Tanlia Difference
+          </span>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal tracking-tight">
+            Why shop with Tanlia
           </h2>
+
+          <p className="mt-4 text-sm text-gray-600 font-light leading-relaxed">
+            A thoughtfully curated marketplace made to bring independent
+            boutiques and their collections closer to you.
+          </p>
         </div>
 
-        {/* 4 Items */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 text-center">
-          {features.map((feature) => {
+        {/* Features */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature, index) => {
             const IconComponent = feature.icon;
+
             return (
-              <div key={feature.id} className="flex flex-col items-center group">
-                
-                {/* Icon Box with Terracotta Theme */}
-                <div className="w-16 h-16 rounded-full bg-[#F5EBE6] group-hover:bg-[#B85028] transition-colors duration-300 flex items-center justify-center mb-6 text-[#B85028] group-hover:text-white shadow-sm">
-                  <IconComponent className="w-7 h-7 stroke-[1.5] transition-colors duration-300" />
+              <div
+                key={feature.id}
+                className={`group text-center px-6 py-8 lg:py-4 ${
+                  index !== features.length - 1
+                    ? "lg:border-r border-[#D8CEC3]"
+                    : ""
+                }`}
+              >
+                {/* Icon */}
+                <div className="w-14 h-14 mx-auto mb-6 flex items-center justify-center border border-[#D8CEC3] rounded-full bg-[#FDFBF7] text-[#B85028] transition-all duration-300 group-hover:bg-[#B85028] group-hover:text-white group-hover:border-[#B85028]">
+                  <IconComponent className="w-6 h-6 stroke-[1.4]" />
                 </div>
 
-                <h3 className="text-lg font-serif font-normal text-gray-900 mb-2">
+                {/* Title */}
+                <h3 className="text-lg font-serif font-normal mb-3">
                   {feature.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-gray-500 font-light leading-relaxed max-w-xs">
+                {/* Description */}
+                <p className="max-w-xs mx-auto text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
                   {feature.description}
                 </p>
-
               </div>
             );
           })}

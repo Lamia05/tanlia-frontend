@@ -13,7 +13,6 @@ const FeaturedSellers = () => {
       .then((data) => {
         setSellers(data);
         setLoading(false);
-        
       })
       .catch((err) => {
         console.error("Error fetching sellers:", err);
@@ -23,101 +22,132 @@ const FeaturedSellers = () => {
 
   if (loading) {
     return (
-      <div className="py-20 text-center text-gray-500 font-serif">
-        Loading Boutique Sellers...
-      </div>
+      <section className="py-24 bg-[#FDFBF7] text-center">
+        <p className="text-[10px] uppercase tracking-[0.25em] text-neutral-400">
+          Loading boutiques
+        </p>
+      </section>
     );
   }
 
   return (
-    <section className="py-16 bg-White text-Orange-500 border-t border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 sm:py-24 lg:py-28 bg-[#F5F0E9]">
 
-        {/* Top Header */}
-        <div className="text-center mb-12">
-          <span className="uppercase text-xs tracking-[0.25em] font-semibold text-orange-500 block mb-2">
-          THE MAKERS
-          </span>
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
 
-          <h2 className="text-3xl sm:text-4xl font-serif tracking-tight text-gray-900 mb-2 font-normal">
-            MEET OUR BOUTIQUE SELLERS
-          </h2>
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 lg:mb-14">
 
-          <p className="text-xs sm:text-sm text-gray-500 font-light max-w-md mx-auto">
-           Independent boutiques from around the world, each with their own unique story and aesthetic
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-px bg-[#B85028]" />
 
+              <span className="text-[10px] uppercase tracking-[0.28em] text-[#B85028] font-medium">
+                The makers
+              </span>
+            </div>
 
+            <h2 className="font-serif text-4xl sm:text-5xl text-[#171717] tracking-tight">
+              Meet our boutiques
+            </h2>
+          </div>
+
+          <p className="max-w-sm text-sm leading-6 text-neutral-500 font-light sm:text-right">
+            Discover independent sellers, each bringing their own
+            perspective, craft and style to Tanlia.
           </p>
+
         </div>
 
-        {/* Sellers Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Sellers */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-10">
+
           {sellers.map((seller) => (
             <div
               key={seller.id}
-              className="bg-[#FAF7F2] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200/50 flex flex-col justify-between group"
+              className="group"
             >
 
-              {/* Top Banner & Image */}
-              <div>
-                <div className="relative h-56 overflow-hidden bg-gray-200">
+              {/* Seller Image */}
+              <Link
+                to={`/sellers/${seller.name
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
+              >
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#E9E2D9]">
+
                   <img
                     src={seller.image}
                     alt={seller.name}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.035]"
                   />
 
-                
-                </div>
+                  {/* Soft overlay */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.08] transition-colors duration-500" />
 
-                {/* Body Content */}
-                <div className="p-5">
-                  <h3 className="text-lg font-serif font-medium text-gray-900 mb-1">
-                    {seller.name}
-                  </h3>
-
-                  <span className="text-[10px] uppercase font-semibold tracking-wider text-amber-800 block mb-2">
-                    {seller.tagline}
-                  </span>
-
-                  <p className="text-xs text-gray-600 font-light line-clamp-2 leading-relaxed mb-6">
-                    {seller.description}
-                  </p>
-                </div>
-              </div>
-
-              {/* Card Footer */}
-              <div className="px-5 pb-5">
-                <div className="flex items-center justify-between text-xs text-gray-500 mb-4 pt-3 border-t border-gray-200/60 font-light">
-                  <div className="flex items-center gap-1.5">
-                    
-                    <span>{seller.productsCount} products</span>
+                  {/* View Collection */}
+                  <div className="absolute inset-x-4 bottom-4 hidden sm:flex justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                    <span className="w-full bg-white text-[#171717] py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-center">
+                      View collection
+                    </span>
                   </div>
 
-                  <span>{seller.location}</span>
+                </div>
+              </Link>
+
+              {/* Seller Info */}
+              <div className="pt-5">
+
+                <p className="text-[9px] uppercase tracking-[0.18em] text-[#B85028] font-medium mb-2">
+                  {seller.tagline}
+                </p>
+
+                <h3 className="font-serif text-xl text-[#171717] leading-tight">
+                  {seller.name}
+                </h3>
+
+                <p className="mt-2 text-xs leading-5 text-neutral-500 font-light line-clamp-2">
+                  {seller.description}
+                </p>
+
+                {/* Bottom Info */}
+                <div className="mt-4 pt-3 border-t border-black/10 flex items-center justify-between">
+
+                  <span className="text-[10px] uppercase tracking-[0.12em] text-neutral-400">
+                    {seller.productsCount} products
+                  </span>
+
+                  <span className="text-[10px] uppercase tracking-[0.12em] text-neutral-400">
+                    {seller.location}
+                  </span>
+
                 </div>
 
-                {/* View Collection */}
+                {/* Link */}
                 <Link
                   to={`/sellers/${seller.name
                     .toLowerCase()
                     .replace(/\s+/g, "-")}`}
-                  className="w-full flex items-center justify-between text-xs font-medium text-gray-900 hover:text-amber-800 transition-colors pt-1"
+                  className="group/link mt-4 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.17em] font-semibold text-[#171717] hover:text-[#B85028] transition-colors"
                 >
-                  <span>View Collection</span>
+                  Explore boutique
 
-                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight
+                    className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-1"
+                  />
                 </Link>
-              
 
               </div>
+
             </div>
           ))}
+
         </div>
+
       </div>
+
     </section>
   );
 };
 
 export default FeaturedSellers;
-

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import {
   Heart,
@@ -47,7 +46,6 @@ const FeaturedProducts = () => {
       });
   }, []);
 
-  // Close Quick View with Escape key
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === "Escape") {
@@ -62,7 +60,6 @@ const FeaturedProducts = () => {
     };
   }, []);
 
-  // Prevent background scrolling while modal is open
   useEffect(() => {
     if (quickViewProduct) {
       document.body.style.overflow = "hidden";
@@ -75,25 +72,46 @@ const FeaturedProducts = () => {
     };
   }, [quickViewProduct]);
 
-  // Get all product images
   const getProductImages = (product) => {
     if (!product) return [];
 
+    const images = [];
+
     if (Array.isArray(product.image)) {
-      return product.image.filter(Boolean);
+      product.image.forEach((img) => {
+        if (typeof img === "string" && img.trim()) {
+          images.push(img.trim());
+        }
+      });
+    } else if (
+      typeof product.image === "string" &&
+      product.image.trim()
+    ) {
+      images.push(product.image.trim());
     }
 
-    return product.image ? [product.image] : [];
+    if (Array.isArray(product.colors)) {
+      product.colors.forEach((color) => {
+        if (
+          color &&
+          typeof color === "object" &&
+          typeof color.image === "string" &&
+          color.image.trim()
+        ) {
+          images.push(color.image.trim());
+        }
+      });
+    }
+
+    return [...new Set(images)];
   };
 
-  // Get Colors from JSON
   const getProductColors = (product) => {
     if (!product) return [];
 
     if (Array.isArray(product.colors)) {
       return product.colors
         .map((color) => {
-          // New standard JSON format
           if (color && typeof color === "object") {
             return {
               name: String(color.name || "").trim(),
@@ -101,7 +119,6 @@ const FeaturedProducts = () => {
             };
           }
 
-          // Old string format
           if (typeof color === "string") {
             return {
               name: color.trim(),
@@ -117,11 +134,7 @@ const FeaturedProducts = () => {
         .filter((color) => color.name);
     }
 
-    // Nested products
-    if (
-      product.variants &&
-      Array.isArray(product.variants.colors)
-    ) {
+    if (product.variants && Array.isArray(product.variants.colors)) {
       return product.variants.colors
         .map((color) => {
           if (typeof color === "string") {
@@ -134,9 +147,7 @@ const FeaturedProducts = () => {
           if (color && typeof color === "object") {
             return {
               name: String(
-                color.name ||
-                  color.color ||
-                  ""
+                color.name || color.color || ""
               ).trim(),
               image: color.image || "",
             };
@@ -153,7 +164,6 @@ const FeaturedProducts = () => {
     return [];
   };
 
-  // Get Sizes from JSON
   const getProductSizes = (product) => {
     if (!product) return [];
 
@@ -165,11 +175,7 @@ const FeaturedProducts = () => {
           }
 
           if (size && typeof size === "object") {
-            return (
-              size.name ||
-              size.size ||
-              ""
-            );
+            return size.name || size.size || "";
           }
 
           return "";
@@ -177,11 +183,7 @@ const FeaturedProducts = () => {
         .filter(Boolean);
     }
 
-    // Nested products
-    if (
-      product.variants &&
-      Array.isArray(product.variants.sizes)
-    ) {
+    if (product.variants && Array.isArray(product.variants.sizes)) {
       return product.variants.sizes
         .map((size) => {
           if (typeof size === "string") {
@@ -189,11 +191,7 @@ const FeaturedProducts = () => {
           }
 
           if (size && typeof size === "object") {
-            return (
-              size.name ||
-              size.size ||
-              ""
-            );
+            return size.name || size.size || "";
           }
 
           return "";
@@ -204,7 +202,6 @@ const FeaturedProducts = () => {
     return [];
   };
 
-  // Add product to wishlist
   const handleWishlist = (product) => {
     const wishlist = JSON.parse(
       localStorage.getItem("tanliaWishlist") || "[]"
@@ -234,7 +231,6 @@ const FeaturedProducts = () => {
     window.dispatchEvent(new Event("wishlistUpdated"));
   };
 
-  // Add product to cart
   const handleAddToCart = (
     product,
     selectedColorValue = "",
@@ -261,10 +257,8 @@ const FeaturedProducts = () => {
       JSON.stringify(cart)
     );
 
-    // Update Navbar cart count instantly
     window.dispatchEvent(new Event("cartUpdated"));
 
-    // Show cart notification
     setShowCartNotification(true);
 
     setTimeout(() => {
@@ -272,7 +266,6 @@ const FeaturedProducts = () => {
     }, 2000);
   };
 
-  // Open Quick View
   const handleQuickView = (product) => {
     setQuickViewProduct(product);
 
@@ -280,31 +273,15 @@ const FeaturedProducts = () => {
     const colors = getProductColors(product);
     const sizes = getProductSizes(product);
 
-    // First product image
     setSelectedImage(images[0] || "");
+    setSelectedColor(colors.length > 0 ? colors[0].name : "");
+    setSelectedSize(sizes.length > 0 ? sizes[0] : "");
 
-    // First color
-    setSelectedColor(
-      colors.length > 0
-        ? colors[0].name
-        : ""
-    );
-
-    // First size
-    setSelectedSize(
-      sizes.length > 0
-        ? sizes[0]
-        : ""
-    );
-
-    // If first color has its own image,
-    // show that image
     if (colors.length > 0 && colors[0].image) {
       setSelectedImage(colors[0].image);
     }
   };
 
-  // Change Color + Image
   const handleColorChange = (color) => {
     setSelectedColor(color.name);
 
@@ -313,7 +290,6 @@ const FeaturedProducts = () => {
     }
   };
 
-  // Close Quick View
   const closeQuickView = () => {
     setQuickViewProduct(null);
     setSelectedImage("");
@@ -321,142 +297,170 @@ const FeaturedProducts = () => {
     setSelectedSize("");
   };
 
+  // Only these products will appear in the 30% OFF section
+  const discountProductIds = [27, 28, 31, 32, 33, 34];
+
+  const discountProducts = products.filter((product) =>
+    discountProductIds.includes(Number(product.id))
+  );
+
   if (loading) {
     return (
-      <div className="py-20 text-center text-gray-500 font-serif">
-        Loading Featured Products...
-      </div>
+      <section className="bg-[#FDFBF7] py-24 text-center">
+        <p className="text-xs uppercase tracking-[0.25em] text-neutral-400">
+          Loading collection
+        </p>
+      </section>
     );
   }
 
   return (
-    <section className="py-16 bg-[#F5F1EA] text-gray-900">
+    <section className="bg-[#FDFBF7] py-20 sm:py-24 lg:py-28 text-[#171717]">
 
       {/* Cart Notification */}
       {showCartNotification && (
-        <div className="fixed top-24 right-6 z-[100] bg-black text-white px-5 py-3 text-sm shadow-lg">
+        <div className="fixed top-24 right-5 sm:right-8 z-[100] bg-[#171717] text-white px-5 py-3 text-xs tracking-wide shadow-xl">
           Product added to cart
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
 
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <span className="uppercase text-xs tracking-[0.25em] font-semibold text-orange-500 block mb-2">
-            HANDPICKED
-          </span>
+        {/* ================= FEATURED PRODUCTS ================= */}
 
-          <h2 className="text-3xl sm:text-4xl font-serif tracking-tight text-gray-900 mb-2 font-normal uppercase">
-            FEATURED PRODUCTS
-          </h2>
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-12 lg:mb-14">
 
-          <p className="text-xs sm:text-sm text-gray-500 font-light">
-            A selection of our most loved pieces from across all boutique sellers
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-px bg-[#B85028]" />
+
+              <span className="text-[10px] tracking-[0.28em] uppercase text-[#B85028] font-medium">
+                Handpicked
+              </span>
+            </div>
+
+            <h2 className="font-serif text-4xl sm:text-5xl text-[#171717] tracking-tight">
+              Featured products
+            </h2>
+          </div>
+
+          <p className="max-w-sm text-sm leading-6 text-neutral-500 font-light sm:text-right">
+            Explore pieces selected from our growing community of
+            independent boutique sellers.
           </p>
+
         </div>
 
-        {/* 8 Featured Products */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+        {/* Product Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-10 sm:gap-y-12">
+
           {products.slice(0, 8).map((product) => {
 
-            const productImage = Array.isArray(product.image)
-              ? product.image.find((img) => img)
-              : product.image;
+            const productImages = getProductImages(product);
+            const productImage = productImages[0] || "";
 
             return (
               <div
                 key={product.id}
-                className="group flex flex-col"
+                className="group min-w-0"
               >
 
-                {/* Image Container */}
-                <div className="relative rounded-xl overflow-hidden bg-gray-100 aspect-[3/4] shadow-sm">
+                {/* Image */}
+                <div className="relative aspect-[3/4] overflow-hidden bg-[#EEE9E2]">
 
-                  {/* Product Image */}
-                  <img
-                    src={productImage}
-                    alt={product.title}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <Link to={`/products/${product.id}`}>
+                    {productImage ? (
+                      <img
+                        src={productImage}
+                        alt={product.title}
+                        className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-neutral-400 text-xs">
+                        No Image Available
+                      </div>
+                    )}
+
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.05] transition-colors duration-500" />
+                  </Link>
 
                   {/* Badges */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-                    {product.badges &&
-                      product.badges.map((badge, idx) => (
+                  {product.badges && product.badges.length > 0 && (
+                    <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+                      {product.badges.map((badge, idx) => (
                         <span
                           key={idx}
-                          className={`${badge.bg} text-[10px] font-bold px-2.5 py-0.5 rounded-full tracking-wider uppercase text-center shadow-sm`}
+                          className={`${badge.bg} text-[8px] sm:text-[9px] font-semibold px-2 py-1 tracking-[0.12em] uppercase`}
                         >
                           {badge.text}
                         </span>
                       ))}
-                  </div>
+                    </div>
+                  )}
 
                   {/* Wishlist */}
                   <button
                     type="button"
                     aria-label="Add to Wishlist"
                     onClick={() => handleWishlist(product)}
-                    className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-gray-800 hover:text-black hover:bg-white transition-colors shadow-sm z-20"
+                    className="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur-sm flex items-center justify-center text-[#333] hover:bg-white hover:text-[#B85028] transition-all duration-300 z-20"
                   >
-                    <Heart className="w-4 h-4 stroke-[1.8]" />
+                    <Heart className="w-4 h-4 stroke-[1.5]" />
                   </button>
 
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-black/20 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
+                  {/* Hover Actions */}
+                  <div className="absolute inset-x-3 bottom-3 hidden sm:flex items-center gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
 
-                    <div className="w-full flex items-center gap-2 transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300">
+                    <button
+                      type="button"
+                      onClick={() => handleAddToCart(product)}
+                      className="flex-1 bg-white text-[#171717] py-3 px-2 text-[10px] font-semibold uppercase tracking-[0.12em] flex items-center justify-center gap-2 hover:bg-[#B85028] hover:text-white transition-colors"
+                    >
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      Add to cart
+                    </button>
 
-                      {/* Add to Cart */}
-                      <button
-                        type="button"
-                        onClick={() => handleAddToCart(product)}
-                        className="flex-1 bg-white text-gray-900 py-2.5 px-3 rounded-lg text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5 hover:bg-black hover:text-white transition-colors shadow-md"
-                      >
-                        <ShoppingBag className="w-3.5 h-3.5" />
-                        <span>Add to Cart</span>
-                      </button>
-
-                      {/* Quick View */}
-                      <button
-                        type="button"
-                        aria-label="Quick View"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          handleQuickView(product);
-                        }}
-                        className="bg-white/90 text-gray-900 p-2.5 rounded-lg hover:bg-black hover:text-white transition-colors shadow-md"
-                      >
-                        <Eye className="w-4 h-4" />
-                      </button>
-
-                    </div>
+                    <button
+                      type="button"
+                      aria-label="Quick View"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleQuickView(product);
+                      }}
+                      className="w-11 h-11 bg-white text-[#171717] flex items-center justify-center hover:bg-[#171717] hover:text-white transition-colors"
+                    >
+                      <Eye className="w-4 h-4" />
+                    </button>
 
                   </div>
 
                 </div>
 
-                {/* Product Details */}
-                <div className="mt-4 flex flex-col">
+                {/* Product Info */}
+                <div className="pt-4">
 
-                  <span className="text-[11px] uppercase tracking-wider text-gray-500 font-medium">
+                  <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-neutral-400 mb-1.5">
                     {product.sellerName}
-                  </span>
+                  </p>
 
-                  <h3 className="text-sm font-serif font-medium text-gray-900 mt-0.5 group-hover:text-amber-900 transition-colors line-clamp-1">
-                    {product.title}
-                  </h3>
+                  <Link to={`/products/${product.id}`}>
+                    <h3 className="text-xs sm:text-sm font-medium text-[#222] leading-snug line-clamp-2 hover:text-[#B85028] transition-colors">
+                      {product.title}
+                    </h3>
+                  </Link>
 
-                  <div className="mt-1.5 flex items-center gap-2">
-                    <span className="text-sm font-bold text-gray-900">
-                      {product.price}
+                  <div className="mt-2 flex items-center gap-2">
+                    <span className="text-xs sm:text-sm font-medium text-[#222]">
+                      ৳{product.price}
                     </span>
 
                     {product.originalPrice && (
-                      <span className="text-xs text-gray-400 line-through">
-                        {product.originalPrice}
+                      <span className="text-[10px] sm:text-xs text-neutral-400 line-through">
+                        ৳{product.originalPrice}
                       </span>
                     )}
                   </div>
@@ -466,66 +470,233 @@ const FeaturedProducts = () => {
               </div>
             );
           })}
+
         </div>
 
-        {/* Explore All Products */}
-        <div className="mt-14 text-center">
+        {/* Explore All */}
+        <div className="mt-14 sm:mt-16 text-center">
           <Link
             to="/products"
-            className="inline-flex items-center gap-2 bg-transparent border border-gray-900 text-gray-900 px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-900 hover:text-white transition-all duration-300 shadow-sm"
+            className="group inline-flex items-center gap-3 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#171717] border-b border-[#171717]/40 pb-2 hover:border-[#B85028] hover:text-[#B85028] transition-all duration-300"
           >
-            <span>Explore All Products</span>
-            <ArrowRight className="w-4 h-4" />
+            Explore all products
+            <ArrowRight
+              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+            />
           </Link>
+        </div>
+
+        {/* ================= 30% OFF SECTION ================= */}
+
+        <div className="mt-24 sm:mt-28 lg:mt-32">
+
+          {/* Section Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-12 lg:mb-14">
+
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="w-8 h-px bg-[#B85028]" />
+
+                <span className="text-[10px] tracking-[0.28em] uppercase text-[#B85028] font-medium">
+                  Special Offer
+                </span>
+              </div>
+
+              <h2 className="font-serif text-4xl sm:text-5xl text-[#171717] tracking-tight">
+                30% Off
+              </h2>
+            </div>
+
+            <p className="max-w-sm text-sm leading-6 text-neutral-500 font-light sm:text-right">
+              Discover selected pieces available at a special price.
+            </p>
+
+          </div>
+
+          {/* Discount Product Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-10 sm:gap-y-12">
+
+            {discountProducts.map((product) => {
+
+              const productImages = getProductImages(product);
+              const productImage = productImages[0] || "";
+
+              return (
+                <div
+                  key={`discount-${product.id}`}
+                  className="group min-w-0"
+                >
+
+                  {/* Image */}
+                  <div className="relative aspect-[3/4] overflow-hidden bg-[#EEE9E2]">
+
+                    <Link to={`/products/${product.id}`}>
+                      {productImage ? (
+                        <img
+                          src={productImage}
+                          alt={product.title}
+                          className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+
+                            const fallback =
+                              e.currentTarget.parentElement?.querySelector(
+                                "[data-image-fallback]"
+                              );
+
+                            if (fallback) {
+                              fallback.style.display = "flex";
+                            }
+                          }}
+                        />
+                      ) : null}
+
+                      <div
+                        data-image-fallback
+                        className={`w-full h-full items-center justify-center text-neutral-400 text-xs ${
+                          productImage ? "hidden" : "flex"
+                        }`}
+                      >
+                        No Image Available
+                      </div>
+
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.05] transition-colors duration-500" />
+                    </Link>
+
+                    {/* 30% OFF Badge */}
+                    <div className="absolute top-3 left-3 z-10">
+                      <span className="bg-[#B85028] text-white text-[8px] sm:text-[9px] font-semibold px-2.5 py-1.5 tracking-[0.12em] uppercase">
+                        30% OFF
+                      </span>
+                    </div>
+
+                    {/* Wishlist */}
+                    <button
+                      type="button"
+                      aria-label="Add to Wishlist"
+                      onClick={() => handleWishlist(product)}
+                      className="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur-sm flex items-center justify-center text-[#333] hover:bg-white hover:text-[#B85028] transition-all duration-300 z-20"
+                    >
+                      <Heart className="w-4 h-4 stroke-[1.5]" />
+                    </button>
+
+                    {/* Hover Actions */}
+                    <div className="absolute inset-x-3 bottom-3 hidden sm:flex items-center gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+
+                      <button
+                        type="button"
+                        onClick={() => handleAddToCart(product)}
+                        className="flex-1 bg-white text-[#171717] py-3 px-2 text-[10px] font-semibold uppercase tracking-[0.12em] flex items-center justify-center gap-2 hover:bg-[#B85028] hover:text-white transition-colors"
+                      >
+                        <ShoppingBag className="w-3.5 h-3.5" />
+                        Add to cart
+                      </button>
+
+                      <button
+                        type="button"
+                        aria-label="Quick View"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleQuickView(product);
+                        }}
+                        className="w-11 h-11 bg-white text-[#171717] flex items-center justify-center hover:bg-[#171717] hover:text-white transition-colors"
+                      >
+                        <Eye className="w-4 h-4" />
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                  {/* Product Info */}
+                  <div className="pt-4">
+
+                    <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-neutral-400 mb-1.5">
+                      {product.sellerName}
+                    </p>
+
+                    <Link to={`/products/${product.id}`}>
+                      <h3 className="text-xs sm:text-sm font-medium text-[#222] leading-snug line-clamp-2 hover:text-[#B85028] transition-colors">
+                        {product.title}
+                      </h3>
+                    </Link>
+
+                    {/* IMPORTANT:
+                        Show exact backend price.
+                        No price calculation here.
+                    */}
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+
+                      <span className="text-xs sm:text-sm font-medium text-[#B85028]">
+                        ৳{product.price}
+                      </span>
+
+                      {product.originalPrice && (
+                        <span className="text-[10px] sm:text-xs text-neutral-400 line-through">
+                          ৳{product.originalPrice}
+                        </span>
+                      )}
+
+                    </div>
+
+                  </div>
+
+                </div>
+              );
+            })}
+
+          </div>
+
         </div>
 
       </div>
 
       {/* ================= QUICK VIEW MODAL ================= */}
+
       {quickViewProduct && (
         <div
-          className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] bg-black/55 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={closeQuickView}
         >
 
-          {/* Modal */}
           <div
-            className="relative w-full max-w-4xl max-h-[90vh] bg-[#FDFBF7] rounded-2xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-4xl max-h-[90vh] bg-[#FDFBF7] shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
 
-            {/* Close Button */}
+            {/* Close */}
             <button
               type="button"
               onClick={closeQuickView}
               aria-label="Close Quick View"
-              className="absolute top-4 right-4 z-30 w-9 h-9 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-colors shadow-md"
+              className="absolute top-4 right-4 z-30 w-9 h-9 bg-white flex items-center justify-center text-[#222] hover:bg-[#171717] hover:text-white transition-colors shadow-sm"
             >
               <X className="w-4 h-4" />
             </button>
 
-            {/* Modal Content */}
             <div className="grid grid-cols-1 md:grid-cols-2 max-h-[90vh] overflow-y-auto">
 
-              {/* LEFT SIDE - IMAGE + THUMBNAILS */}
-              <div className="bg-gray-100">
+              {/* Image */}
+              <div className="bg-[#EEE9E2]">
 
-                {/* Main Image */}
                 <div className="w-full h-[430px] sm:h-[500px] md:h-[560px]">
                   {selectedImage ? (
                     <img
                       src={selectedImage}
                       alt={quickViewProduct.title}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                    <div className="w-full h-full flex items-center justify-center text-neutral-400 text-sm">
                       No Image Available
                     </div>
                   )}
                 </div>
 
-                {/* Thumbnails */}
                 {getProductImages(quickViewProduct).length > 0 && (
                   <div className="bg-[#FDFBF7] px-4 py-4">
                     <div className="flex gap-3 overflow-x-auto justify-center">
@@ -535,13 +706,11 @@ const FeaturedProducts = () => {
                           <button
                             key={`${image}-${index}`}
                             type="button"
-                            onClick={() =>
-                              setSelectedImage(image)
-                            }
-                            className={`flex-shrink-0 w-16 h-20 sm:w-20 sm:h-24 rounded-lg overflow-hidden border-2 transition-all ${
+                            onClick={() => setSelectedImage(image)}
+                            className={`flex-shrink-0 w-16 h-20 sm:w-20 sm:h-24 overflow-hidden border transition-all ${
                               selectedImage === image
-                                ? "border-gray-900"
-                                : "border-transparent hover:border-gray-400"
+                                ? "border-[#171717]"
+                                : "border-transparent hover:border-neutral-400"
                             }`}
                           >
                             <img
@@ -559,56 +728,53 @@ const FeaturedProducts = () => {
 
               </div>
 
-              {/* RIGHT SIDE - PRODUCT INFORMATION */}
-              <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-start pt-10 sm:pt-12 md:pt-16">
+              {/* Information */}
+              <div className="p-6 sm:p-8 md:p-10 pt-12 md:pt-16">
 
-                {/* Seller */}
-                <span className="text-[11px] uppercase tracking-wider text-gray-500 font-medium">
+                <span className="text-[10px] uppercase tracking-[0.18em] text-neutral-400">
                   {quickViewProduct.sellerName}
                 </span>
 
-                {/* Title */}
-                <h2 className="text-2xl sm:text-3xl font-serif text-gray-900 mt-2 pr-8">
+                <h2 className="text-2xl sm:text-3xl font-serif text-[#171717] mt-3 pr-8 leading-tight">
                   {quickViewProduct.title}
                 </h2>
 
-                {/* Price */}
+                {/* Exact Product Price */}
                 <div className="mt-4 flex items-center gap-3">
-                  <span className="text-lg font-bold text-gray-900">
-                    {quickViewProduct.price}
+
+                  <span className="text-lg font-medium text-[#171717]">
+                    ৳{quickViewProduct.price}
                   </span>
 
                   {quickViewProduct.originalPrice && (
-                    <span className="text-sm text-gray-400 line-through">
-                      {quickViewProduct.originalPrice}
+                    <span className="text-sm text-neutral-400 line-through">
+                      ৳{quickViewProduct.originalPrice}
                     </span>
                   )}
+
                 </div>
 
                 {/* Description */}
-                <div className="mt-5">
+                <div className="mt-6">
 
-                  <p className="text-sm leading-6 text-gray-600">
+                  <p className="text-sm leading-6 text-neutral-600">
                     {typeof quickViewProduct.description === "object"
                       ? quickViewProduct.description.intro
                       : quickViewProduct.description ||
                         "A thoughtfully selected piece from one of our independent boutique sellers."}
                   </p>
 
-                  {/* Structured Description Details */}
                   {typeof quickViewProduct.description === "object" &&
-                    Array.isArray(
-                      quickViewProduct.description.details
-                    ) && (
+                    Array.isArray(quickViewProduct.description.details) && (
                       <div className="mt-4 space-y-2">
                         {quickViewProduct.description.details
                           .slice(0, 3)
                           .map((detail, index) => (
                             <div
                               key={index}
-                              className="flex items-start gap-2 text-xs text-gray-600"
+                              className="flex items-start gap-2 text-xs text-neutral-600"
                             >
-                              <span className="mt-1 w-1 h-1 rounded-full bg-gray-500 flex-shrink-0" />
+                              <span className="mt-1 w-1 h-1 bg-neutral-500 rounded-full flex-shrink-0" />
                               <span>{detail}</span>
                             </div>
                           ))}
@@ -617,88 +783,76 @@ const FeaturedProducts = () => {
 
                 </div>
 
-                {/* ================= COLOR & SIZE ================= */}
-                <div className="mt-6 space-y-5">
+                {/* Options */}
+                <div className="mt-7 space-y-6">
 
-                  {/* COLOR */}
+                  {/* Color */}
                   {getProductColors(quickViewProduct).length > 0 && (
                     <div>
 
-                      <div className="flex items-center justify-between mb-2.5">
-
-                        <span className="text-xs font-semibold uppercase tracking-wider text-gray-900">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#171717]">
                           Color
                         </span>
 
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-neutral-500">
                           {selectedColor}
                         </span>
-
                       </div>
 
                       <div className="flex flex-wrap gap-2">
-
                         {getProductColors(quickViewProduct).map(
                           (color, index) => (
                             <button
                               key={`${color.name}-${index}`}
                               type="button"
-                              onClick={() =>
-                                handleColorChange(color)
-                              }
-                              className={`px-3.5 py-2 rounded-md border text-xs transition-all ${
+                              onClick={() => handleColorChange(color)}
+                              className={`px-3.5 py-2 border text-xs transition-all ${
                                 selectedColor === color.name
-                                  ? "border-gray-900 bg-gray-900 text-white"
-                                  : "border-gray-300 bg-white text-gray-800 hover:border-gray-900"
+                                  ? "border-[#171717] bg-[#171717] text-white"
+                                  : "border-neutral-300 bg-white text-neutral-800 hover:border-[#171717]"
                               }`}
                             >
                               {color.name}
                             </button>
                           )
                         )}
-
                       </div>
 
                     </div>
                   )}
 
-                  {/* SIZE */}
+                  {/* Size */}
                   {getProductSizes(quickViewProduct).length > 0 && (
                     <div>
 
-                      <div className="flex items-center justify-between mb-2.5">
-
-                        <span className="text-xs font-semibold uppercase tracking-wider text-gray-900">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#171717]">
                           Size
                         </span>
 
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-neutral-500">
                           {selectedSize}
                         </span>
-
                       </div>
 
                       <div className="flex flex-wrap gap-2">
-
                         {getProductSizes(quickViewProduct).map(
                           (size, index) => (
                             <button
                               key={`${size}-${index}`}
                               type="button"
-                              onClick={() =>
-                                setSelectedSize(size)
-                              }
-                              className={`min-w-[44px] px-3 py-2 rounded-md border text-xs transition-all ${
+                              onClick={() => setSelectedSize(size)}
+                              className={`min-w-[44px] px-3 py-2 border text-xs transition-all ${
                                 selectedSize === size
-                                  ? "border-gray-900 bg-gray-900 text-white"
-                                  : "border-gray-300 bg-white text-gray-800 hover:border-gray-900"
+                                  ? "border-[#171717] bg-[#171717] text-white"
+                                  : "border-neutral-300 bg-white text-neutral-800 hover:border-[#171717]"
                               }`}
                             >
                               {size}
                             </button>
                           )
                         )}
-
                       </div>
 
                     </div>
@@ -707,9 +861,8 @@ const FeaturedProducts = () => {
                 </div>
 
                 {/* Buttons */}
-                <div className="mt-7 flex flex-col gap-3">
+                <div className="mt-8 flex flex-col gap-3">
 
-                  {/* Add to Cart */}
                   <button
                     type="button"
                     onClick={() =>
@@ -719,13 +872,12 @@ const FeaturedProducts = () => {
                         selectedSize
                       )
                     }
-                    className="w-full bg-black text-white py-3 rounded-lg text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors"
+                    className="w-full bg-[#171717] text-white py-3.5 text-[10px] font-semibold tracking-[0.18em] uppercase flex items-center justify-center gap-2 hover:bg-[#B85028] transition-colors"
                   >
                     <ShoppingBag className="w-4 h-4" />
-                    Add to Cart
+                    Add to cart
                   </button>
 
-                  {/* View Details */}
                   <button
                     type="button"
                     onClick={() => {
@@ -734,9 +886,9 @@ const FeaturedProducts = () => {
                       closeQuickView();
                       navigate(`/products/${productId}`);
                     }}
-                    className="text-gray-900 py-3 rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-gray-100 transition-colors"
+                    className="w-full text-[#171717] py-3.5 text-[10px] font-semibold tracking-[0.18em] uppercase border border-neutral-300 hover:border-[#171717] transition-colors"
                   >
-                    View Details
+                    View details
                   </button>
 
                 </div>
@@ -746,7 +898,6 @@ const FeaturedProducts = () => {
             </div>
 
           </div>
-
         </div>
       )}
 
